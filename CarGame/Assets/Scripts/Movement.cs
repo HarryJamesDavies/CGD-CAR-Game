@@ -61,86 +61,91 @@ public class Movement : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        //switch (gameObject.tag)
-        //{
-        //    case "Player1":
-        //        PlayerMovement(1);
-        //        break;
-        //    case "Player2":
-        //        PlayerMovement(2);
-        //        break;
-        //    case "Player3":
-        //        PlayerMovement(3);
-        //        break;
-        //    case "Player4":
-        //        PlayerMovement(4);
-        //        break;
-        //    default:
-        //        break;
-        //}
-
-        if (Input.GetKeyDown("w"))
+        if (ControllerManager.m_instance.m_useController)
         {
-            forward = true;
-        }
-        if (Input.GetKeyUp("w"))
-        {
-            forward = false;
-        }
-        if (Input.GetKeyDown("s"))
-        {
-            backward = true;
-        }
-        if (Input.GetKeyUp("s"))
-        {
-            backward = false;
-        }
-
-        if (Input.GetKeyDown("d"))
-        {
-            right = true;
-        }
-        if (Input.GetKeyUp("d"))
-        {
-            right = false;
-        }
-        if (Input.GetKeyDown("a"))
-        {
-            left = true;
-        }
-        if (Input.GetKeyUp("a"))
-        {
-            left = false;
-        }
-
-        if (Input.GetKeyDown("q"))
-        {
-            transform.position += Vector3.up * 2.5f;
-            transform.rotation = startingRotation;
-        }
-
-        if (Input.GetKeyDown("l"))
-        {
-            foreach (GameObject lights in m_lights)
+            switch (gameObject.tag)
             {
-                lights.SetActive(!lights.activeInHierarchy);
+                case "Player1":
+                    PlayerMovement(1);
+                    break;
+                case "Player2":
+                    PlayerMovement(2);
+                    break;
+                case "Player3":
+                    PlayerMovement(3);
+                    break;
+                case "Player4":
+                    PlayerMovement(4);
+                    break;
+                default:
+                    break;
             }
         }
-
-        if (Input.GetKeyDown("h"))
+        else
         {
-            int sound = Random.Range(0, m_hornSounds.Count);
-            m_audioSource.clip = m_hornSounds[sound];
-            m_audioSource.Play();
-        }
+            if (Input.GetKeyDown("w"))
+            {
+                forward = true;
+            }
+            if (Input.GetKeyUp("w"))
+            {
+                forward = false;
+            }
+            if (Input.GetKeyDown("s"))
+            {
+                backward = true;
+            }
+            if (Input.GetKeyUp("s"))
+            {
+                backward = false;
+            }
 
-        if (fuel < 0)
-        {
-            xspeep = 0;
-        }
+            if (Input.GetKeyDown("d"))
+            {
+                right = true;
+            }
+            if (Input.GetKeyUp("d"))
+            {
+                right = false;
+            }
+            if (Input.GetKeyDown("a"))
+            {
+                left = true;
+            }
+            if (Input.GetKeyUp("a"))
+            {
+                left = false;
+            }
 
-        xspeep *= friction;
-        transform.Translate(Vector3.forward * -xspeep);
+            if (Input.GetKeyDown("q"))
+            {
+                transform.position += Vector3.up * 2.5f;
+                transform.rotation = startingRotation;
+            }
+
+            if (Input.GetKeyDown("l"))
+            {
+                foreach (GameObject lights in m_lights)
+                {
+                    lights.SetActive(!lights.activeInHierarchy);
+                }
+            }
+
+            if (Input.GetKeyDown("h"))
+            {
+                int sound = Random.Range(0, m_hornSounds.Count);
+                m_audioSource.clip = m_hornSounds[sound];
+                m_audioSource.Play();
+            }
+
+            if (fuel < 0)
+            {
+                xspeep = 0;
+            }
+
+            xspeep *= friction;
+            transform.Translate(Vector3.forward * -xspeep);
+        }
     }
 
     void PlayerMovement(int _controller)
@@ -161,6 +166,10 @@ public class Movement : MonoBehaviour {
         {
             backward = false;
         }
+
+        //Debug.Log("R2: " + Input.GetAxis("P" + _controller + "-R2(PS4)"));
+        //Debug.Log("L2: " + Input.GetAxis("P" + _controller + "-L2(PS4)"));
+        //Debug.Log("LeftJoystickX: " + Input.GetAxis("P" + _controller + "-LeftJoystickX(PS4)"));
 
         if (Input.GetAxis("P" + _controller + ("-LeftJoystickX(PS4)")) > 0.5f)
         {
