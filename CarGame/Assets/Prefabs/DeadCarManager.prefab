@@ -8042,7 +8042,7 @@ MonoBehaviour:
   m_sections: []
   m_sectionBoundaries: []
   m_sectionsToActivate: 
-  m_mode: 0
+  m_mode: 1
   m_gridWidth: 4
   m_gridHeight: 4
   m_gridBorderWidth: 1
