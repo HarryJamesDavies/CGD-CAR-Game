@@ -2,11 +2,28 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class DeadCarManager : MonoBehaviour {
+public class DeadCarManager : MonoBehaviour
+{
+    public enum SectioningMode
+    {
+        GRID = 0,
+        SQUARE = 1,
+        SPECIFIC = 2,
+        Length
+    };
 
     public static DeadCarManager m_instance = null;
     public List<GameObject> m_sections;
-    public float m_minimumDistance;
+    public List<Rect> m_sectionBoundaries;
+    public List<int> m_sectionsToActivate;
+    public SectioningMode m_mode;
+
+    public int m_gridWidth;
+    public int m_gridHeight;
+
+    public int m_gridBorderWidth;
+    public int m_gridBorderHeight;
+
 
     // Use this for initialization
     void Start ()
@@ -23,6 +40,13 @@ public class DeadCarManager : MonoBehaviour {
         for (int i = 0; i <= transform.childCount - 1; i++)
         {
             m_sections.Add(transform.GetChild(i).gameObject);
+        }
+
+        foreach(GameObject sections in m_sections)
+        {
+            Vector2 sectionPosition = new Vector2(sections.transform.position.x - 50.0f, sections.transform.position.z - 50.0f);
+            Rect tempRect = new Rect(sectionPosition, new Vector2(100.0f, 100.0f));
+            m_sectionBoundaries.Add(tempRect);
         }
 	}
 	
@@ -41,7 +65,7 @@ public class DeadCarManager : MonoBehaviour {
 
     public void OnEventBegin()
     {
-        switch (EventManager.m_instance.m_currentState)
+        switch (EventManager.m_instance.m_currentEvent)
         {
             case EventManager.Events.FREEROAM:
                 {
@@ -61,7 +85,7 @@ public class DeadCarManager : MonoBehaviour {
 
     public void OnEventUpdate()
     {
-        switch (EventManager.m_instance.m_currentState)
+        switch (EventManager.m_instance.m_currentEvent)
         {
             case EventManager.Events.FREEROAM:
                 {
@@ -81,7 +105,7 @@ public class DeadCarManager : MonoBehaviour {
 
     public void OnEventEnd()
     {
-        switch (EventManager.m_instance.m_prevState)
+        switch (EventManager.m_instance.m_prevEvent)
         {
             case EventManager.Events.FREEROAM:
                 {
@@ -101,12 +125,66 @@ public class DeadCarManager : MonoBehaviour {
 
     void SetSections()
     {
-        foreach(GameObject sections in m_sections)
+        switch (m_mode)
         {
-            if(m_minimumDistance >= Vector3.Distance(EventManager.m_instance.m_eventLocation, sections.transform.position))
-            {
-                sections.gameObject.SetActive(true);
-            }
+            case SectioningMode.GRID:
+                {
+                    int centerIndex = 0;
+                    Vector2 eventLocation = new Vector2(EventManager.m_instance.m_eventLocation.x, EventManager.m_instance.m_eventLocation.z);
+
+                    int index = 0;
+                    foreach (Rect sections in m_sectionBoundaries)
+                    {
+                        if(sections.Contains(eventLocation))
+                        {
+                            centerIndex = index;
+                        }
+                        index++;
+                    }
+
+                    Vector2 centerPos = GetSectionPos(centerIndex);
+
+                    for (int y = ((int)centerPos.y - m_gridBorderHeight / 2); y >= ((int)centerPos.y + m_gridBorderHeight / 2); y++)
+                    {
+                        for (int x = ((int)centerPos.x - m_gridBorderWidth / 2); x >= ((int)centerPos.x + m_gridBorderWidth / 2); x++)
+                        {
+                            m_sections[GetSectionIndex(new Vector2(x, y)) - 1].SetActive(true);
+                        }
+                    }
+
+                    break;
+                }
+            case SectioningMode.SQUARE:
+                {
+                    Vector2 eventMinimum = new Vector2(EventManager.m_instance.m_eventLocation.x - EventManager.m_instance.m_eventWidth / 2,
+                        EventManager.m_instance.m_eventLocation.z - EventManager.m_instance.m_eventHeight / 2);
+                    Rect eventRect = new Rect(eventMinimum, new Vector2(EventManager.m_instance.m_eventWidth, EventManager.m_instance.m_eventHeight));
+
+                    int index = 1;
+                    foreach (Rect sections in m_sectionBoundaries)
+                    {
+                        if (eventRect.Overlaps(sections))
+                        {
+                            m_sections[index].SetActive(true);
+                        }
+                        index++;
+                    }
+                    break;
+                }
+            case SectioningMode.SPECIFIC:
+                {
+                    foreach(int index in m_sectionsToActivate)
+                    {
+                        m_sections[index - 1].SetActive(true);
+                    }
+
+                    m_sectionsToActivate.Clear();
+                    break;
+                }
+            default:
+                {
+                    break;
+                }
         }
     }
 
@@ -118,16 +196,49 @@ public class DeadCarManager : MonoBehaviour {
         }
     }
 
-    /*
-        if (Input.GetKeyDown("e") || Input.GetButtonDown("P" + _controller + ("-Circle(PS4)")))
-        {
-            EventManager.m_instance.m_eventLocation = this.gameObject.transform.position;
-            EventManager.m_instance.m_currentState = EventManager.Events.DRIVEANDSEEK;
-        }
+    Vector2 GetSectionPos(int index)
+    {
+        Vector2 centerPos;
 
-        if (Input.GetKeyDown("r") || Input.GetButtonDown("P" + _controller + ("-Circle(PS4)")))
+        centerPos.x = index % m_gridHeight;
+        centerPos.y = index / m_gridHeight;
+
+        return centerPos;
+    }
+
+    int GetSectionIndex(Vector2 _pos)
+    {
+        int index;
+
+        index = ((int)_pos.y * m_gridBorderWidth) + (int)_pos.x;
+
+        return index;
+    }
+
+    public void AddSectionIndex(int _index)
+    {
+        m_sectionsToActivate.Add(_index);
+    }
+
+    public void AddSectionIndex(List<int> _indicies)
+    {
+        foreach(int index in _indicies)
         {
-            EventManager.m_instance.m_currentState = EventManager.Events.FREEROAM;
+            m_sectionsToActivate.Add(index);
         }
-    */
+    }
+
+    /*
+      if (Input.GetKeyDown("e"))
+            {
+                EventManager.m_instance.m_eventLocation = this.gameObject.transform.position;
+                EventManager.m_instance.m_currentEvent = EventManager.Events.DRIVEANDSEEK;
+            }
+
+            if (Input.GetKeyDown("r"))
+            {
+                EventManager.m_instance.m_currentEvent = EventManager.Events.FREEROAM;
+            }
+     * /
+
 }
