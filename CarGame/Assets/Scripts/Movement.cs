@@ -61,6 +61,24 @@ public class Movement : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        switch (gameObject.tag)
+        {
+            case "Player1":
+                PlayerMovement(1);
+                break;
+            case "Player2":
+                PlayerMovement(2);
+                break;
+            case "Player3":
+                PlayerMovement(3);
+                break;
+            case "Player4":
+                PlayerMovement(4);
+                break;
+            default:
+                break;
+        }
+
         if (Input.GetKeyDown("q"))
         {
             transform.position += Vector3.up * 2.5f;
@@ -82,7 +100,19 @@ public class Movement : MonoBehaviour {
             m_audioSource.Play();
         }
 
-            if (Input.GetKeyDown("w"))
+        if (fuel < 0)
+        {
+            xspeep = 0;
+        }
+
+        xspeep *= friction;
+        transform.Translate(Vector3.forward * -xspeep);
+
+    }
+
+    void PlayerMovement(int _controller)
+    {
+        if (Input.GetKeyDown("w"))
         {
             forward = true;
         }
@@ -115,16 +145,5 @@ public class Movement : MonoBehaviour {
         {
             left = false;
         }
-
-        if (fuel < 0)
-        {
-
-            xspeep = 0;
-
-        }
-
-        xspeep *= friction;
-        transform.Translate(Vector3.forward * -xspeep);
-
     }
 }
