@@ -12,14 +12,17 @@ public class EventManager : MonoBehaviour
         Length
     };
 
-    public Events m_currentState = Events.FREEROAM;
-    public Events m_prevState = Events.FREEROAM;
+    public Events m_currentEvent = Events.FREEROAM;
+    public Events m_prevEvent = Events.FREEROAM;
+    private Events m_floatingEvent = Events.FREEROAM;
     public bool m_stateChanged = false;
 
     public Vector3 m_eventLocation;
+    public float m_eventWidth;
+    public float m_eventHeight;
 
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start ()
     {
 	    if(m_instance)
         {
@@ -36,10 +39,11 @@ public class EventManager : MonoBehaviour
     {
         m_stateChanged = false;
 
-        if (m_currentState != m_prevState)
+        if (m_currentEvent != m_floatingEvent)
         {
             m_stateChanged = true;
-            m_prevState = m_currentState;
+            m_prevEvent = m_floatingEvent;
+            m_floatingEvent = m_currentEvent;
         }
 	}
 }

@@ -8040,7 +8040,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_sections: []
-  m_minimumDistance: 100
+  m_sectionBoundaries: []
+  m_sectionsToActivate: 
+  m_mode: 0
+  m_gridWidth: 4
+  m_gridHeight: 4
+  m_gridBorderWidth: 1
+  m_gridBorderHeight: 1
 --- !u!146 &14602882
 WheelCollider:
   m_ObjectHideFlags: 1
