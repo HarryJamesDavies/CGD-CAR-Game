@@ -26,7 +26,7 @@ public class DeadCarManager : MonoBehaviour
 
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
         if (m_instance)
         {
@@ -42,18 +42,18 @@ public class DeadCarManager : MonoBehaviour
             m_sections.Add(transform.GetChild(i).gameObject);
         }
 
-        foreach(GameObject sections in m_sections)
+        foreach (GameObject sections in m_sections)
         {
             Vector2 sectionPosition = new Vector2(sections.transform.position.x - 50.0f, sections.transform.position.z - 50.0f);
             Rect tempRect = new Rect(sectionPosition, new Vector2(100.0f, 100.0f));
             m_sectionBoundaries.Add(tempRect);
         }
-	}
-	
-	// Update is called once per frame
-	void Update ()
+    }
+
+    // Update is called once per frame
+    void Update()
     {
-	    if(EventManager.m_instance.m_stateChanged)
+        if (EventManager.m_instance.m_stateChanged)
         {
             OnEventEnd();
 
@@ -61,7 +61,7 @@ public class DeadCarManager : MonoBehaviour
         }
 
         OnEventUpdate();
-	}
+    }
 
     public void OnEventBegin()
     {
@@ -135,7 +135,7 @@ public class DeadCarManager : MonoBehaviour
                     int index = 0;
                     foreach (Rect sections in m_sectionBoundaries)
                     {
-                        if(sections.Contains(eventLocation))
+                        if (sections.Contains(eventLocation))
                         {
                             centerIndex = index;
                         }
@@ -173,7 +173,7 @@ public class DeadCarManager : MonoBehaviour
                 }
             case SectioningMode.SPECIFIC:
                 {
-                    foreach(int index in m_sectionsToActivate)
+                    foreach (int index in m_sectionsToActivate)
                     {
                         m_sections[index - 1].SetActive(true);
                     }
@@ -222,23 +222,10 @@ public class DeadCarManager : MonoBehaviour
 
     public void AddSectionIndex(List<int> _indicies)
     {
-        foreach(int index in _indicies)
+        foreach (int index in _indicies)
         {
             m_sectionsToActivate.Add(index);
         }
     }
-
-    /*
-      if (Input.GetKeyDown("e"))
-            {
-                EventManager.m_instance.m_eventLocation = this.gameObject.transform.position;
-                EventManager.m_instance.m_currentEvent = EventManager.Events.DRIVEANDSEEK;
-            }
-
-            if (Input.GetKeyDown("r"))
-            {
-                EventManager.m_instance.m_currentEvent = EventManager.Events.FREEROAM;
-            }
-     * /
 
 }

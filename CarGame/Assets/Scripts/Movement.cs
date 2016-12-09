@@ -138,6 +138,17 @@ public class Movement : MonoBehaviour {
                 m_audioSource.Play();
             }
 
+            if (Input.GetKeyDown("e"))
+            {
+                EventManager.m_instance.m_eventLocation = this.gameObject.transform.position;
+                EventManager.m_instance.m_currentEvent = EventManager.Events.DRIVEANDSEEK;
+            }
+
+            if (Input.GetKeyDown("r"))
+            {
+                EventManager.m_instance.m_currentEvent = EventManager.Events.FREEROAM;
+            }
+
             if (fuel < 0)
             {
                 xspeep = 0;
