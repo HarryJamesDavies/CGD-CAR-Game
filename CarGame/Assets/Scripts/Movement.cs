@@ -61,68 +61,65 @@ public class Movement : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        switch (gameObject.tag)
-        {
-            case "Player1":
-                PlayerMovement(1);
-                break;
-            case "Player2":
-                PlayerMovement(2);
-                break;
-            case "Player3":
-                PlayerMovement(3);
-                break;
-            case "Player4":
-                PlayerMovement(4);
-                break;
-            default:
-                break;
-        }
-    }
+        //switch (gameObject.tag)
+        //{
+        //    case "Player1":
+        //        PlayerMovement(1);
+        //        break;
+        //    case "Player2":
+        //        PlayerMovement(2);
+        //        break;
+        //    case "Player3":
+        //        PlayerMovement(3);
+        //        break;
+        //    case "Player4":
+        //        PlayerMovement(4);
+        //        break;
+        //    default:
+        //        break;
+        //}
 
-    void PlayerMovement(int _controller)
-    {
-        if (Input.GetKeyDown("w") || Input.GetAxis("P" + _controller + "-R2(PS4)") > -1.0f)
+        if (Input.GetKeyDown("w"))
         {
             forward = true;
         }
-        if (Input.GetKeyUp("w") || Input.GetAxis("P" + _controller + "-R2(PS4)") == -1.0f)
+        if (Input.GetKeyUp("w"))
         {
             forward = false;
         }
-        if (Input.GetKeyDown("s") || Input.GetAxis("P" + _controller + "-L2(PS4)") > -1.0f)
+        if (Input.GetKeyDown("s"))
         {
             backward = true;
         }
-        if (Input.GetKeyUp("s") || Input.GetAxis("P" + _controller + "-L2(PS4)") == -1.0f)
+        if (Input.GetKeyUp("s"))
         {
             backward = false;
         }
 
-        if (Input.GetKeyDown("d") || Input.GetAxis("P" + _controller + ("-LeftJoystickX(PS4)")) > 0.5f)
+        if (Input.GetKeyDown("d"))
         {
             right = true;
         }
-        if (Input.GetKeyUp("d") || Input.GetAxis("P" + _controller + ("-LeftJoystickX(PS4)")) < 0.5f)
+        if (Input.GetKeyUp("d"))
         {
             right = false;
         }
-        if (Input.GetKeyDown("a") || Input.GetAxis("P" + _controller + ("-LeftJoystickX(PS4)")) < -0.5f)
+        if (Input.GetKeyDown("a"))
         {
             left = true;
         }
-        if (Input.GetKeyUp("a") || Input.GetAxis("P" + _controller + ("-LeftJoystickX(PS4)")) > -0.5f)
+        if (Input.GetKeyUp("a"))
         {
             left = false;
         }
 
-        if (Input.GetKeyDown("q") || Input.GetButtonDown("P" + _controller + ("-Triangle(PS4)")))
+        if (Input.GetKeyDown("q"))
         {
             transform.position += Vector3.up * 2.5f;
             transform.rotation = startingRotation;
         }
 
-        if (Input.GetKeyDown("l") || Input.GetButtonDown("P" + _controller + ("-Square(PS4)")))
+        if (Input.GetKeyDown("l"))
         {
             foreach (GameObject lights in m_lights)
             {
@@ -130,7 +127,73 @@ public class Movement : MonoBehaviour {
             }
         }
 
-        if (Input.GetKeyDown("h") || Input.GetButtonDown("P" + _controller + ("-Circle(PS4)")))
+        if (Input.GetKeyDown("h"))
+        {
+            int sound = Random.Range(0, m_hornSounds.Count);
+            m_audioSource.clip = m_hornSounds[sound];
+            m_audioSource.Play();
+        }
+
+        if (fuel < 0)
+        {
+            xspeep = 0;
+        }
+
+        xspeep *= friction;
+        transform.Translate(Vector3.forward * -xspeep);
+    }
+
+    void PlayerMovement(int _controller)
+    {
+        if (Input.GetAxis("P" + _controller + "-R2(PS4)") > -1.0f)
+        {
+            forward = true;
+        }
+        if (Input.GetAxis("P" + _controller + "-R2(PS4)") == -1.0f)
+        {
+            forward = false;
+        }
+        if (Input.GetAxis("P" + _controller + "-L2(PS4)") > -1.0f)
+        {
+            backward = true;
+        }
+        if (Input.GetAxis("P" + _controller + "-L2(PS4)") == -1.0f)
+        {
+            backward = false;
+        }
+
+        if (Input.GetAxis("P" + _controller + ("-LeftJoystickX(PS4)")) > 0.5f)
+        {
+            right = true;
+        }
+        if (Input.GetAxis("P" + _controller + ("-LeftJoystickX(PS4)")) < 0.5f)
+        {
+            right = false;
+        }
+        if (Input.GetAxis("P" + _controller + ("-LeftJoystickX(PS4)")) < -0.5f)
+        {
+            left = true;
+        }
+        if (Input.GetAxis("P" + _controller + ("-LeftJoystickX(PS4)")) > -0.5f)
+        {
+            left = false;
+        }
+
+        if (Input.GetButtonDown("P" + _controller + ("-Triangle(PS4)")))
+        {
+            transform.position += Vector3.up * 2.5f;
+            transform.rotation = startingRotation;
+        }
+
+        if (Input.GetButtonDown("P" + _controller + ("-Square(PS4)")))
+        {
+            foreach (GameObject lights in m_lights)
+            {
+                lights.SetActive(!lights.activeInHierarchy);
+            }
+        }
+
+        if (Input.GetButtonDown("P" + _controller + ("-Circle(PS4)")))
         {
             int sound = Random.Range(0, m_hornSounds.Count);
             m_audioSource.clip = m_hornSounds[sound];
