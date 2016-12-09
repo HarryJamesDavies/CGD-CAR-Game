@@ -5,8 +5,7 @@ public class ControllerManager : MonoBehaviour {
 
     public static ControllerManager m_instance = null;
 
-    private int m_joystickIterator;
-
+    public int m_joystickNumber;
     public bool m_useController;
 
 	// Use this for initialization
@@ -28,7 +27,7 @@ public class ControllerManager : MonoBehaviour {
 	
 	void Update ()
     {
-        m_joystickIterator = 0;
+        m_joystickNumber = 0;
         Debug.Log("Use Controller: " + m_useController);
 
         for (int i = 0; i < Input.GetJoystickNames().Length; i++)
@@ -36,17 +35,17 @@ public class ControllerManager : MonoBehaviour {
             if (Input.GetJoystickNames()[i] == "Wireless Controller")
             {
                 m_useController = true;
-                m_joystickIterator++;
-                Debug.Log("Joystick Iterator: " + m_joystickIterator);
+                m_joystickNumber++;
+                Debug.Log("Joystick Iterator: " + m_joystickNumber);
             }
             else
             {
-                m_joystickIterator--;
+                m_joystickNumber--;
 
-                if (m_joystickIterator >= Input.GetJoystickNames().Length)
+                if (m_joystickNumber >= Input.GetJoystickNames().Length)
                 {
                     m_useController = false;
-                    Debug.Log("Joystick Iterator: " + m_joystickIterator);
+                    Debug.Log("Joystick Iterator: " + m_joystickNumber);
                 }
             }
         }
