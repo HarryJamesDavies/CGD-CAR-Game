@@ -966,7 +966,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 461734, guid: 1d97417e631cd0f4eb91bad7711fcc4c, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -2.15
+      value: -2.619
       objectReference: {fileID: 0}
     - target: {fileID: 461734, guid: 1d97417e631cd0f4eb91bad7711fcc4c, type: 2}
       propertyPath: m_LocalPosition.z
@@ -990,7 +990,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 461734, guid: 1d97417e631cd0f4eb91bad7711fcc4c, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 13642574, guid: 1d97417e631cd0f4eb91bad7711fcc4c, type: 2}
       propertyPath: m_IsTrigger
@@ -1499,6 +1499,22 @@ MeshFilter:
   m_PrefabInternal: {fileID: 1033156698}
   m_GameObject: {fileID: 781262813}
   m_Mesh: {fileID: 4300000, guid: 6be68c3f0ead28d45b84bc36ebf28bc8, type: 3}
+--- !u!1 &811846471 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 103304, guid: 1d97417e631cd0f4eb91bad7711fcc4c, type: 2}
+  m_PrefabInternal: {fileID: 525024452}
+--- !u!114 &811846476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 811846471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db162bf6dcfd83e4f95f626d7b839890, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_bilboard: {fileID: 0}
 --- !u!1 &821719168
 GameObject:
   m_ObjectHideFlags: 0
