@@ -9,6 +9,7 @@ public class PlayerManager : MonoBehaviour {
     public List<GameObject> m_playerCars;
 
     private int m_spawned;
+    public int m_numberOfCars;
 
     public GameObject m_p1Prefab;
     public GameObject m_p2Prefab;
@@ -33,6 +34,7 @@ public class PlayerManager : MonoBehaviour {
 
         m_playerCars = new List<GameObject>();
         m_spawned = 0;
+        m_numberOfCars = 0;
 	}
 	
 	void Update ()
@@ -42,24 +44,29 @@ public class PlayerManager : MonoBehaviour {
             switch (ControllerManager.m_instance.m_joystickNumber)
             {
                 case 0:
+                    m_numberOfCars = 3;
                     m_playerCars.Add((GameObject)Instantiate(m_p1Prefab, m_p1Start.position, m_p1Start.rotation));
-                    //m_playerCars.Add((GameObject)Instantiate(m_p2Prefab, m_p2Start.position, m_p2Start.rotation));
-                    //m_playerCars.Add((GameObject)Instantiate(m_p3Prefab, m_p3Start.position, m_p3Start.rotation));
+                    m_playerCars.Add((GameObject)Instantiate(m_p2Prefab, m_p2Start.position, m_p2Start.rotation));
+                    m_playerCars.Add((GameObject)Instantiate(m_p3Prefab, m_p3Start.position, m_p3Start.rotation));
                     //m_playerCars.Add((GameObject)Instantiate(m_p4Prefab, m_p4Start.position, m_p4Start.rotation));
                     break;
                 case 1:
+                    m_numberOfCars = 1;
                     m_playerCars.Add((GameObject)Instantiate(m_p1Prefab, m_p1Start.position, m_p1Start.rotation));
                     break;
                 case 2:
+                    m_numberOfCars = 2;
                     m_playerCars.Add((GameObject)Instantiate(m_p1Prefab, m_p1Start.position, m_p1Start.rotation));
                     m_playerCars.Add((GameObject)Instantiate(m_p2Prefab, m_p2Start.position, m_p2Start.rotation));
                     break;
                 case 3:
+                    m_numberOfCars = 3;
                     m_playerCars.Add((GameObject)Instantiate(m_p1Prefab, m_p1Start.position, m_p1Start.rotation));
                     m_playerCars.Add((GameObject)Instantiate(m_p2Prefab, m_p2Start.position, m_p2Start.rotation));
                     m_playerCars.Add((GameObject)Instantiate(m_p3Prefab, m_p3Start.position, m_p3Start.rotation));
                     break;
                 case 4:
+                    m_numberOfCars = 4;
                     m_playerCars.Add((GameObject)Instantiate(m_p1Prefab, m_p1Start.position, m_p1Start.rotation));
                     m_playerCars.Add((GameObject)Instantiate(m_p2Prefab, m_p2Start.position, m_p2Start.rotation));
                     m_playerCars.Add((GameObject)Instantiate(m_p3Prefab, m_p3Start.position, m_p3Start.rotation));
@@ -68,7 +75,6 @@ public class PlayerManager : MonoBehaviour {
                 default:
                     break;
             }
-
             m_spawned++;
         }
 	}
