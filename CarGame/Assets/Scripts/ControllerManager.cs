@@ -28,7 +28,7 @@ public class ControllerManager : MonoBehaviour {
 	void Update ()
     {
         m_joystickNumber = 0;
-        Debug.Log("Use Controller: " + m_useController);
+       // Debug.Log("Use Controller: " + m_useController);
 
         for (int i = 0; i < Input.GetJoystickNames().Length; i++)
         {
