@@ -107,11 +107,12 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 430806}
-  - 65: {fileID: 6506772}
+  - 64: {fileID: 6458280}
   - 54: {fileID: 5480162}
   - 114: {fileID: 11414692}
   - 82: {fileID: 8274074}
   - 114: {fileID: 11488974}
+  - 114: {fileID: 11413048}
   m_Layer: 0
   m_Name: Player3
   m_TagString: Player3
@@ -306,7 +307,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 154258}
   m_LocalRotation: {x: 0.000001809995, y: -0.0000038146973, z: 6.904644e-12, w: 1}
-  m_LocalPosition: {x: 0, y: -0.0040000007, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.1999999, y: 1.1999999, z: 1.1999999}
   m_Children:
   - {fileID: 404210}
@@ -676,8 +677,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &6506772
-BoxCollider:
+--- !u!64 &6458280
+MeshCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -686,8 +687,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.014589604, y: 0.01, z: 0.031210115}
-  m_Center: {x: 0.00043151848, y: 0, z: 0.00018859877}
+  m_Convex: 1
+  m_Mesh: {fileID: 4300000, guid: 3e29cb83d7ad27e4bb1fa7750f25411a, type: 3}
 --- !u!82 &8274074
 AudioSource:
   m_ObjectHideFlags: 1
@@ -901,6 +902,23 @@ Light:
   m_ShadowRadius: 0
   m_ShadowAngle: 0
   m_AreaSize: {x: 1, y: 1}
+--- !u!114 &11413048
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 158980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 200d7ae1362a4b244ab903574f33b809, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxMoveDelta: 0.25
+  maxCollisionStrength: 7.5
+  yForceDamp: 0.075
+  demolutionRange: 0.15
+  impactDirManipulator: 0.1875
+  optionalMeshList: []
 --- !u!114 &11414692
 MonoBehaviour:
   m_ObjectHideFlags: 1

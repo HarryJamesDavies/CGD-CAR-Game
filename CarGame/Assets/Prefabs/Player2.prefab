@@ -142,11 +142,12 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 491578}
-  - 65: {fileID: 6588774}
+  - 64: {fileID: 6466374}
   - 54: {fileID: 5476534}
   - 114: {fileID: 11413492}
   - 82: {fileID: 8225670}
   - 114: {fileID: 11489724}
+  - 114: {fileID: 11464690}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Player2
@@ -341,7 +342,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 146774}
   m_LocalRotation: {x: 0.000001809995, y: -0.0000038146973, z: 6.904644e-12, w: 1}
-  m_LocalPosition: {x: 0, y: -0.00642, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 404562}
@@ -739,8 +740,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &6588774
-BoxCollider:
+--- !u!64 &6466374
+MeshCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -749,8 +750,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.02, y: 0.01, z: 0.04}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Convex: 1
+  m_Mesh: {fileID: 4300000, guid: 7b6e46ecbeb5d0d4fbe27aa62e0dba54, type: 3}
 --- !u!82 &8225670
 AudioSource:
   m_ObjectHideFlags: 1
@@ -985,6 +986,23 @@ MonoBehaviour:
   - {fileID: 106952}
   - {fileID: 178004}
   - {fileID: 112510}
+--- !u!114 &11464690
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 154870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 200d7ae1362a4b244ab903574f33b809, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxMoveDelta: 0.25
+  maxCollisionStrength: 7.5
+  yForceDamp: 0.075
+  demolutionRange: 0.15
+  impactDirManipulator: 0.1875
+  optionalMeshList: []
 --- !u!114 &11489724
 MonoBehaviour:
   m_ObjectHideFlags: 1
