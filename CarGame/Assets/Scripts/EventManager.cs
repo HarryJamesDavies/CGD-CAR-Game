@@ -9,7 +9,7 @@ public class EventManager : MonoBehaviour
     {
         FREEROAM = 0,
         DRIVEANDSEEK = 1,
-        Length
+        Count
     };
 
     public Events m_currentEvent = Events.FREEROAM;
