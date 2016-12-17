@@ -41,5 +41,10 @@ public class EventCollider : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
+        if(Input.GetKeyDown(KeyCode.P)) //DEBUG LINE TO START HIDE AND SEEK
+        {
+            EventManager.m_instance.m_currentEvent = EventManager.Events.DRIVEANDSEEK;
+            Debug.Log("Drive and seek started");
+        }
 	}
 }

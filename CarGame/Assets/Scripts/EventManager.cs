@@ -41,9 +41,14 @@ public class EventManager : MonoBehaviour
 
         if (m_currentEvent != m_floatingEvent)
         {
+            if(m_currentEvent == Events.DRIVEANDSEEK)
+            {
+                StateManager.m_instance.m_currentState = StateManager.State.GAMESETUPDRIVEANDSEEK;
+            }
             m_stateChanged = true;
             m_prevEvent = m_floatingEvent;
             m_floatingEvent = m_currentEvent;
         }
+        
 	}
 }
