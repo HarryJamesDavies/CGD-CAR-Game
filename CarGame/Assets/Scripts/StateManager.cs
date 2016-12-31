@@ -12,6 +12,7 @@ public class StateManager : MonoBehaviour
         GAMEOVER = 3,
         RESET = 4,
         GAMESETUPDRIVEANDSEEK = 5,
+        GAMEPLAYDRIVEANDSEEK = 6,
         Count
     };
 
@@ -25,7 +26,7 @@ public class StateManager : MonoBehaviour
     [SerializeField]
     GameObject gameManagerRef;
     [SerializeField]
-    GameObject gameManager;
+    public GameObject gameManager;
 
     // Use this for initialization
     void Start()
@@ -89,6 +90,10 @@ public class StateManager : MonoBehaviour
                 {
                     break;
                 }
+            case StateManager.State.GAMEPLAYDRIVEANDSEEK:
+                {
+                    break;
+                }
             default:
                 {
                     break;
@@ -136,6 +141,10 @@ public class StateManager : MonoBehaviour
                     }
                     break;
                 }
+            case StateManager.State.GAMEPLAYDRIVEANDSEEK:
+                {
+                    break;
+                }
             default:
                 {
                     break;
@@ -168,6 +177,10 @@ public class StateManager : MonoBehaviour
                     break;
                 }
             case StateManager.State.GAMESETUPDRIVEANDSEEK:
+                {
+                    break;
+                }
+            case StateManager.State.GAMEPLAYDRIVEANDSEEK:
                 {
                     break;
                 }
