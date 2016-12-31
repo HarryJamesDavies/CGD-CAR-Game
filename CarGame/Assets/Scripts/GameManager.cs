@@ -9,68 +9,73 @@ public class GameManager : MonoBehaviour {
         driveAndSeek
     }
 
-    enum DriveAndSeekPhases
+    public enum DriveAndSeekPhases
     {
         setup,
         hide,
         seek,
         finish
     }
+
+    Coroutine timer = null;
+
     [SerializeField]
-    DriveAndSeekPhases phaseDriveAndSeek;
+    public DriveAndSeekPhases m_phaseDriveAndSeek;
     [SerializeField]
-    Games gameToPlay;
-    bool gameSetup;
+    Games m_gameToPlay;
+    bool m_gameSetup;
     bool m_gameDirtyFlag;
     bool m_coRoutineStarted;
     
     [SerializeField]
-    GameObject volcanoArenaPrefab;
+    GameObject m_volcanoArenaPrefab;
     [SerializeField]
-    GameObject arena;
+    GameObject m_arena;
 
-    List<Transform> seekerPositions = new List<Transform>();
+    List<Transform> m_seekerPositions = new List<Transform>();
 
     int m_roundCounter;
     int m_hider;
-    List<int> previousHiders = new List<int>();
+    List<int> m_previousHiders = new List<int>();
 
     [SerializeField]
-    Transform hiderPosition; //volcanoArenaPrefab.gameObject.transform.FindChild("HiderSpawn").gameObject.transform.position;
+    Transform m_hiderPosition; //volcanoArenaPrefab.gameObject.transform.FindChild("HiderSpawn").gameObject.transform.position;
 
 	// Use this for initialization
 	void Start () {
 	    if(StateManager.m_instance.m_currentState == StateManager.State.GAMESETUPDRIVEANDSEEK)
         {
-            gameToPlay = Games.driveAndSeek;
-            phaseDriveAndSeek = DriveAndSeekPhases.setup;
+            m_gameToPlay = Games.driveAndSeek;
+            m_phaseDriveAndSeek = DriveAndSeekPhases.setup;
         }
-        gameSetup = false;
+        m_gameSetup = false;
         m_gameDirtyFlag = false;
         m_coRoutineStarted = false;
         m_roundCounter = 0;
-        hiderPosition = volcanoArenaPrefab.gameObject.transform.FindChild("HiderSpawn").gameObject.transform;
-        seekerPositions.Add(volcanoArenaPrefab.gameObject.transform.FindChild("SeekerSpawn1").gameObject.transform);
-        seekerPositions.Add(volcanoArenaPrefab.gameObject.transform.FindChild("SeekerSpawn2").gameObject.transform);
+        m_hiderPosition = m_volcanoArenaPrefab.gameObject.transform.FindChild("HiderSpawn").gameObject.transform;
+        m_seekerPositions.Add(m_volcanoArenaPrefab.gameObject.transform.FindChild("SeekerSpawn1").gameObject.transform);
+        m_seekerPositions.Add(m_volcanoArenaPrefab.gameObject.transform.FindChild("SeekerSpawn2").gameObject.transform);
         m_hider = -5;
     }
 	
 	// Update is called once per frame
 	void Update () {
 	
-        if(gameSetup == false)
+        if(m_gameSetup == false)
         {
+            StateManager.m_instance.m_currentState = StateManager.State.GAMESETUPDRIVEANDSEEK;
             PerformSetup();
+            StateManager.m_instance.m_currentState = StateManager.State.GAMEPLAYDRIVEANDSEEK;
         }
-        if(gameSetup == true)
+        if(m_gameSetup == true)
         {
-            if(gameToPlay == Games.driveAndSeek)
+            if(m_gameToPlay == Games.driveAndSeek)
             {
-                if(phaseDriveAndSeek == DriveAndSeekPhases.hide)
+                if(m_phaseDriveAndSeek == DriveAndSeekPhases.hide)
                 {
                     DriveAndSeekHide();
                 }
-                else if (phaseDriveAndSeek == DriveAndSeekPhases.seek)
+                else if (m_phaseDriveAndSeek == DriveAndSeekPhases.seek)
                 {
                     DriveAndSeekSeek();
                 }
@@ -83,14 +88,14 @@ public class GameManager : MonoBehaviour {
         if (m_coRoutineStarted == false)
         {
             m_coRoutineStarted = true;
-            StartCoroutine(HideAndSeekTimer(10));
+            timer = StartCoroutine(HideAndSeekTimer(10));
         }
         //start a co-routine for the timer with a boolean
         //check to see if vision is hiden
         //check to see if controls are taken away
         if(m_gameDirtyFlag == true)
         {
-            phaseDriveAndSeek = DriveAndSeekPhases.seek;
+            m_phaseDriveAndSeek = DriveAndSeekPhases.seek;
             m_gameDirtyFlag = false;
             m_coRoutineStarted = false;
         }
@@ -105,10 +110,10 @@ public class GameManager : MonoBehaviour {
         }
         if (m_gameDirtyFlag == true)
         {
-            phaseDriveAndSeek = DriveAndSeekPhases.setup;
+            m_phaseDriveAndSeek = DriveAndSeekPhases.setup;
             m_gameDirtyFlag = false;
             m_coRoutineStarted = false;
-            gameSetup = false;
+            m_gameSetup = false;
             m_hider = -5;
             m_roundCounter++;
 
@@ -125,25 +130,25 @@ public class GameManager : MonoBehaviour {
         {
             EventManager.m_instance.m_currentEvent = EventManager.Events.FREEROAM;
             StateManager.m_instance.m_currentState = StateManager.State.PLAY;
-            Destroy(arena);
+            Destroy(m_arena);
             Destroy(gameObject);
         }
-        if (gameToPlay == Games.driveAndSeek && phaseDriveAndSeek == DriveAndSeekPhases.setup)
+        if (m_gameToPlay == Games.driveAndSeek && m_phaseDriveAndSeek == DriveAndSeekPhases.setup)
         {
 
             //do some logic for deciding what arena to set up
-            if (arena == null)
+            if (m_arena == null)
             {
-                arena = Instantiate(volcanoArenaPrefab);
+                m_arena = Instantiate(m_volcanoArenaPrefab);
             }
 
             //select the hider
             while (m_hider == -5)
             {
                 m_hider = Random.Range(0, 2);
-                for(int iter = 0; iter < previousHiders.Count; iter++)
+                for(int iter = 0; iter < m_previousHiders.Count; iter++)
                 {
-                    if(m_hider == previousHiders[iter])
+                    if(m_hider == m_previousHiders[iter])
                     {
                         m_hider = -5;
                     }
@@ -155,17 +160,17 @@ public class GameManager : MonoBehaviour {
             {
                 if(iter == m_hider)
                 {
-                    PlayerManager.m_instance.m_playerCars[m_hider].gameObject.transform.position = hiderPosition.position;
+                    PlayerManager.m_instance.m_playerCars[m_hider].gameObject.transform.position = m_hiderPosition.position;
                 }
                 else
                 {
-                    PlayerManager.m_instance.m_playerCars[iter].gameObject.transform.position = seekerPositions[iterTwo].position;
+                    PlayerManager.m_instance.m_playerCars[iter].gameObject.transform.position = m_seekerPositions[iterTwo].position;
                     iterTwo++;
                 }
             }
 
-            phaseDriveAndSeek = DriveAndSeekPhases.hide;
-            gameSetup = true;
+            m_phaseDriveAndSeek = DriveAndSeekPhases.hide;
+            m_gameSetup = true;
            
             //countdown to play? intro?
 
@@ -176,6 +181,13 @@ public class GameManager : MonoBehaviour {
     IEnumerator HideAndSeekTimer(int time)
     {
         yield return new WaitForSeconds(time);
+
+        m_gameDirtyFlag = true;
+    }
+
+    public void hiderCaught()
+    {
+        StopCoroutine(timer);
 
         m_gameDirtyFlag = true;
     }

@@ -7,10 +7,17 @@ public class Car : MonoBehaviour {
 
     private Camera m_playerCam;
 
+    [SerializeField]
+    bool m_hider;
+    [SerializeField]
+    bool m_seeker;
+
     void Awake()
     {
         m_tag = gameObject.tag;
         SetCamera();
+        m_hider = false;
+        m_seeker = false;
     }
 	
 	void Update ()
@@ -82,6 +89,24 @@ public class Car : MonoBehaviour {
                 break;
             default:
                 break;
+        }
+    }
+
+    void OnCollisionEnter(Collider _collider)
+    {
+        if(_collider.gameObject.GetComponent<Car>().m_hider == true 
+            || _collider.gameObject.GetComponent<Car>().m_seeker == true)
+        {
+            if(_collider.gameObject.GetComponent<Car>().m_seeker == true && m_hider == true)
+            {
+                if (StateManager.m_instance.gameManager.GetComponent<GameManager>().m_phaseDriveAndSeek 
+                    == GameManager.DriveAndSeekPhases.seek)
+                {
+                    StateManager.m_instance.gameManager.GetComponent<GameManager>().hiderCaught();
+                }
+
+                //some sort of logic to add points to a score
+            }
         }
     }
 }

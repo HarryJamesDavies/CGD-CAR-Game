@@ -39,9 +39,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 858f1b6cfd9eb944d8f4df8af55d5109, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volcanoArenaPrefab: {fileID: 150340, guid: 8ce25848661eff541859cad1936e8c0f, type: 2}
-  arena: {fileID: 0}
-  hiderPosition: {fileID: 0}
+  m_phaseDriveAndSeek: 0
+  m_gameToPlay: 0
+  m_volcanoArenaPrefab: {fileID: 150340, guid: 8ce25848661eff541859cad1936e8c0f, type: 2}
+  m_arena: {fileID: 0}
+  m_hiderPosition: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
