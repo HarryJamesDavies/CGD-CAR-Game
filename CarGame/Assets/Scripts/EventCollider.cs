@@ -26,7 +26,7 @@ public class EventCollider : MonoBehaviour {
                     }
 
                     //start the event
-                    EventManager.m_instance.m_currentEvent = EventManager.Events.DRIVEANDSEEK;
+                    GameModeManager.m_instance.m_currentEvent = GameModeManager.GameModeState.DRIVEANDSEEK;
                     Debug.Log("Drive and Seek started");
                     m_firstPlayerPlaying = true;
                 }
