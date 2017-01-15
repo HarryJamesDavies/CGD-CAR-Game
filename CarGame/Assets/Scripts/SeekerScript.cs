@@ -3,7 +3,7 @@ using System.Collections;
 
 public class SeekerScript : MonoBehaviour
 {
-    int m_playerNumber;
+    //int m_playerNumber;
     int m_damageApplied = 0;
     bool m_lights = true;
 
@@ -14,7 +14,7 @@ public class SeekerScript : MonoBehaviour
 
     void Start()
     {
-        m_playerNumber = transform.parent.GetComponent<Car>().m_playerNumber;
+        //m_playerNumber = transform.parent.GetComponent<Car>().m_playerNumber;
     }
 
     // Update is called once per frame
