@@ -508,6 +508,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b10c739a2b4960342b619d34a296a749, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_playersconnected: 0
 --- !u!114 &11469480
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -598,7 +599,7 @@ LineRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 440da4882076b8843b73a0ec62537a9f, type: 2}
+  - {fileID: 2100000, guid: 1f49f885edb03a14db8b0f2c7e0f9e5a, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -618,8 +619,8 @@ LineRenderer:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 1}
   m_Parameters:
-    startWidth: 0.5
-    endWidth: 0.5
+    startWidth: 0.1
+    endWidth: 0.1
     m_StartColor:
       serializedVersion: 2
       rgba: 4294967295

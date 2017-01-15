@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class DriveAndSeekMode : GameMode
 {
@@ -13,6 +14,7 @@ public class DriveAndSeekMode : GameMode
         CHASE = 3,  
         RESET = 4,
         FINISH = 5,
+        BUFFER = 6,
         Count
     }
 
@@ -23,6 +25,13 @@ public class DriveAndSeekMode : GameMode
         public float m_length;
     }
 
+    public struct BufferStruct
+    {
+        public DriveAndSeekPhases m_nextPhase;
+        public float m_lenght;
+        public string m_message;
+    }
+
     public DriveAndSeekPhases m_currentPhase;
     public int m_winningScore = 3;
     public int m_hiderNumber = 0;
@@ -30,14 +39,17 @@ public class DriveAndSeekMode : GameMode
     private int m_gameWinner = -1;
 
     public List<PhaseLenght> m_phaseLenghts;
-    public List<Timer> m_timers;
     public List<int> m_playerScores;
+    public List<Timer> m_timers;
 
     public Transform m_hiderSpawn;
     public List<Transform> m_seekerSpawns;
 
     private Transform m_timerHolder;
     public GameObject m_timerPrefab;
+
+    public BufferStruct m_bufferPhase;
+    public GameObject m_infoText;
 
     new
 	void Start ()
@@ -60,6 +72,8 @@ public class DriveAndSeekMode : GameMode
             m_playerScores.Add(0);
         }
 
+        m_infoText = GameObject.FindGameObjectWithTag("DaSText");
+
         m_currentPhase = DriveAndSeekPhases.SETUP;
         InitializePhase();
 	}
@@ -79,19 +93,41 @@ public class DriveAndSeekMode : GameMode
                 {
                     EventManager.m_instance.AddEvent(Events.Event.DS_SETUP);
                     SetupHiderAndSeekers();
-                    m_currentPhase = DriveAndSeekPhases.HIDING;
+                    m_currentPhase = DriveAndSeekPhases.BUFFER;
+                    m_bufferPhase.m_lenght = 5.0f;
+                    m_bufferPhase.m_nextPhase = DriveAndSeekPhases.HIDING;
+                    m_bufferPhase.m_message = "Seekers Look Away!";
                     InitializePhase();
                     break;
                 }
             case DriveAndSeekPhases.HIDING:
                 {
                     EventManager.m_instance.AddEvent(Events.Event.DS_HIDING);
+                    m_infoText.GetComponent<Text>().text = "Hiding Timing!";
                     m_timers[GetTimer("Hide")].StartTimer();
+
+                    for (int iter = 0; iter <= PlayerManager.m_instance.m_playerCars.Count - 1; iter++)
+                    {
+                        if (iter != m_hiderNumber)
+                        {
+                            PlayerManager.m_instance.m_playerCars[iter].GetComponent<Car>().ToggleCamera(false);
+                        }
+                    }
                     break;
                 }
             case DriveAndSeekPhases.SEEKING:
                 {
                     EventManager.m_instance.AddEvent(Events.Event.DS_SEEKING);
+                    m_infoText.GetComponent<Text>().text = "Seeking Time";
+
+                    for (int iter = 0; iter <= PlayerManager.m_instance.m_playerCars.Count - 1; iter++)
+                    {
+                        if (iter != m_hiderNumber)
+                        {
+                            PlayerManager.m_instance.m_playerCars[iter].GetComponent<Car>().ToggleCamera(true);
+                        }
+                    }
+
                     m_timers[GetTimer("Seek")].StartTimer();
                     break;
                 }
@@ -126,6 +162,13 @@ public class DriveAndSeekMode : GameMode
                     DestroyObject(gameObject);
                     break;
                 }
+            case DriveAndSeekPhases.BUFFER:
+                {
+                    m_timers[GetTimer("Buffer")].m_timerLength = m_bufferPhase.m_lenght;
+                    m_infoText.GetComponent<Text>().text = m_bufferPhase.m_message;
+                    m_timers[GetTimer("Buffer")].StartTimer();
+                    break;
+                }
             default:
                 {
                     break;
@@ -143,23 +186,32 @@ public class DriveAndSeekMode : GameMode
                 }
             case DriveAndSeekPhases.HIDING:
                 {
-                    if(m_timers[GetTimer("Hide")].CheckFinished())
+                    if (m_timers[GetTimer("Hide")].CheckFinished())
                     {
-                        PlayerManager.m_instance.m_playerCars[m_hiderNumber].GetComponent<Car>().ToggleCamera(false);
-                        m_currentPhase = DriveAndSeekPhases.SEEKING;
+                       //PlayerManager.m_instance.m_playerCars[m_hiderNumber].GetComponent<Car>().ToggleCamera(false);
+
+                        for(int iter = 0; iter <= PlayerManager.m_instance.m_playerCars.Count - 1; iter++)
+                        {
+                            PlayerManager.m_instance.m_playerCars[iter].GetComponent<Car>().ToggleCamera(false);
+                        }
+
+                        m_currentPhase = DriveAndSeekPhases.BUFFER;
+                        m_bufferPhase.m_lenght = 5.0f;
+                        m_bufferPhase.m_nextPhase = DriveAndSeekPhases.SEEKING;
+                        m_bufferPhase.m_message = "Seekers Look Back!";
                         InitializePhase();
                     }
                     break;
                 }
             case DriveAndSeekPhases.SEEKING:
                 {
-                    if(CheckHidersCaught())
+                    if (CheckHidersCaught())
                     {
                         m_currentPhase = DriveAndSeekPhases.RESET;
                         InitializePhase();
                     }
 
-                    if(m_timers[GetTimer("Seek")].CheckFinished())
+                    if (m_timers[GetTimer("Seek")].CheckFinished())
                     {
                         m_currentPhase = DriveAndSeekPhases.CHASE;
                         InitializePhase();
@@ -188,6 +240,15 @@ public class DriveAndSeekMode : GameMode
                 }
             case DriveAndSeekPhases.FINISH:
                 {
+                    break;
+                }
+            case DriveAndSeekPhases.BUFFER:
+                {
+                    if (m_timers[GetTimer("Buffer")].CheckFinished())
+                    {
+                        m_currentPhase = m_bufferPhase.m_nextPhase;
+                        InitializePhase();
+                    }
                     break;
                 }
             default:

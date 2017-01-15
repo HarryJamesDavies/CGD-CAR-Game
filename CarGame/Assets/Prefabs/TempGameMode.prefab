@@ -171,14 +171,17 @@ MonoBehaviour:
     m_length: 10
   - m_name: Chase
     m_length: 10
-  m_timers: []
+  - m_name: Buffer
+    m_length: 10
   m_playerScores: 
+  m_timers: []
   m_hiderSpawn: {fileID: 416376}
   m_seekerSpawns:
   - {fileID: 499488}
   - {fileID: 415156}
   - {fileID: 477318}
   m_timerPrefab: {fileID: 194154, guid: 1106d9acb5bdfe44d8d29ffd6f7f0088, type: 2}
+  m_infoText: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
