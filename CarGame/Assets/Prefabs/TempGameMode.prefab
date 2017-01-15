@@ -162,7 +162,7 @@ MonoBehaviour:
     width: 0
     height: 0
   m_currentPhase: 0
-  m_winningScore: 3
+  m_winningScore: 1
   m_hiderNumber: 0
   m_phaseLenghts:
   - m_name: Hide
