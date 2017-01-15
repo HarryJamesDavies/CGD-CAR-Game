@@ -128,7 +128,7 @@ public class GameManager : MonoBehaviour {
     {
         if(m_roundCounter == 3)
         {
-            EventManager.m_instance.m_currentEvent = EventManager.Events.FREEROAM;
+            GameModeManager.m_instance.m_currentEvent = GameModeManager.GameModeState.FREEROAM;
             StateManager.m_instance.m_currentState = StateManager.State.PLAY;
             Destroy(m_arena);
             Destroy(gameObject);

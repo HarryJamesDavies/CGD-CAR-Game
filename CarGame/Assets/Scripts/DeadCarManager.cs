@@ -35,6 +35,12 @@ public class DeadCarManager : MonoBehaviour
             m_sections.Add(transform.GetChild(i).gameObject);
         }
 
+        EventManager.m_instance.SubscribeToEvent(Events.Event.DS_SETUP, EvFunc_OnDSSetup);
+        EventManager.m_instance.SubscribeToEvent(Events.Event.DS_HIDING, EvFunc_OnDSHiding);
+        EventManager.m_instance.SubscribeToEvent(Events.Event.DS_SEEKING, EvFunc_OnDSSeeking);
+        EventManager.m_instance.SubscribeToEvent(Events.Event.DS_RESET, EvFunc_OnDSReset);
+        EventManager.m_instance.SubscribeToEvent(Events.Event.DS_FINISH, EvFunc_OnDSFinish);
+
         foreach (GameObject sections in m_sections)
         {
             Vector2 sectionPosition = new Vector2(sections.transform.position.x - 50.0f, sections.transform.position.z - 50.0f);
@@ -43,77 +49,34 @@ public class DeadCarManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    void EvFunc_OnDSSetup()
     {
-        if (EventManager.m_instance.m_stateChanged)
-        {
-            OnEventEnd();
-
-            OnEventBegin();
-        }
-
-        OnEventUpdate();
+        SetSections();
+        return;
     }
 
-    public void OnEventBegin()
+    void EvFunc_OnDSHiding()
     {
-        switch (EventManager.m_instance.m_currentEvent)
-        {
-            case EventManager.Events.FREEROAM:
-                {
-                    break;
-                }
-            case EventManager.Events.DRIVEANDSEEK:
-                {
-                    SetSections();
-                    break;
-                }
-            default:
-                {
-                    break;
-                }
-        }
+        
+        return;
     }
 
-    public void OnEventUpdate()
+    void EvFunc_OnDSSeeking()
     {
-        switch (EventManager.m_instance.m_currentEvent)
-        {
-            case EventManager.Events.FREEROAM:
-                {
-                    break;
-                }
-            case EventManager.Events.DRIVEANDSEEK:
-                {
-
-                    break;
-                }
-            default:
-                {
-                    break;
-                }
-        }
+        
+        return;
     }
 
-    public void OnEventEnd()
+    void EvFunc_OnDSReset()
     {
-        switch (EventManager.m_instance.m_prevEvent)
-        {
-            case EventManager.Events.FREEROAM:
-                {
-                    break;
-                }
-            case EventManager.Events.DRIVEANDSEEK:
-                {
-                    ResetSections();
-                    break;
-                }
-            default:
-                {
-                    break;
-                }
-        }
+        ResetSections();
+        return;
+    }
+
+    void EvFunc_OnDSFinish()
+    {
+        
+        return;
     }
 
     void SetSections()
@@ -122,14 +85,10 @@ public class DeadCarManager : MonoBehaviour
         {
             case SectioningMode.SQUARE:
                 {
-                    Vector2 eventMinimum = new Vector2(EventManager.m_instance.m_eventLocation.x - EventManager.m_instance.m_eventWidth / 2,
-                        EventManager.m_instance.m_eventLocation.z - EventManager.m_instance.m_eventHeight / 2);
-                    Rect eventRect = new Rect(eventMinimum, new Vector2(EventManager.m_instance.m_eventWidth, EventManager.m_instance.m_eventHeight));
-
                     int index = 0;
                     foreach (Rect sections in m_sectionBoundaries)
                     {
-                        if (eventRect.Overlaps(sections))
+                        if (GameModeManager.m_instance.m_currentGameMode.m_eventRect.Overlaps(sections))
                         {
                             m_sections[index].SetActive(true);
                         }
