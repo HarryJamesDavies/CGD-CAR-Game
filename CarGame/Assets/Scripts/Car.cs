@@ -20,6 +20,7 @@ public class Car : MonoBehaviour {
         {
             m_hider = true;
             m_seeker = false;
+            gameObject.AddComponent<Hider>();
         }
         else if (m_tag == "Player2")
         {
