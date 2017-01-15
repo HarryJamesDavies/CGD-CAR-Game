@@ -13,6 +13,7 @@ public class Movement : MonoBehaviour {
     bool left = false;
 
     public float fuel = 2;
+    public bool m_controls;
 
     public Vector3 m_direction;
     Quaternion startingRotation;
@@ -26,6 +27,7 @@ public class Movement : MonoBehaviour {
         m_direction = Vector3.forward;
         startingRotation = transform.rotation;
         m_audioSource = GetComponent<AudioSource>();
+        m_controls = true;
     }
 
 
@@ -57,55 +59,60 @@ public class Movement : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (ControllerManager.m_instance.m_useController)
-        {
-            switch (gameObject.tag)
-            {
-                case "Player1":
-                    PlayerMovement(1);
-                    break;
-                case "Player2":
-                    PlayerMovement(2);
-                    break;
-                case "Player3":
-                    PlayerMovement(3);
-                    break;
-                case "Player4":
-                    PlayerMovement(4);
-                    break;
-                default:
-                    break;
-            }
-        }
-        else
-        {
-            switch (gameObject.tag)
-            {
-                case "Player1":
-                    KeyboardMovement(1);
-                    break;
-                case "Player2":
-                    KeyboardMovement(2);
-                    break;
-                case "Player3":
-                    KeyboardMovement(3);
-                    break;
-                case "Player4":
-                    KeyboardMovement(4);
-                    break;
-                default:
-                    break;
-            }
+        Debug.Log(m_controls);
 
-            if (Input.GetKeyDown("e"))
+        if (m_controls)
+        {
+            if (ControllerManager.m_instance.m_useController)
             {
-                EventManager.m_instance.m_eventLocation = this.gameObject.transform.position;
-                EventManager.m_instance.m_currentEvent = EventManager.Events.DRIVEANDSEEK;
+                switch (gameObject.tag)
+                {
+                    case "Player1":
+                        PlayerMovement(1);
+                        break;
+                    case "Player2":
+                        PlayerMovement(2);
+                        break;
+                    case "Player3":
+                        PlayerMovement(3);
+                        break;
+                    case "Player4":
+                        PlayerMovement(4);
+                        break;
+                    default:
+                        break;
+                }
             }
-
-            if (Input.GetKeyDown("r"))
+            else
             {
-                EventManager.m_instance.m_currentEvent = EventManager.Events.FREEROAM;
+                switch (gameObject.tag)
+                {
+                    case "Player1":
+                        KeyboardMovement(1);
+                        break;
+                    case "Player2":
+                        KeyboardMovement(2);
+                        break;
+                    case "Player3":
+                        KeyboardMovement(3);
+                        break;
+                    case "Player4":
+                        KeyboardMovement(4);
+                        break;
+                    default:
+                        break;
+                }
+
+                if (Input.GetKeyDown("e"))
+                {
+                    EventManager.m_instance.m_eventLocation = this.gameObject.transform.position;
+                    EventManager.m_instance.m_currentEvent = EventManager.Events.DRIVEANDSEEK;
+                }
+
+                if (Input.GetKeyDown("r"))
+                {
+                    EventManager.m_instance.m_currentEvent = EventManager.Events.FREEROAM;
+                }
             }
         }
     }
