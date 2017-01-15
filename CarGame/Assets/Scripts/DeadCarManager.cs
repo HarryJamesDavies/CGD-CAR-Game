@@ -19,6 +19,7 @@ public class DeadCarManager : MonoBehaviour
     public SectioningMode m_mode;
 
     public List<GameObject> m_cars = new List<GameObject>();
+    private Transform m_deadCarHolder;
 
 
     // Use this for initialization
@@ -38,12 +39,10 @@ public class DeadCarManager : MonoBehaviour
             m_sections.Add(transform.GetChild(i).gameObject);
         }
 
+        m_deadCarHolder = new GameObject("DeadCarHolder").transform;
+
         EventManager.m_instance.SubscribeToEvent(Events.Event.DS_SETUP, EvFunc_OnDSSetup);
-        EventManager.m_instance.SubscribeToEvent(Events.Event.DS_HIDING, EvFunc_OnDSHiding);
-        EventManager.m_instance.SubscribeToEvent(Events.Event.DS_SEEKING, EvFunc_OnDSSeeking);
-        EventManager.m_instance.SubscribeToEvent(Events.Event.DS_CHASE, EvFunc_OnDSChase);
         EventManager.m_instance.SubscribeToEvent(Events.Event.DS_RESET, EvFunc_OnDSReset);
-        EventManager.m_instance.SubscribeToEvent(Events.Event.DS_FINISH, EvFunc_OnDSFinish);
 
         foreach (GameObject sections in m_sections)
         {
@@ -59,34 +58,9 @@ public class DeadCarManager : MonoBehaviour
         return;
     }
 
-    void EvFunc_OnDSHiding()
-    {
-        
-        return;
-    }
-
-    void EvFunc_OnDSSeeking()
-    {
-        
-        return;
-    }
-
-    void EvFunc_OnDSChase()
-    {
-
-        return;
-    }
-
-
     void EvFunc_OnDSReset()
     {
         ResetSections();
-        return;
-    }
-
-    void EvFunc_OnDSFinish()
-    {
-        
         return;
     }
 
@@ -154,7 +128,9 @@ public class DeadCarManager : MonoBehaviour
         for (int iter = 0; iter <= m_sections[_section].transform.childCount - 1; iter++)
         {
             Transform spawnLocation = m_sections[_section].transform.GetChild(iter).transform;
-            m_cars.Add((GameObject)Instantiate(m_prefabCars[GetRandomCar()], spawnLocation.position, spawnLocation.rotation));
+            GameObject tempObject = (GameObject)Instantiate(m_prefabCars[GetRandomCar()], spawnLocation.position, spawnLocation.rotation);
+            tempObject.transform.SetParent(m_deadCarHolder);
+            m_cars.Add(tempObject);
         }
     }
 

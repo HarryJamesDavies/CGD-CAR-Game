@@ -59,7 +59,7 @@ public class Movement : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(m_controls);
+        //Debug.Log(m_controls);
 
         if (m_controls)
         {

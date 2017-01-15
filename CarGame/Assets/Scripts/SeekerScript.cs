@@ -7,7 +7,7 @@ public class SeekerScript : MonoBehaviour
     int m_damageApplied = 0;
     bool m_lights = true;
 
-    float timer = 5.0f;
+    float timer = 2.0f;
     bool m_hiderHit = false;
 
     public string m_hiderTag;
@@ -23,7 +23,7 @@ public class SeekerScript : MonoBehaviour
         if (m_damageApplied > 0 && timer > 0.0f)
         {
             timer -= Time.deltaTime;
-            Debug.Log(timer);
+            //Debug.Log(timer);
         }
         else
         {
