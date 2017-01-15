@@ -38,6 +38,7 @@ public class DeadCarManager : MonoBehaviour
         EventManager.m_instance.SubscribeToEvent(Events.Event.DS_SETUP, EvFunc_OnDSSetup);
         EventManager.m_instance.SubscribeToEvent(Events.Event.DS_HIDING, EvFunc_OnDSHiding);
         EventManager.m_instance.SubscribeToEvent(Events.Event.DS_SEEKING, EvFunc_OnDSSeeking);
+        EventManager.m_instance.SubscribeToEvent(Events.Event.DS_CHASE, EvFunc_OnDSChase);
         EventManager.m_instance.SubscribeToEvent(Events.Event.DS_RESET, EvFunc_OnDSReset);
         EventManager.m_instance.SubscribeToEvent(Events.Event.DS_FINISH, EvFunc_OnDSFinish);
 
@@ -66,6 +67,13 @@ public class DeadCarManager : MonoBehaviour
         
         return;
     }
+
+    void EvFunc_OnDSChase()
+    {
+
+        return;
+    }
+
 
     void EvFunc_OnDSReset()
     {

@@ -1,69 +1,48 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &105448
+--- !u!1 &194154
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 448368}
-  - 114: {fileID: 11425228}
+  - 4: {fileID: 411640}
+  - 114: {fileID: 11459528}
   m_Layer: 0
-  m_Name: TempGameMode
+  m_Name: PrefabTimer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &448368
+--- !u!4 &411640
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 105448}
+  m_GameObject: {fileID: 194154}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &11425228
+--- !u!114 &11459528
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 105448}
+  m_GameObject: {fileID: 194154}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd69bec0d497a314b8deb6e7a7c23cb8, type: 3}
+  m_Script: {fileID: 11500000, guid: 566f17df7c0b9ea4daa61aa6300e0dd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_active: 0
-  m_eventLocation: {x: 0, y: 0, z: 0}
-  m_eventWidth: 300
-  m_eventHeight: 300
-  m_eventRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 0
-    height: 0
-  m_currentPhase: 0
-  m_winningScore: 3
-  m_numberOfPlayers: 0
-  m_hiderNumber: 0
-  m_phaseLenghts:
-  - m_name: Hide
-    m_length: 5
-  - m_name: Seek
-    m_length: 10
-  - m_name: Chase
-    m_length: 5
-  m_timers: []
-  m_playerScores: 
-  m_timerHolder: {fileID: 0}
-  m_timerPrefab: {fileID: 194154, guid: 1106d9acb5bdfe44d8d29ffd6f7f0088, type: 2}
+  m_counting: 0
+  m_name: 
+  m_startTime: 0
+  m_timerLength: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -73,5 +52,5 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 105448}
+  m_RootGameObject: {fileID: 194154}
   m_IsPrefabParent: 1
