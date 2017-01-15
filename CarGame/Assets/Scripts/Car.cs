@@ -68,17 +68,19 @@ public class Car : MonoBehaviour {
         m_hider = false;
     }
 
+    public void ToggleCamera(bool _active)
+    {
+        m_playerCam.enabled = _active;
+    }
+
     void SetCamera()
     {
-        Debug.Log("Number of Cars: " + PlayerManager.m_instance.m_numberOfCars);
-
         for (int i = 0; i <= transform.childCount - 1; i++)
         {
             string tempTag = transform.GetChild(i).gameObject.tag;
 
             if (tempTag == "CarCamera")
             {
-                Debug.Log("Found car cam.");
                 m_playerCam = transform.GetChild(i).GetComponent<Camera>();
             }
         }
@@ -135,21 +137,21 @@ public class Car : MonoBehaviour {
         }
     }
 
-    void OnCollisionEnter(Collider _collider)
-    {
-        if(_collider.gameObject.GetComponent<Car>().m_hider == true 
-            || _collider.gameObject.GetComponent<Car>().m_seeker == true)
-        {
-            if(_collider.gameObject.GetComponent<Car>().m_seeker == true && m_hider == true)
-            {
-                if (StateManager.m_instance.gameManager.GetComponent<GameManager>().m_phaseDriveAndSeek 
-                    == GameManager.DriveAndSeekPhases.seek)
-                {
-                    StateManager.m_instance.gameManager.GetComponent<GameManager>().hiderCaught();
-                }
+    //void OnCollisionEnter(Collider _collider)
+    //{
+    //    if(_collider.gameObject.GetComponent<Car>().m_hider == true 
+    //        || _collider.gameObject.GetComponent<Car>().m_seeker == true)
+    //    {
+    //        if(_collider.gameObject.GetComponent<Car>().m_seeker == true && m_hider == true)
+    //        {
+    //            if (StateManager.m_instance.gameManager.GetComponent<GameManager>().m_phaseDriveAndSeek 
+    //                == GameManager.DriveAndSeekPhases.seek)
+    //            {
+    //                StateManager.m_instance.gameManager.GetComponent<GameManager>().hiderCaught();
+    //            }
 
-                //some sort of logic to add points to a score
-            }
-        }
-    }
+    //            //some sort of logic to add points to a score
+    //        }
+    //    }
+    //}
 }

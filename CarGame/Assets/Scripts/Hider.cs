@@ -4,6 +4,7 @@ using System.Collections;
 public class Hider : MonoBehaviour {
 
     Movement m_carMovement;
+    Car m_car;
 
     bool m_controlsEnabled;
     private Camera m_hiderCam;
@@ -11,29 +12,14 @@ public class Hider : MonoBehaviour {
     void Start()
     {
         m_carMovement = gameObject.GetComponent<Movement>();
+        m_car = gameObject.GetComponent<Car>();
         m_controlsEnabled = true;
     }
 
 	// Update is called once per frame
 	void Update ()
     {
-	    switch (gameObject.tag)
-        {
-            case "Player1":
-                SetLocation(1);
-                break;
-            case "Player2":
-                SetLocation(2);
-                break;
-            case "Player3":
-                SetLocation(3);
-                break;
-            case "Player4":
-                SetLocation(4);
-                break;
-            default:
-                break;
-        }
+        SetLocation(m_car.m_playerNumber);
 	}
 
     void SetLocation(int _playerNumber)
@@ -45,12 +31,12 @@ public class Hider : MonoBehaviour {
                 if (!m_controlsEnabled)
                 {
                     m_controlsEnabled = true;
-                    SetCamera(true);
+                    m_car.ToggleCamera(true);
                 }
                 else
                 {
                     m_controlsEnabled = false;
-                    SetCamera(false);
+                    m_car.ToggleCamera(false);
                 }
             }
         }
@@ -64,12 +50,12 @@ public class Hider : MonoBehaviour {
                         if (!m_controlsEnabled)
                         {
                             m_controlsEnabled = true;
-                            SetCamera(true);
+                            m_car.ToggleCamera(true);
                         }
                         else
                         {
                             m_controlsEnabled = false;
-                            SetCamera(false);
+                            m_car.ToggleCamera(false);
                         }
                     }
                     break;
@@ -79,12 +65,12 @@ public class Hider : MonoBehaviour {
                         if (!m_controlsEnabled)
                         {
                             m_controlsEnabled = true;
-                            SetCamera(true);
+                            m_car.ToggleCamera(true);
                         }
                         else
                         {
                             m_controlsEnabled = false;
-                            SetCamera(false);
+                            m_car.ToggleCamera(false);
                         }
                     }
                     break;
@@ -94,12 +80,12 @@ public class Hider : MonoBehaviour {
                         if (!m_controlsEnabled)
                         {
                             m_controlsEnabled = true;
-                            SetCamera(true);
+                            m_car.ToggleCamera(true);
                         }
                         else
                         {
                             m_controlsEnabled = false;
-                            SetCamera(false);
+                            m_car.ToggleCamera(false);
                         }
                     }
                     break;
@@ -109,12 +95,12 @@ public class Hider : MonoBehaviour {
                         if (!m_controlsEnabled)
                         {
                             m_controlsEnabled = true;
-                            SetCamera(true);
+                            m_car.ToggleCamera(true);
                         }
                         else
                         {
                             m_controlsEnabled = false;
-                            SetCamera(false);
+                            m_car.ToggleCamera(false);
                         }
                     }
                     break;
@@ -124,27 +110,5 @@ public class Hider : MonoBehaviour {
         }
 
         m_carMovement.m_controls = m_controlsEnabled;
-    }
-
-    void SetCamera(bool _active)
-    {
-        for (int i = 0; i <= transform.childCount - 1; i++)
-        {
-            string tempTag = transform.GetChild(i).gameObject.tag;
-
-            if (tempTag == "CarCamera")
-            {
-                Debug.Log("Found hider cam.");
-                m_hiderCam = transform.GetChild(i).GetComponent<Camera>();
-                if (m_hiderCam.enabled)
-                {
-                    m_hiderCam.enabled = false;
-                }
-                else
-                {
-                    m_hiderCam.enabled = true;
-                }
-            }
-        }
     }
 }
