@@ -101,8 +101,16 @@ public class DriveAndSeekMode : GameMode
 
     void SetupHiderAndSeekers()
     {
-        int HiderNumber = Random.Range(0, PlayerManager.m_instance.m_numberOfCars);
-        /* Link Stuff */
+        int HiderNumber = Random.Range(1, PlayerManager.m_instance.m_numberOfCars);
+        PlayerManager.m_instance.m_playerCars[HiderNumber - 1].GetComponent<Car>().SetHider();
+        string HiderTag = PlayerManager.m_instance.m_playerCars[HiderNumber - 1].transform.tag;
+        for(int iter = 1; iter <= PlayerManager.m_instance.m_numberOfCars; iter++)
+        {
+            if(iter != HiderNumber)
+            {
+                PlayerManager.m_instance.m_playerCars[iter - 1].GetComponent<Car>().SetSeeker(HiderTag);
+            }
+        }
         /* Turn off Cams */
     }
 }
