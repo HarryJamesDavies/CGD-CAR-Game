@@ -4,6 +4,7 @@ using System.Collections;
 public class Car : MonoBehaviour {
 
     public string m_tag;
+    public int m_playerNumber;
 
     private Camera m_playerCam;
     public GameObject m_seekerParam;
@@ -18,20 +19,29 @@ public class Car : MonoBehaviour {
 
         if (m_tag == "Player1")
         {
+            m_playerNumber = 1;
             m_hider = true;
             m_seeker = false;
             gameObject.AddComponent<Hider>();
         }
         else if (m_tag == "Player2")
         {
+            m_playerNumber = 2;
             m_hider = false;
             m_seeker = true;
             SetSeekerParameters();
         }
-        else
+        else if (m_tag == "Player3")
         {
+            m_playerNumber = 3;
             m_hider = false;
-            m_seeker = false;
+            m_seeker = true;
+        }
+        else if (m_tag == "Player4")
+        {
+            m_playerNumber = 4;
+            m_hider = false;
+            m_seeker = true;
         }
     }
 	
