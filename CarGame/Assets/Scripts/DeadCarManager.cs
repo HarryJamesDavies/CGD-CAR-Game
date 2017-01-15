@@ -12,10 +12,13 @@ public class DeadCarManager : MonoBehaviour
     };
 
     public static DeadCarManager m_instance = null;
+    public List<GameObject> m_prefabCars;
     public List<GameObject> m_sections;
     public List<Rect> m_sectionBoundaries;
     public List<int> m_sectionsToActivate;
     public SectioningMode m_mode;
+
+    public List<GameObject> m_cars = new List<GameObject>();
 
 
     // Use this for initialization
@@ -98,7 +101,7 @@ public class DeadCarManager : MonoBehaviour
                     {
                         if (GameModeManager.m_instance.m_currentGameMode.m_eventRect.Overlaps(sections))
                         {
-                            m_sections[index].SetActive(true);
+                            SpawnCars(index);
                         }
                         index++;
                     }
@@ -108,7 +111,7 @@ public class DeadCarManager : MonoBehaviour
                 {
                     foreach (int index in m_sectionsToActivate)
                     {
-                        m_sections[index - 1].SetActive(true);
+                        SpawnCars(index - 1);
                     }
 
                     m_sectionsToActivate.Clear();
@@ -123,9 +126,13 @@ public class DeadCarManager : MonoBehaviour
 
     void ResetSections()
     {
-        foreach (GameObject sections in m_sections)
+        if (m_cars.Count != 0)
         {
-            sections.gameObject.SetActive(false);
+            for (int iter = 0; iter <= m_cars.Count - 1; iter++)
+            {
+                Destroy(m_cars[iter].gameObject);
+            }
+            m_cars.Clear();
         }
     }
 
@@ -142,4 +149,17 @@ public class DeadCarManager : MonoBehaviour
         }
     }
 
+    void SpawnCars(int _section)
+    {
+        for (int iter = 0; iter <= m_sections[_section].transform.childCount - 1; iter++)
+        {
+            Transform spawnLocation = m_sections[_section].transform.GetChild(iter).transform;
+            m_cars.Add((GameObject)Instantiate(m_prefabCars[GetRandomCar()], spawnLocation.position, spawnLocation.rotation));
+        }
+    }
+
+    int GetRandomCar()
+    {
+        return Random.Range(0, m_prefabCars.Count);
+    }
 }
