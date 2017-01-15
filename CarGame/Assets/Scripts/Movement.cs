@@ -105,13 +105,18 @@ public class Movement : MonoBehaviour {
 
                 if (Input.GetKeyDown("e"))
                 {
-                    EventManager.m_instance.m_eventLocation = this.gameObject.transform.position;
-                    EventManager.m_instance.m_currentEvent = EventManager.Events.DRIVEANDSEEK;
+                    if (gameObject.CompareTag("Player1"))
+                    {
+                        GameModeManager.m_instance.m_currentEvent = GameModeManager.GameModeState.DRIVEANDSEEK;
+                    }
                 }
 
                 if (Input.GetKeyDown("r"))
                 {
-                    EventManager.m_instance.m_currentEvent = EventManager.Events.FREEROAM;
+                    if (gameObject.CompareTag("Player1"))
+                    {
+                        GameModeManager.m_instance.m_currentEvent = GameModeManager.GameModeState.FREEROAM;
+                    }
                 }
             }
         }
