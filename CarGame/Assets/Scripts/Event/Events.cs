@@ -20,6 +20,7 @@ public class Events : MonoBehaviour
         DS_SETUP,
         DS_HIDING,
         DS_SEEKING,
+        DS_CHASE,
         DS_RESET,
         DS_FINISH,
         Count
