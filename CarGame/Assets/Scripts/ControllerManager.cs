@@ -21,8 +21,6 @@ public class ControllerManager : MonoBehaviour {
         {
             Destroy(gameObject);
         }
-
-        Debug.Log(Input.GetJoystickNames().Length);
 	}
 	
 	void Update ()
