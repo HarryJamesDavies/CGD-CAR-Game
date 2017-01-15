@@ -18,7 +18,16 @@ public class EventCollider : MonoBehaviour {
 
                     //activates the laser and active player number
                     PlayersConnected.pc_instance.IncrementPC();
-                    ShootBeam.sb_instance.DisplayLine();
+
+                    //only fire the beam if there is 1 player connected
+                    if (PlayersConnected.pc_instance.m_playersconnected > 0)
+                    {
+                        ShootBeam.sb_instance.DisplayLine();
+                    }
+
+                    //start the event
+                    EventManager.m_instance.m_currentEvent = EventManager.Events.DRIVEANDSEEK;
+                    Debug.Log("Drive and Seek started");
                     m_firstPlayerPlaying = true;
                 }
             }
@@ -39,12 +48,9 @@ public class EventCollider : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
 	
-        if(Input.GetKeyDown(KeyCode.P)) //DEBUG LINE TO START HIDE AND SEEK
-        {
-            EventManager.m_instance.m_currentEvent = EventManager.Events.DRIVEANDSEEK;
-            Debug.Log("Drive and seek started");
-        }
+  
 	}
 }
