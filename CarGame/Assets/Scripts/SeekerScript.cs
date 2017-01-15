@@ -1,67 +1,63 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SeekerScript : MonoBehaviour {
-
-    Car m_car;
-    Car m_hidercar;
-
+public class SeekerScript : MonoBehaviour
+{
     int m_playerNumber;
 
     public string m_hiderTag;
 
-    void Start ()
+    void Start()
     {
-        m_car = gameObject.GetComponent<Car>();
+        m_playerNumber = transform.parent.GetComponent<Car>().m_playerNumber;
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update()
     {
-        
-	}
+        Debug.Log("Seeker: " + m_playerNumber);
+    }
 
     void OnTriggerStay(Collider other)
     {
         //if damage is required to be taken
-        if (Input.GetKey(KeyCode.V))
-        {          
-            if (other.gameObject.tag != "EmptyCar")
+        if (ControllerManager.m_instance.m_useController)
+        {
+            if (Input.GetButtonDown("P" + m_playerNumber + ("-X(PS4)")))
             {
-                //take damage for the hider car
-                Debug.Log("Take Damage");
-            }
-            else if (m_hiderTag == other.gameObject.tag)  //if the car is a hider car
-            {
-                if (ControllerManager.m_instance.m_useController)
+                if (m_hiderTag == other.gameObject.tag)
                 {
-                    int _playerNumber = 0;
-
-                    switch (gameObject.tag)
-                    {
-                        case "Player1":
-                            _playerNumber = 1;
-                            break;
-                        case "Player2":
-                            _playerNumber = 2;
-                            break;
-                        case "Player3":
-                            _playerNumber = 3;
-                            break;
-                        case "Player4":
-                            _playerNumber = 4;
-                            break;
-                        default:
-                            break;
-                    }
-
-                    if (Input.GetButtonDown("P" + _playerNumber + ("-X(PS4)")))
-                    {
-                        //take damage for the hider car
-                        Debug.Log("Take Damage");
-                    }
+                    //take damage for the hider car
+                    Debug.Log("Hider Take Damage");
+                    other.gameObject.GetComponent<PlayerHealth>().decreasehealth();
+                }
+                else
+                {
+                    //seeker take damage
+                    Debug.Log("Seeker Take Damage");
+                    transform.GetComponent<PlayerHealth>().decreasehealth();
                 }
             }
         }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.V))
+            {
+                if (m_hiderTag == other.gameObject.tag)
+                {
+                    //take damage for the hider car
+                    Debug.Log("Hider Take Damage");
+                    other.gameObject.GetComponent<PlayerHealth>().decreasehealth();
+                    //m_damageApplied++;
+                }
+                else
+                {
+                    //seeker take damage
+                    Debug.Log("Seeker Take Damage");
+                    transform.parent.GetComponent<PlayerHealth>().decreasehealth();
+                }
+            }
+        }
+
     }
 }
