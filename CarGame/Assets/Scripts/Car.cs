@@ -6,11 +6,10 @@ public class Car : MonoBehaviour {
     public string m_tag;
 
     private Camera m_playerCam;
+    public GameObject m_seekerParam;
 
-    [SerializeField]
-    bool m_hider;
-    [SerializeField]
-    bool m_seeker;
+    public bool m_hider;
+    public bool m_seeker;
 
     void Awake()
     {
@@ -26,6 +25,7 @@ public class Car : MonoBehaviour {
         {
             m_hider = false;
             m_seeker = true;
+            SetSeekerParameters();
         }
         else
         {
@@ -38,6 +38,13 @@ public class Car : MonoBehaviour {
     {
 	    
 	}
+
+    void SetSeekerParameters()
+    {
+        //add the seeker cone and set its parent
+        GameObject m_seekerCone = Instantiate(m_seekerParam, transform.position, Quaternion.Euler(0.0f,90.0f,90.0f)) as GameObject;
+        m_seekerCone.transform.parent = gameObject.transform;
+    }
 
     void SetCamera()
     {
