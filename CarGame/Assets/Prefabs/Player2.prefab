@@ -1015,6 +1015,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tag: 
+  m_seekerParam: {fileID: 192426, guid: 54d99531f0c1c4c409ad6e4bb48bc7a2, type: 2}
   m_hider: 0
   m_seeker: 0
 --- !u!124 &12432826
