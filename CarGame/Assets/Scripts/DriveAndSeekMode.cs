@@ -25,7 +25,6 @@ public class DriveAndSeekMode : GameMode
 
     public DriveAndSeekPhases m_currentPhase;
     public int m_winningScore = 3;
-    public int m_numberOfPlayers = 0;
     public int m_hiderNumber = 0;
     private int m_roundWinner = -1;
     private int m_gameWinner = -1;
@@ -34,7 +33,10 @@ public class DriveAndSeekMode : GameMode
     public List<Timer> m_timers;
     public List<int> m_playerScores;
 
-    public Transform m_timerHolder;
+    public Transform m_hiderSpawn;
+    public List<Transform> m_seekerSpawns;
+
+    private Transform m_timerHolder;
     public GameObject m_timerPrefab;
 
     new
@@ -78,6 +80,7 @@ public class DriveAndSeekMode : GameMode
                     EventManager.m_instance.AddEvent(Events.Event.DS_SETUP);
                     SetupHiderAndSeekers();
                     m_currentPhase = DriveAndSeekPhases.HIDING;
+                    InitializePhase();
                     break;
                 }
             case DriveAndSeekPhases.HIDING:
@@ -89,14 +92,13 @@ public class DriveAndSeekMode : GameMode
             case DriveAndSeekPhases.SEEKING:
                 {
                     EventManager.m_instance.AddEvent(Events.Event.DS_SEEKING);
-                    /* turn on seeker cams */
                     m_timers[GetTimer("Seek")].StartTimer();
                     break;
                 }
             case DriveAndSeekPhases.CHASE:
                 {
                     EventManager.m_instance.AddEvent(Events.Event.DS_CHASE);
-                    /* turn on hider cam */
+                    PlayerManager.m_instance.m_playerCars[m_hiderNumber].GetComponent<Car>().ToggleCamera(true);
                     m_timers[GetTimer("Chase")].StartTimer();
                     break;
                 }
@@ -143,7 +145,7 @@ public class DriveAndSeekMode : GameMode
                 {
                     if(m_timers[GetTimer("Hide")].CheckFinished())
                     {
-                        /* turn off hider cam */
+                        PlayerManager.m_instance.m_playerCars[m_hiderNumber].GetComponent<Car>().ToggleCamera(false);
                         m_currentPhase = DriveAndSeekPhases.SEEKING;
                         InitializePhase();
                     }
@@ -209,17 +211,21 @@ public class DriveAndSeekMode : GameMode
 
     void SetupHiderAndSeekers()
     {
-        m_hiderNumber = UnityEngine.Random.Range(1, PlayerManager.m_instance.m_numberOfCars) - 1;
+        m_hiderNumber = UnityEngine.Random.Range(1, PlayerManager.m_instance.m_numberOfCars + 1) - 1;
         PlayerManager.m_instance.m_playerCars[m_hiderNumber].GetComponent<Car>().SetHider();
         string HiderTag = PlayerManager.m_instance.m_playerCars[m_hiderNumber].transform.tag;
-        for(int iter = 1; iter <= PlayerManager.m_instance.m_numberOfCars; iter++)
+        PlayerManager.m_instance.m_playerCars[m_hiderNumber].transform.position = m_hiderSpawn.position;
+        PlayerManager.m_instance.m_playerCars[m_hiderNumber].transform.rotation = m_hiderSpawn.rotation;
+
+        for (int iter = 1; iter <= PlayerManager.m_instance.m_numberOfCars; iter++)
         {
-            if(iter != m_hiderNumber)
+            if(iter != m_hiderNumber + 1)
             {
                 PlayerManager.m_instance.m_playerCars[iter - 1].GetComponent<Car>().SetSeeker(HiderTag);
+                PlayerManager.m_instance.m_playerCars[iter - 1].transform.position = m_seekerSpawns[iter - 1].position;
+                PlayerManager.m_instance.m_playerCars[iter - 1].transform.rotation = m_seekerSpawns[iter - 1].rotation;
             }
         }
-        /* Turn off Cams */
     }
 
     bool CheckHidersCaught()
@@ -242,6 +248,14 @@ public class DriveAndSeekMode : GameMode
 
     void ResetRound()
     {
-        
+        foreach(Timer timer in m_timers)
+        {
+            timer.ResetTimer();
+        }
+
+        foreach(GameObject player in PlayerManager.m_instance.m_playerCars)
+        {
+            player.GetComponent<Car>().ResetMode();
+        }
     }
 }

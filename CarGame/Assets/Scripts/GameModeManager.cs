@@ -58,7 +58,7 @@ public class GameModeManager : MonoBehaviour {
             case GameModeState.DRIVEANDSEEK:
                 {
                     EventManager.m_instance.AddEvent(Events.Event.GM_DRIVEANDSEEK);
-                    m_modeHolder = (GameObject)Instantiate(m_modePrefab, transform.position, Quaternion.identity);
+                    m_modeHolder = (GameObject)Instantiate(m_modePrefab, m_modePrefab.transform.position, m_modePrefab.transform.rotation);
                     m_currentGameMode = m_modeHolder.GetComponent<DriveAndSeekMode>();
                     break;
                 }

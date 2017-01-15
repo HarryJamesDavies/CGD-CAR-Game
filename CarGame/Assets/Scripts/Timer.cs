@@ -6,7 +6,7 @@ public class Timer : MonoBehaviour
     public bool m_counting = false;
 
     public string m_name = "";
-    public float m_startTime = 0.0f;
+    public float m_startTime = 100000.0f;
     public float m_timerLength = 0.0f;
 
     public void SetTimer(string _name, float _timerLength)
@@ -23,9 +23,8 @@ public class Timer : MonoBehaviour
 
     public void ResetTimer()
     {
-        m_name = "";
-        m_startTime = 0.0f;
-        m_timerLength = 0.0f;
+        m_counting = false;
+        m_startTime = 10000.0f;
     }
 
     public bool CheckFinished()
