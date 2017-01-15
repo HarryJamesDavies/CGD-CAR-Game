@@ -29,7 +29,6 @@ public class Car : MonoBehaviour {
             m_playerNumber = 2;
             m_hider = false;
             m_seeker = true;
-            SetSeekerParameters();
         }
         else if (m_tag == "Player3")
         {
@@ -50,11 +49,23 @@ public class Car : MonoBehaviour {
 	    
 	}
 
-    void SetSeekerParameters()
+    public void SetSeeker(string _hiderTag)
     {
-        //add the seeker cone and set its parent
-        GameObject m_seekerCone = Instantiate(m_seekerParam, transform.position, Quaternion.Euler(0.0f,90.0f,90.0f)) as GameObject;
+        m_seeker = true;
+        GameObject m_seekerCone = Instantiate(m_seekerParam, transform.position, Quaternion.Euler(0.0f, 90.0f, 90.0f)) as GameObject;
         m_seekerCone.transform.parent = gameObject.transform;
+        m_seekerCone.GetComponent<SeekerScript>().m_hiderTag = _hiderTag;
+    }
+
+    public void SetHider()
+    {
+        m_hider = true;
+    }
+
+    public void ResetMode()
+    {
+        m_seeker = false;
+        m_hider = false;
     }
 
     void SetCamera()

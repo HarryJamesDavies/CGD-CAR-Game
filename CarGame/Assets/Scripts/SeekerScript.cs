@@ -8,6 +8,8 @@ public class SeekerScript : MonoBehaviour {
 
     int m_playerNumber;
 
+    public string m_hiderTag;
+
     void Start ()
     {
         m_car = gameObject.GetComponent<Car>();
@@ -19,14 +21,17 @@ public class SeekerScript : MonoBehaviour {
         
 	}
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerStay(Collider other)
     {
-        /*if (other.gameObject.tag != "EmptyCar")
-        {
-            //if the car is a hider car
-            m_hidercar = other.gameObject.GetComponent<Car>();
-
-            if (get the hidertag variable m_hidertag == true)
+        //if damage is required to be taken
+        if (Input.GetKey(KeyCode.V))
+        {          
+            if (other.gameObject.tag != "EmptyCar")
+            {
+                //take damage for the hider car
+                Debug.Log("Take Damage");
+            }
+            else if (m_hiderTag == other.gameObject.tag)  //if the car is a hider car
             {
                 if (ControllerManager.m_instance.m_useController)
                 {
@@ -52,20 +57,11 @@ public class SeekerScript : MonoBehaviour {
 
                     if (Input.GetButtonDown("P" + _playerNumber + ("-X(PS4)")))
                     {
-                        //take damage for the hider car 
-                        Debug.Log("Take Damage");
-                    }
-                }
-                else
-                {
-                    //if damage is required to be taken
-                    if (Input.GetKey(KeyCode.Z))
-                    {
-                        //take damage for the hider car 
+                        //take damage for the hider car
                         Debug.Log("Take Damage");
                     }
                 }
             }
-        }*/
+        }
     }
 }
