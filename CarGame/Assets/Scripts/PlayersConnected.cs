@@ -6,7 +6,7 @@ public class PlayersConnected : MonoBehaviour {
 
     public static PlayersConnected pc_instance;
 
-    public static int m_playersconnected;
+    public int m_playersconnected;
     Text text;
 
     void Awake()
