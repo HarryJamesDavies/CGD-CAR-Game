@@ -32,8 +32,6 @@ public class Movement : MonoBehaviour {
     // Use this for initialization
     void FixedUpdate()
     {
-
-
         if (forward)
         {
             xspeep += power;
@@ -54,8 +52,6 @@ public class Movement : MonoBehaviour {
         {
             transform.Rotate(new Vector3(0.0f, -1.0f, 0.0f));
         }
-
-
     }
 
     // Update is called once per frame
@@ -83,59 +79,22 @@ public class Movement : MonoBehaviour {
         }
         else
         {
-            if (Input.GetKeyDown("w"))
+            switch (gameObject.tag)
             {
-                forward = true;
-            }
-            if (Input.GetKeyUp("w"))
-            {
-                forward = false;
-            }
-            if (Input.GetKeyDown("s"))
-            {
-                backward = true;
-            }
-            if (Input.GetKeyUp("s"))
-            {
-                backward = false;
-            }
-
-            if (Input.GetKeyDown("d"))
-            {
-                right = true;
-            }
-            if (Input.GetKeyUp("d"))
-            {
-                right = false;
-            }
-            if (Input.GetKeyDown("a"))
-            {
-                left = true;
-            }
-            if (Input.GetKeyUp("a"))
-            {
-                left = false;
-            }
-
-            if (Input.GetKeyDown("q"))
-            {
-                transform.position += Vector3.up * 2.5f;
-                transform.rotation = startingRotation;
-            }
-
-            if (Input.GetKeyDown("l"))
-            {
-                foreach (GameObject lights in m_lights)
-                {
-                    lights.SetActive(!lights.activeInHierarchy);
-                }
-            }
-
-            if (Input.GetKeyDown("h"))
-            {
-                int sound = Random.Range(0, m_hornSounds.Count);
-                m_audioSource.clip = m_hornSounds[sound];
-                m_audioSource.Play();
+                case "Player1":
+                    KeyboardMovement(1);
+                    break;
+                case "Player2":
+                    KeyboardMovement(2);
+                    break;
+                case "Player3":
+                    KeyboardMovement(3);
+                    break;
+                case "Player4":
+                    KeyboardMovement(4);
+                    break;
+                default:
+                    break;
             }
 
             if (Input.GetKeyDown("e"))
@@ -148,14 +107,6 @@ public class Movement : MonoBehaviour {
             {
                 EventManager.m_instance.m_currentEvent = EventManager.Events.FREEROAM;
             }
-
-            if (fuel < 0)
-            {
-                xspeep = 0;
-            }
-
-            xspeep *= friction;
-            transform.Translate(Vector3.forward * -xspeep);
         }
     }
 
@@ -219,6 +170,201 @@ public class Movement : MonoBehaviour {
             m_audioSource.clip = m_hornSounds[sound];
             m_audioSource.Play();
         }
+
+        if (fuel < 0)
+        {
+            xspeep = 0;
+        }
+
+        xspeep *= friction;
+        transform.Translate(Vector3.forward * -xspeep);
+    }
+
+    void KeyboardMovement(int _playerNumber)
+    {
+        if (_playerNumber == 1)
+        {
+            if (Input.GetKeyDown("w"))
+            {
+                forward = true;
+            }
+            if (Input.GetKeyUp("w"))
+            {
+                forward = false;
+            }
+            if (Input.GetKeyDown("s"))
+            {
+                backward = true;
+            }
+            if (Input.GetKeyUp("s"))
+            {
+                backward = false;
+            }
+
+            if (Input.GetKeyDown("d"))
+            {
+                right = true;
+            }
+            if (Input.GetKeyUp("d"))
+            {
+                right = false;
+            }
+            if (Input.GetKeyDown("a"))
+            {
+                left = true;
+            }
+            if (Input.GetKeyUp("a"))
+            {
+                left = false;
+            }
+
+            if (Input.GetKeyDown("q"))
+            {
+                transform.position += Vector3.up * 2.5f;
+                transform.rotation = startingRotation;
+            }
+        }
+        else if (_playerNumber == 2)
+        {
+            if (Input.GetKeyDown("t"))
+            {
+                forward = true;
+            }
+            if (Input.GetKeyUp("t"))
+            {
+                forward = false;
+            }
+            if (Input.GetKeyDown("g"))
+            {
+                backward = true;
+            }
+            if (Input.GetKeyUp("g"))
+            {
+                backward = false;
+            }
+
+            if (Input.GetKeyDown("h"))
+            {
+                right = true;
+            }
+            if (Input.GetKeyUp("h"))
+            {
+                right = false;
+            }
+            if (Input.GetKeyDown("f"))
+            {
+                left = true;
+            }
+            if (Input.GetKeyUp("f"))
+            {
+                left = false;
+            }
+
+            if (Input.GetKeyDown("r"))
+            {
+                transform.position += Vector3.up * 2.5f;
+                transform.rotation = startingRotation;
+            }
+        }
+        else if (_playerNumber == 3)
+        {
+            if (Input.GetKeyDown("i"))
+            {
+                forward = true;
+            }
+            if (Input.GetKeyUp("i"))
+            {
+                forward = false;
+            }
+            if (Input.GetKeyDown("k"))
+            {
+                backward = true;
+            }
+            if (Input.GetKeyUp("k"))
+            {
+                backward = false;
+            }
+
+            if (Input.GetKeyDown("l"))
+            {
+                right = true;
+            }
+            if (Input.GetKeyUp("l"))
+            {
+                right = false;
+            }
+            if (Input.GetKeyDown("j"))
+            {
+                left = true;
+            }
+            if (Input.GetKeyUp("j"))
+            {
+                left = false;
+            }
+
+            if (Input.GetKeyDown("u"))
+            {
+                transform.position += Vector3.up * 2.5f;
+                transform.rotation = startingRotation;
+            }
+        }
+        else if (_playerNumber == 4)
+        {
+            if (Input.GetKeyDown("["))
+            {
+                forward = true;
+            }
+            if (Input.GetKeyUp("["))
+            {
+                forward = false;
+            }
+            if (Input.GetKeyDown("'"))
+            {
+                backward = true;
+            }
+            if (Input.GetKeyUp("'"))
+            {
+                backward = false;
+            }
+
+            if (Input.GetKeyDown("#"))
+            {
+                right = true;
+            }
+            if (Input.GetKeyUp("#"))
+            {
+                right = false;
+            }
+            if (Input.GetKeyDown(";"))
+            {
+                left = true;
+            }
+            if (Input.GetKeyUp(";"))
+            {
+                left = false;
+            }
+
+            if (Input.GetKeyDown(";"))
+            {
+                transform.position += Vector3.up * 2.5f;
+                transform.rotation = startingRotation;
+            }
+        }
+
+        //if (Input.GetKeyDown("l"))
+        //{
+        //    foreach (GameObject lights in m_lights)
+        //    {
+        //        lights.SetActive(!lights.activeInHierarchy);
+        //    }
+        //}
+
+        //if (Input.GetKeyDown("h"))
+        //{
+        //    int sound = Random.Range(0, m_hornSounds.Count);
+        //    m_audioSource.clip = m_hornSounds[sound];
+        //    m_audioSource.Play();
+        //}
 
         if (fuel < 0)
         {
