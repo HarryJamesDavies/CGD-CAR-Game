@@ -16,13 +16,27 @@ public class Car : MonoBehaviour {
     {
         m_tag = gameObject.tag;
         SetCamera();
-        m_hider = false;
-        m_seeker = false;
+
+        if (m_tag == "Player1")
+        {
+            m_hider = true;
+            m_seeker = false;
+        }
+        else if (m_tag == "Player2")
+        {
+            m_hider = false;
+            m_seeker = true;
+        }
+        else
+        {
+            m_hider = false;
+            m_seeker = false;
+        }
     }
 	
 	void Update ()
     {
-	
+	    
 	}
 
     void SetCamera()
