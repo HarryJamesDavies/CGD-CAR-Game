@@ -3,7 +3,7 @@ using System.Collections;
 
 public class SeekerScript : MonoBehaviour
 {
-    //int m_playerNumber;
+    int m_playerNumber;
     int m_damageApplied = 0;
     //bool m_lights = true;
 
@@ -14,7 +14,7 @@ public class SeekerScript : MonoBehaviour
 
     void Start()
     {
-        //m_playerNumber = transform.parent.GetComponent<Car>().m_playerNumber;
+        m_playerNumber = transform.parent.GetComponent<Car>().m_playerNumber;
     }
 
     // Update is called once per frame
@@ -57,6 +57,40 @@ public class SeekerScript : MonoBehaviour
                 m_hiderHit = false;
             }
 
+
+        }
+        else
+        {
+            //check for the controller input
+            if (ControllerManager.m_instance.m_useController)
+            {
+                if (Input.GetButtonDown("P" + m_playerNumber + ("-X(PS4)")))
+                {
+                    Collider[] m_itemsInRange = Physics.OverlapSphere(transform.parent.position, 2);
+
+                    for (int i = 0; i < m_itemsInRange.Length; i++)
+                    {
+                        if (m_itemsInRange[i].tag == m_hiderTag)
+                        {
+                            m_hiderHit = true;
+                            DamageHider(m_itemsInRange[i]);
+
+                        }
+                    }
+
+                    if (!m_hiderHit)
+                    {
+                        DamageSeeker();
+
+                    }
+                    else
+                    {
+                        m_hiderHit = false;
+                    }
+
+                }
+
+            }
 
         }
 
