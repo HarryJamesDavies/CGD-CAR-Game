@@ -21,27 +21,26 @@ public class Car : MonoBehaviour {
         if (m_tag == "Player1")
         {
             m_playerNumber = 1;
-            m_hider = true;
+            m_hider = false;
             m_seeker = false;
-            gameObject.AddComponent<Hider>();
         }
         else if (m_tag == "Player2")
         {
             m_playerNumber = 2;
             m_hider = false;
-            m_seeker = true;
+            m_seeker = false;
         }
         else if (m_tag == "Player3")
         {
             m_playerNumber = 3;
             m_hider = false;
-            m_seeker = true;
+            m_seeker = false;
         }
         else if (m_tag == "Player4")
         {
             m_playerNumber = 4;
             m_hider = false;
-            m_seeker = true;
+            m_seeker = false;
         }
     }
 
@@ -56,6 +55,7 @@ public class Car : MonoBehaviour {
     public void SetHider()
     {
         m_hider = true;
+        gameObject.AddComponent<Hider>();
     }
 
     public void ResetMode()

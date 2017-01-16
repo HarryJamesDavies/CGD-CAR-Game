@@ -6,18 +6,30 @@ public class Hider : MonoBehaviour {
     Movement m_carMovement;
     Car m_car;
 
-    bool m_controlsEnabled;
     private Camera m_hiderCam;
+    private bool m_hidingState = false;
 
     void Start()
     {
+        EventManager.m_instance.SubscribeToEvent(Events.Event.DS_HIDING, EvFunc_HidingPhase);
+        EventManager.m_instance.SubscribeToEvent(Events.Event.DS_BUFFER, EvFunc_BufferPhase);
+
         m_carMovement = gameObject.GetComponent<Movement>();
         m_car = gameObject.GetComponent<Car>();
-        m_controlsEnabled = true;
     }
 
-	// Update is called once per frame
-	void Update ()
+    void EvFunc_HidingPhase()
+    {
+        m_hidingState = true;
+    }
+
+    void EvFunc_BufferPhase()
+    {
+        m_hidingState = false;
+    }
+
+    // Update is called once per frame
+    void Update ()
     {
         SetLocation(m_car.m_playerNumber);
 	}
@@ -33,6 +45,11 @@ public class Hider : MonoBehaviour {
                     m_carMovement.m_controls = true;
                     m_car.ToggleCamera(true);
                     m_carMovement.ToggleLights(true);
+
+                    if(m_hidingState)
+                    {
+                        EventManager.m_instance.AddEvent(Events.Event.DS_HIDERREADY);
+                    }
                 }
                 else
                 {
@@ -60,11 +77,16 @@ public class Hider : MonoBehaviour {
                             m_carMovement.m_controls = false;
                             m_car.ToggleCamera(false);
                             m_carMovement.ToggleLights(false);
+
+                            if (m_hidingState)
+                            {
+                                EventManager.m_instance.AddEvent(Events.Event.DS_HIDERREADY);
+                            }
                         }
                     }
                     break;
                 case 2:
-                    if (Input.GetKeyDown("v"))
+                    if (Input.GetKeyDown("c"))
                     {
                         if (!m_carMovement.m_controls)
                         {
@@ -77,6 +99,11 @@ public class Hider : MonoBehaviour {
                             m_carMovement.m_controls = false;
                             m_car.ToggleCamera(false);
                             m_carMovement.ToggleLights(false);
+
+                            if (m_hidingState)
+                            {
+                                EventManager.m_instance.AddEvent(Events.Event.DS_HIDERREADY);
+                            }
                         }
                     }
                     break;
@@ -94,6 +121,11 @@ public class Hider : MonoBehaviour {
                             m_carMovement.m_controls = false;
                             m_car.ToggleCamera(false);
                             m_carMovement.ToggleLights(false);
+
+                            if (m_hidingState)
+                            {
+                                EventManager.m_instance.AddEvent(Events.Event.DS_HIDERREADY);
+                            }
                         }
                     }
                     break;
@@ -111,6 +143,11 @@ public class Hider : MonoBehaviour {
                             m_carMovement.m_controls = false;
                             m_car.ToggleCamera(false);
                             m_carMovement.ToggleLights(false);
+
+                            if (m_hidingState)
+                            {
+                                EventManager.m_instance.AddEvent(Events.Event.DS_HIDERREADY);
+                            }
                         }
                     }
                     break;
