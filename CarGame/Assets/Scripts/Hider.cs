@@ -32,11 +32,13 @@ public class Hider : MonoBehaviour {
                 {
                     m_controlsEnabled = true;
                     m_car.ToggleCamera(true);
+                    m_carMovement.ToggleLights(true);
                 }
                 else
                 {
                     m_controlsEnabled = false;
                     m_car.ToggleCamera(false);
+                    m_carMovement.ToggleLights(false);
                 }
             }
         }
@@ -51,11 +53,13 @@ public class Hider : MonoBehaviour {
                         {
                             m_controlsEnabled = true;
                             m_car.ToggleCamera(true);
+                            m_carMovement.ToggleLights(true);
                         }
                         else
                         {
                             m_controlsEnabled = false;
                             m_car.ToggleCamera(false);
+                            m_carMovement.ToggleLights(false);
                         }
                     }
                     break;
@@ -66,11 +70,13 @@ public class Hider : MonoBehaviour {
                         {
                             m_controlsEnabled = true;
                             m_car.ToggleCamera(true);
+                            m_carMovement.ToggleLights(true);
                         }
                         else
                         {
                             m_controlsEnabled = false;
                             m_car.ToggleCamera(false);
+                            m_carMovement.ToggleLights(false);
                         }
                     }
                     break;
@@ -81,11 +87,13 @@ public class Hider : MonoBehaviour {
                         {
                             m_controlsEnabled = true;
                             m_car.ToggleCamera(true);
+                            m_carMovement.ToggleLights(true);
                         }
                         else
                         {
                             m_controlsEnabled = false;
                             m_car.ToggleCamera(false);
+                            m_carMovement.ToggleLights(false);
                         }
                     }
                     break;
@@ -96,11 +104,13 @@ public class Hider : MonoBehaviour {
                         {
                             m_controlsEnabled = true;
                             m_car.ToggleCamera(true);
+                            m_carMovement.ToggleLights(true);
                         }
                         else
                         {
                             m_controlsEnabled = false;
                             m_car.ToggleCamera(false);
+                            m_carMovement.ToggleLights(false);
                         }
                     }
                     break;

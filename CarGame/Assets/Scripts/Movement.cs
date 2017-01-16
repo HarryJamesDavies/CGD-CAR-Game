@@ -386,4 +386,12 @@ public class Movement : MonoBehaviour {
         xspeep *= friction;
         transform.Translate(Vector3.forward * -xspeep);
     }
+
+    public void ToggleLights(bool _active)
+    {
+        foreach (GameObject lights in m_lights)
+        {
+            lights.SetActive(_active);
+        }
+    }
 }
