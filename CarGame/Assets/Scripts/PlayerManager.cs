@@ -44,11 +44,11 @@ public class PlayerManager : MonoBehaviour {
             switch (ControllerManager.m_instance.m_joystickNumber)
             {
                 case 0:
-                    m_numberOfCars = 2;
+                    m_numberOfCars = 4;
                     m_playerCars.Add((GameObject)Instantiate(m_p1Prefab, m_p1Start.position, m_p1Start.rotation));
                     m_playerCars.Add((GameObject)Instantiate(m_p2Prefab, m_p2Start.position, m_p2Start.rotation));
-                    //m_playerCars.Add((GameObject)Instantiate(m_p3Prefab, m_p3Start.position, m_p3Start.rotation));
-                    //m_playerCars.Add((GameObject)Instantiate(m_p4Prefab, m_p4Start.position, m_p4Start.rotation));
+                    m_playerCars.Add((GameObject)Instantiate(m_p3Prefab, m_p3Start.position, m_p3Start.rotation));
+                    m_playerCars.Add((GameObject)Instantiate(m_p4Prefab, m_p4Start.position, m_p4Start.rotation));
                     break;
                 case 1:
                     m_numberOfCars = 1;

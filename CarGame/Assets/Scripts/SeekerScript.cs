@@ -33,65 +33,147 @@ public class SeekerScript : MonoBehaviour
             TurnLightsOn();
         }
 
-        if (Input.GetKeyDown(KeyCode.V))
+        if (ControllerManager.m_instance.m_useController)
         {
-            Collider[] m_itemsInRange = Physics.OverlapSphere(transform.parent.position, 2);
+            if (Input.GetButtonDown("P" + m_playerNumber + ("-X(PS4)")))
+            {
+                Collider[] m_itemsInRange = Physics.OverlapSphere(transform.parent.position, 2);
 
-            for(int i = 0; i< m_itemsInRange.Length; i++)
-            { 
-                if(m_itemsInRange[i].tag == m_hiderTag)
+                for (int i = 0; i < m_itemsInRange.Length; i++)
                 {
-                    m_hiderHit = true;
-                    DamageHider(m_itemsInRange[i]);
-                 
-                }
-            }
-           
-            if(!m_hiderHit)
-            {
-                DamageSeeker();
-        
-            }
-            else
-            {
-                m_hiderHit = false;
-            }
+                    if (m_itemsInRange[i].tag == m_hiderTag)
+                    {
+                        m_hiderHit = true;
+                        DamageHider(m_itemsInRange[i]);
 
+                    }
+                }
+
+                if (!m_hiderHit)
+                {
+                    DamageSeeker();
+
+                }
+                else
+                {
+                    m_hiderHit = false;
+                }
+
+            }
 
         }
         else
         {
-            //check for the controller input
-            if (ControllerManager.m_instance.m_useController)
+            //check for the controller inpu
+            switch (m_playerNumber)
             {
-                if (Input.GetButtonDown("P" + m_playerNumber + ("-X(PS4)")))
-                {
-                    Collider[] m_itemsInRange = Physics.OverlapSphere(transform.parent.position, 2);
-
-                    for (int i = 0; i < m_itemsInRange.Length; i++)
+                case 1:
+                    if (Input.GetKeyDown(KeyCode.X))
                     {
-                        if (m_itemsInRange[i].tag == m_hiderTag)
+                        Collider[] m_itemsInRange = Physics.OverlapSphere(transform.parent.position, 2);
+
+                        for (int i = 0; i < m_itemsInRange.Length; i++)
                         {
-                            m_hiderHit = true;
-                            DamageHider(m_itemsInRange[i]);
+                            if (m_itemsInRange[i].tag == m_hiderTag)
+                            {
+                                m_hiderHit = true;
+                                DamageHider(m_itemsInRange[i]);
+
+                            }
+                        }
+
+                        if (!m_hiderHit)
+                        {
+                            DamageSeeker();
 
                         }
+                        else
+                        {
+                            m_hiderHit = false;
+                        }
                     }
-
-                    if (!m_hiderHit)
+                    break;
+                case 2:
+                    if (Input.GetKeyDown(KeyCode.RightAlt))
                     {
-                        DamageSeeker();
+                        Collider[] m_itemsInRange = Physics.OverlapSphere(transform.parent.position, 2);
 
+                        for (int i = 0; i < m_itemsInRange.Length; i++)
+                        {
+                            if (m_itemsInRange[i].tag == m_hiderTag)
+                            {
+                                m_hiderHit = true;
+                                DamageHider(m_itemsInRange[i]);
+
+                            }
+                        }
+
+                        if (!m_hiderHit)
+                        {
+                            DamageSeeker();
+
+                        }
+                        else
+                        {
+                            m_hiderHit = false;
+                        }
                     }
-                    else
+                    break;
+                case 3:
+                    if (Input.GetKeyDown(","))
                     {
-                        m_hiderHit = false;
+                        Collider[] m_itemsInRange = Physics.OverlapSphere(transform.parent.position, 2);
+
+                        for (int i = 0; i < m_itemsInRange.Length; i++)
+                        {
+                            if (m_itemsInRange[i].tag == m_hiderTag)
+                            {
+                                m_hiderHit = true;
+                                DamageHider(m_itemsInRange[i]);
+
+                            }
+                        }
+
+                        if (!m_hiderHit)
+                        {
+                            DamageSeeker();
+
+                        }
+                        else
+                        {
+                            m_hiderHit = false;
+                        }
                     }
+                    break;
+                case 4:
+                    if (Input.GetKeyDown("b"))
+                    {
+                        Collider[] m_itemsInRange = Physics.OverlapSphere(transform.parent.position, 2);
 
-                }
+                        for (int i = 0; i < m_itemsInRange.Length; i++)
+                        {
+                            if (m_itemsInRange[i].tag == m_hiderTag)
+                            {
+                                m_hiderHit = true;
+                                DamageHider(m_itemsInRange[i]);
 
+                            }
+                        }
+
+                        if (!m_hiderHit)
+                        {
+                            DamageSeeker();
+
+                        }
+                        else
+                        {
+                            m_hiderHit = false;
+                        }
+                    }
+                    break;
+                default:
+                    break;
             }
-
         }
 
     }
