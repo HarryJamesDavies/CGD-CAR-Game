@@ -51,4 +51,9 @@ public class PlayerHealth : MonoBehaviour
             m_car.m_isDead = false;
         }
     }
+
+    public void ResetHealth()
+    {
+        cur_Health = max_Health;
+    }
 }
