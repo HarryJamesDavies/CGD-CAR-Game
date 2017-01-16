@@ -25,6 +25,8 @@ public class Events : MonoBehaviour
         DS_CHASE,
         DS_RESET,
         DS_FINISH,
+        DS_BUFFER,
+        DS_HIDERREADY,
         Count
     }
 }
