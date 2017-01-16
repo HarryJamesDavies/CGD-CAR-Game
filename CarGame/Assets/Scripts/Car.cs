@@ -11,6 +11,7 @@ public class Car : MonoBehaviour {
 
     public bool m_hider;
     public bool m_seeker;
+    public bool m_isDead;
 
     void Awake()
     {
@@ -43,11 +44,6 @@ public class Car : MonoBehaviour {
             m_seeker = true;
         }
     }
-	
-	void Update ()
-    {
-	    
-	}
 
     public void SetSeeker(string _hiderTag)
     {
