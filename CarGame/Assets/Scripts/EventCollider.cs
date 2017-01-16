@@ -14,7 +14,7 @@ public class EventCollider : MonoBehaviour {
             {
                 if (ControllerManager.m_instance.m_useController)
                 {
-                    if (Input.GetButtonDown("P" + _controller + ("-X(PS4)")))
+                    if (Input.GetButtonDown("P1-X(PS4)")) 
                     {
                         Debug.Log(other.tag + " wants to connect!");
 
