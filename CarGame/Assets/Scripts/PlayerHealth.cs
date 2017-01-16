@@ -47,7 +47,7 @@ public class PlayerHealth : MonoBehaviour
         }
         else
         {
-            m_movement.m_controls = true;
+            //m_movement.m_controls = true;
             m_car.m_isDead = false;
         }
     }
