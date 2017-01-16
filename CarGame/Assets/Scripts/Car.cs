@@ -12,6 +12,7 @@ public class Car : MonoBehaviour {
     public bool m_hider;
     public bool m_seeker;
     public bool m_isDead;
+    private GameObject m_seekerCone;
 
     void Awake()
     {
@@ -47,7 +48,7 @@ public class Car : MonoBehaviour {
     public void SetSeeker(string _hiderTag)
     {
         m_seeker = true;
-        GameObject m_seekerCone = Instantiate(m_seekerParam, transform.position, Quaternion.Euler(0.0f, 90.0f, 90.0f)) as GameObject;
+        m_seekerCone = Instantiate(m_seekerParam, transform.position, Quaternion.Euler(0.0f, 90.0f, 90.0f)) as GameObject;
         m_seekerCone.transform.parent = gameObject.transform;
         m_seekerCone.GetComponent<SeekerScript>().m_hiderTag = _hiderTag;
     }
@@ -58,10 +59,18 @@ public class Car : MonoBehaviour {
         gameObject.AddComponent<Hider>();
     }
 
-    public void ResetMode()
+    public void ResetSeeker()
     {
         m_seeker = false;
+        GetComponent<PlayerHealth>().ResetHealth();
+        Destroy(m_seekerCone);
+    }
+
+    public void ResetHider()
+    {
         m_hider = false;
+        GetComponent<PlayerHealth>().ResetHealth();
+        Destroy(GetComponent<Hider>());
     }
 
     public void ToggleCamera(bool _active)

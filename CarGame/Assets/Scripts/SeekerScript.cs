@@ -23,7 +23,7 @@ public class SeekerScript : MonoBehaviour
         if (m_damageApplied > 0 && timer > 0.0f)
         {
             timer -= Time.deltaTime;
-            Debug.Log(timer);
+            //Debug.Log(timer);
   
         }
         else
