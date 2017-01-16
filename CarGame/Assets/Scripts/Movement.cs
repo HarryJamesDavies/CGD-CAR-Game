@@ -102,22 +102,6 @@ public class Movement : MonoBehaviour {
                     default:
                         break;
                 }
-
-                if (Input.GetKeyDown("e"))
-                {
-                    if (gameObject.CompareTag("Player1"))
-                    {
-                        GameModeManager.m_instance.m_currentEvent = GameModeManager.GameModeState.DRIVEANDSEEK;
-                    }
-                }
-
-                if (Input.GetKeyDown("r"))
-                {
-                    if (gameObject.CompareTag("Player1"))
-                    {
-                        GameModeManager.m_instance.m_currentEvent = GameModeManager.GameModeState.FREEROAM;
-                    }
-                }
             }
         }
     }

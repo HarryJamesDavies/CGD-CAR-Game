@@ -18,6 +18,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &103682
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 455206}
+  m_Layer: 0
+  m_Name: Seeker 3 Spawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &108454
 GameObject:
   m_ObjectHideFlags: 0
@@ -48,6 +63,21 @@ GameObject:
   - 114: {fileID: 11404392}
   m_Layer: 5
   m_Name: PressX
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &139390
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 459978}
+  m_Layer: 0
+  m_Name: Seeker 2 Spawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -117,8 +147,24 @@ GameObject:
   - 4: {fileID: 497496}
   - 65: {fileID: 6518288}
   - 114: {fileID: 11435212}
+  - 114: {fileID: 11463544}
   m_Layer: 0
   m_Name: EventCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &169358
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 487984}
+  m_Layer: 0
+  m_Name: Seeker 1 Spawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -151,6 +197,21 @@ GameObject:
   - 4: {fileID: 461734}
   m_Layer: 0
   m_Name: DriveAndSeekEvent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &186262
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461016}
+  m_Layer: 0
+  m_Name: Hider Spawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -231,6 +292,42 @@ Transform:
   m_Children: []
   m_Father: {fileID: 461734}
   m_RootOrder: 4
+--- !u!4 &455206
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 103682}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: -0.5, z: -1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 497496}
+  m_RootOrder: 0
+--- !u!4 &459978
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 139390}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.75, y: -0.5, z: -1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 497496}
+  m_RootOrder: 1
+--- !u!4 &461016
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 186262}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.5, z: -2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 497496}
+  m_RootOrder: 3
 --- !u!4 &461734
 Transform:
   m_ObjectHideFlags: 1
@@ -272,6 +369,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 461734}
   m_RootOrder: 1
+--- !u!4 &487984
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 169358}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.75, y: -0.5, z: -1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 497496}
+  m_RootOrder: 2
 --- !u!4 &497496
 Transform:
   m_ObjectHideFlags: 1
@@ -281,7 +390,11 @@ Transform:
   m_LocalRotation: {x: 0, y: 0.150944, z: 0, w: 0.9885423}
   m_LocalPosition: {x: 2.953, y: 4.407, z: -0.013}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 455206}
+  - {fileID: 459978}
+  - {fileID: 487984}
+  - {fileID: 461016}
   m_Father: {fileID: 461734}
   m_RootOrder: 3
 --- !u!23 &2377866
@@ -290,7 +403,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 195870}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
@@ -337,7 +450,7 @@ BoxCollider:
   m_GameObject: {fileID: 195870}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -509,6 +622,48 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_playersconnected: 0
+--- !u!114 &11463544
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 162862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd69bec0d497a314b8deb6e7a7c23cb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_active: 0
+  m_eventLocation: {x: 0, y: 0, z: 0}
+  m_eventWidth: 300
+  m_eventHeight: 300
+  m_eventRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
+  m_currentPhase: 7
+  m_winningScore: 3
+  m_hiderNumber: 0
+  m_phaseLenghts:
+  - m_name: Hide
+    m_length: 30
+  - m_name: Seek
+    m_length: 60
+  - m_name: Chase
+    m_length: 20
+  - m_name: Buffer
+    m_length: 5
+  m_playerScores: 
+  m_timers: []
+  m_hiderSpawn: {fileID: 461016}
+  m_seekerSpawns:
+  - {fileID: 487984}
+  - {fileID: 459978}
+  - {fileID: 455206}
+  m_timerPrefab: {fileID: 194154, guid: 1106d9acb5bdfe44d8d29ffd6f7f0088, type: 2}
+  m_infoText: {fileID: 0}
 --- !u!114 &11469480
 MonoBehaviour:
   m_ObjectHideFlags: 1

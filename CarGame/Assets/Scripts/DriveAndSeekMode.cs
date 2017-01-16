@@ -15,6 +15,7 @@ public class DriveAndSeekMode : GameMode
         RESET = 4,
         FINISH = 5,
         BUFFER = 6,
+        INACTIVE = 7,
         Count
     }
 
@@ -68,15 +69,14 @@ public class DriveAndSeekMode : GameMode
             m_timers.Add(tempTimer.GetComponent<Timer>());
         }
 
-        for(int iter = 1; iter <= PlayerManager.m_instance.m_numberOfCars; iter++)
+        for(int iter = 1; iter <= 4; iter++)
         {
             m_playerScores.Add(0);
         }
 
         m_infoText = GameObject.FindGameObjectWithTag("DaSText");
 
-        m_currentPhase = DriveAndSeekPhases.SETUP;
-        InitializePhase();
+        m_currentPhase = DriveAndSeekPhases.INACTIVE;
 	}
 	
 	new
@@ -94,6 +94,8 @@ public class DriveAndSeekMode : GameMode
                 {
                     EventManager.m_instance.AddEvent(Events.Event.DS_SETUP);
                     SetupHiderAndSeekers();
+
+                    //Setup buffer phase
                     m_currentPhase = DriveAndSeekPhases.BUFFER;
                     m_bufferPhase.m_lenght = 5.0f;
                     m_bufferPhase.m_nextPhase = DriveAndSeekPhases.HIDING;
@@ -106,6 +108,9 @@ public class DriveAndSeekMode : GameMode
                     EventManager.m_instance.AddEvent(Events.Event.DS_HIDING);
                     m_infoText.GetComponent<Text>().text = "Hiding Time!";
                     m_timers[GetTimer("Hide")].StartTimer();
+
+                    ChangeAllPlayerMovement(false);
+                    ChangePlayerMovement(m_hiderNumber, true);
 
                     for (int iter = 0; iter <= PlayerManager.m_instance.m_playerCars.Count - 1; iter++)
                     {
@@ -120,6 +125,8 @@ public class DriveAndSeekMode : GameMode
                 {
                     EventManager.m_instance.AddEvent(Events.Event.DS_SEEKING);
                     m_infoText.GetComponent<Text>().text = "Seeking Time";
+
+                    ChangeAllPlayerMovement(true);
 
                     for (int iter = 0; iter <= PlayerManager.m_instance.m_playerCars.Count - 1; iter++)
                     {
@@ -159,16 +166,31 @@ public class DriveAndSeekMode : GameMode
             case DriveAndSeekPhases.FINISH:
                 {
                     EventManager.m_instance.AddEvent(Events.Event.DS_FINISH);
+
+                    for(int iter = 0; iter <= m_playerScores.Count - 1; iter++)
+                    {
+                        m_playerScores[iter] = 0;
+                    }
+
                     m_infoText.GetComponent<Text>().text = "Player " + m_gameWinner + " Wins!";
-                    Debug.Log("Player " + m_gameWinner + " Wins!");
-                    DestroyObject(gameObject);
+                    m_currentPhase = DriveAndSeekPhases.INACTIVE;
+                    InitializePhase();
+                    m_active = false;
+                    GameModeManager.m_instance.m_currentEvent = GameModeManager.GameModeState.FREEROAM;
                     break;
                 }
             case DriveAndSeekPhases.BUFFER:
                 {
+                    ChangeAllPlayerMovement(false);
+
                     m_timers[GetTimer("Buffer")].m_timerLength = m_bufferPhase.m_lenght;
                     m_infoText.GetComponent<Text>().text = m_bufferPhase.m_message;
                     m_timers[GetTimer("Buffer")].StartTimer();
+                    break;
+                }
+            case DriveAndSeekPhases.INACTIVE:
+                {
+                    m_infoText.GetComponent<Text>().text = "";
                     break;
                 }
             default:
@@ -252,6 +274,16 @@ public class DriveAndSeekMode : GameMode
                     }
                     break;
                 }
+            case DriveAndSeekPhases.INACTIVE:
+                {
+                    if(m_active)
+                    {
+                        m_currentPhase = DriveAndSeekPhases.SETUP;
+                        InitializePhase();
+                    }
+
+                    break;
+                }
             default:
                 {
                     break;
@@ -325,4 +357,17 @@ public class DriveAndSeekMode : GameMode
             player.GetComponent<Car>().ResetMode();
         }
     }
+
+    void ChangePlayerMovement(int _index, bool _state)
+    {
+        PlayerManager.m_instance.m_playerCars[_index].GetComponent<Movement>().m_controls = _state;
+    }
+
+    void ChangeAllPlayerMovement(bool _state)
+    {
+        for (int iter = 0; iter <= PlayerManager.m_instance.m_numberOfCars - 1; iter++)
+        {
+            PlayerManager.m_instance.m_playerCars[iter].GetComponent<Movement>().m_controls = _state;
+        }
+    } 
 }

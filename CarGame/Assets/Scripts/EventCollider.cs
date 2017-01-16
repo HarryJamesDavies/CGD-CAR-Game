@@ -12,7 +12,7 @@ public class EventCollider : MonoBehaviour {
         {
             if (m_firstPlayerPlaying == false)
             {
-                if (Input.GetKeyDown(KeyCode.X))
+                if (Input.GetKeyDown(KeyCode.E))
                 {
                     Debug.Log(other.tag + " wants to connect!");
 
@@ -25,10 +25,14 @@ public class EventCollider : MonoBehaviour {
                         ShootBeam.sb_instance.DisplayLine();
                     }
 
-                    //start the event
+                    ////start the event
+                    //GameModeManager.m_instance.m_currentEvent = GameModeManager.GameModeState.DRIVEANDSEEK;
+                    //Debug.Log("Drive and Seek started");
+                    //m_firstPlayerPlaying = true;
+
+                    GetComponent<DriveAndSeekMode>().m_active = true;
+                    GameModeManager.m_instance.m_currentGameMode = GetComponent<DriveAndSeekMode>();
                     GameModeManager.m_instance.m_currentEvent = GameModeManager.GameModeState.DRIVEANDSEEK;
-                    Debug.Log("Drive and Seek started");
-                    m_firstPlayerPlaying = true;
                 }
             }
         }
