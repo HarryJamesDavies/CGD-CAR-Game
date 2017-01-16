@@ -345,7 +345,7 @@ public class DriveAndSeekMode : GameMode
         PlayerManager.m_instance.m_playerCars[m_hiderNumber].transform.position = m_hiderSpawn.position;
         PlayerManager.m_instance.m_playerCars[m_hiderNumber].transform.rotation = m_hiderSpawn.rotation;
 
-        for (int iter = 1; iter <= PlayerManager.m_instance.m_numberOfCars; iter++)
+        for (int iter = 1; iter <= PlayerManager.m_instance.m_numberOfCars - 1; iter++)
         {
             if(iter != m_hiderNumber + 1)
             {

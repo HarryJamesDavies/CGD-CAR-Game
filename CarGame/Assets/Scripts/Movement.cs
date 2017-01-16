@@ -220,7 +220,7 @@ public class Movement : MonoBehaviour {
                 transform.rotation = startingRotation;
             }
         }
-        else if (_playerNumber == 2)
+        else if (_playerNumber == 4)
         {
             if (Input.GetKeyDown("t"))
             {
@@ -304,43 +304,43 @@ public class Movement : MonoBehaviour {
                 transform.rotation = startingRotation;
             }
         }
-        else if (_playerNumber == 4)
+        else if (_playerNumber == 2)
         {
-            if (Input.GetKeyDown("["))
+            if (Input.GetKeyDown(KeyCode.UpArrow))
             {
                 forward = true;
             }
-            if (Input.GetKeyUp("["))
+            if (Input.GetKeyUp(KeyCode.UpArrow))
             {
                 forward = false;
             }
-            if (Input.GetKeyDown("'"))
+            if (Input.GetKeyDown(KeyCode.DownArrow))
             {
                 backward = true;
             }
-            if (Input.GetKeyUp("'"))
+            if (Input.GetKeyUp(KeyCode.DownArrow))
             {
                 backward = false;
             }
 
-            if (Input.GetKeyDown("#"))
+            if (Input.GetKeyDown(KeyCode.RightArrow))
             {
                 right = true;
             }
-            if (Input.GetKeyUp("#"))
+            if (Input.GetKeyUp(KeyCode.RightArrow))
             {
                 right = false;
             }
-            if (Input.GetKeyDown(";"))
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
                 left = true;
             }
-            if (Input.GetKeyUp(";"))
+            if (Input.GetKeyUp(KeyCode.LeftArrow))
             {
                 left = false;
             }
 
-            if (Input.GetKeyDown(";"))
+            if (Input.GetKeyDown("/"))
             {
                 transform.position += Vector3.up * 2.5f;
                 transform.rotation = startingRotation;

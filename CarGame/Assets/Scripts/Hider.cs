@@ -86,7 +86,7 @@ public class Hider : MonoBehaviour {
                     }
                     break;
                 case 2:
-                    if (Input.GetKeyDown("c"))
+                    if (Input.GetKeyDown(KeyCode.RightShift))
                     {
                         if (!m_carMovement.m_controls)
                         {
@@ -130,7 +130,7 @@ public class Hider : MonoBehaviour {
                     }
                     break;
                 case 4:
-                    if (Input.GetKeyDown("/"))
+                    if (Input.GetKeyDown("v"))
                     {
                         if (!m_carMovement.m_controls)
                         {
