@@ -12,27 +12,55 @@ public class EventCollider : MonoBehaviour {
         {
             if (m_firstPlayerPlaying == false)
             {
-                if (Input.GetKeyDown(KeyCode.E))
+                if (ControllerManager.m_instance.m_useController)
                 {
-                    Debug.Log(other.tag + " wants to connect!");
-
-                    //activates the laser and active player number
-                    PlayersConnected.pc_instance.IncrementPC();
-
-                    //only fire the beam if there is 1 player connected
-                    if (PlayersConnected.pc_instance.m_playersconnected > 0)
+                    if (Input.GetButtonDown("P" + _controller + ("-X(PS4)")))
                     {
-                        ShootBeam.sb_instance.DisplayLine();
+                        Debug.Log(other.tag + " wants to connect!");
+
+                        //activates the laser and active player number
+                        PlayersConnected.pc_instance.IncrementPC();
+
+                        //only fire the beam if there is 1 player connected
+                        if (PlayersConnected.pc_instance.m_playersconnected > 0)
+                        {
+                            ShootBeam.sb_instance.DisplayLine();
+                        }
+
+                        ////start the event
+                        //GameModeManager.m_instance.m_currentEvent = GameModeManager.GameModeState.DRIVEANDSEEK;
+                        //Debug.Log("Drive and Seek started");
+                        //m_firstPlayerPlaying = true;
+
+                        GetComponent<DriveAndSeekMode>().m_active = true;
+                        GameModeManager.m_instance.m_currentGameMode = GetComponent<DriveAndSeekMode>();
+                        GameModeManager.m_instance.m_currentEvent = GameModeManager.GameModeState.DRIVEANDSEEK;
                     }
+                }
+                else
+                {
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        Debug.Log(other.tag + " wants to connect!");
 
-                    ////start the event
-                    //GameModeManager.m_instance.m_currentEvent = GameModeManager.GameModeState.DRIVEANDSEEK;
-                    //Debug.Log("Drive and Seek started");
-                    //m_firstPlayerPlaying = true;
+                        //activates the laser and active player number
+                        PlayersConnected.pc_instance.IncrementPC();
 
-                    GetComponent<DriveAndSeekMode>().m_active = true;
-                    GameModeManager.m_instance.m_currentGameMode = GetComponent<DriveAndSeekMode>();
-                    GameModeManager.m_instance.m_currentEvent = GameModeManager.GameModeState.DRIVEANDSEEK;
+                        //only fire the beam if there is 1 player connected
+                        if (PlayersConnected.pc_instance.m_playersconnected > 0)
+                        {
+                            ShootBeam.sb_instance.DisplayLine();
+                        }
+
+                        ////start the event
+                        //GameModeManager.m_instance.m_currentEvent = GameModeManager.GameModeState.DRIVEANDSEEK;
+                        //Debug.Log("Drive and Seek started");
+                        //m_firstPlayerPlaying = true;
+
+                        GetComponent<DriveAndSeekMode>().m_active = true;
+                        GameModeManager.m_instance.m_currentGameMode = GetComponent<DriveAndSeekMode>();
+                        GameModeManager.m_instance.m_currentEvent = GameModeManager.GameModeState.DRIVEANDSEEK;
+                    }
                 }
             }
         }
