@@ -5,7 +5,7 @@ public class SeekerScript : MonoBehaviour
 {
     //int m_playerNumber;
     int m_damageApplied = 0;
-    bool m_lights = true;
+    //bool m_lights = true;
 
     float timer = 2.0f;
     bool m_hiderHit = false;
@@ -23,27 +23,28 @@ public class SeekerScript : MonoBehaviour
         if (m_damageApplied > 0 && timer > 0.0f)
         {
             timer -= Time.deltaTime;
-            //Debug.Log(timer);
+            Debug.Log(timer);
+  
         }
         else
         {
             m_damageApplied = 0;
-            timer = 5.0f;
+            timer = 2.0f;
+            TurnLightsOn();
         }
 
         if (Input.GetKeyDown(KeyCode.V))
         {
             Collider[] m_itemsInRange = Physics.OverlapSphere(transform.parent.position, 2);
-            int i = 0;
-            while(i < m_itemsInRange.Length)
-            {
+
+            for(int i = 0; i< m_itemsInRange.Length; i++)
+            { 
                 if(m_itemsInRange[i].tag == m_hiderTag)
                 {
                     m_hiderHit = true;
                     DamageHider(m_itemsInRange[i]);
                  
                 }
-                i++;
             }
            
             if(!m_hiderHit)
@@ -63,26 +64,26 @@ public class SeekerScript : MonoBehaviour
 
     void TurnLightsOn()
     {
-        if (!m_lights)
-        {
+        //if (!m_lights)
+        //{
             foreach (GameObject lights in transform.parent.GetComponent<Movement>().m_lights)
             {
-                lights.SetActive(lights.activeInHierarchy);
+                lights.SetActive(true);
             }
-            m_lights = true;
-        }
+        //    m_lights = true;
+        //}
     }
 
     void TurnLightsOff()
     {
-        if (m_lights)
-        {
+        //if (m_lights)
+        //{
             foreach (GameObject lights in transform.parent.GetComponent<Movement>().m_lights)
             {
-                lights.SetActive(!lights.activeInHierarchy);
+                lights.SetActive(false);
             }
-            m_lights = false;
-        }
+        //    m_lights = false;
+        //}
     }
 
     void DamageSeeker()
@@ -91,6 +92,7 @@ public class SeekerScript : MonoBehaviour
         {
             transform.parent.GetComponent<PlayerHealth>().decreasehealth();
             m_damageApplied++;
+            TurnLightsOff();
         }
     }
 
@@ -100,6 +102,7 @@ public class SeekerScript : MonoBehaviour
         {
             other.gameObject.GetComponent<PlayerHealth>().decreasehealth();
             m_damageApplied++;
+            TurnLightsOff();
         }
     }
 
