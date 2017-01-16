@@ -31,6 +31,9 @@ public class GameModeManager : MonoBehaviour {
         {
             m_instance = this;
         }
+
+        m_modeHolder = new GameObject("Mode Holder");
+        m_modeHolder.transform.SetParent(transform);
     }
 
     // Update is called once per frame
@@ -44,6 +47,12 @@ public class GameModeManager : MonoBehaviour {
         }
     }
 
+    void SetMode(GameMode _mode)
+    {
+        m_currentGameMode = _mode;
+        return;
+    }
+
     void UpdateEvent()
     {
         switch (m_currentEvent)
@@ -51,15 +60,15 @@ public class GameModeManager : MonoBehaviour {
             case GameModeState.FREEROAM:
                 {
                     EventManager.m_instance.AddEvent(Events.Event.GM_FREEROAM);
-                    Destroy(m_modeHolder);
+                    //Destroy(m_modeHolder.transform.GetChild(0));
                     m_currentGameMode = null;
                     break;
                 }
             case GameModeState.DRIVEANDSEEK:
                 {
                     EventManager.m_instance.AddEvent(Events.Event.GM_DRIVEANDSEEK);
-                    m_modeHolder = (GameObject)Instantiate(m_modePrefab, m_modePrefab.transform.position, m_modePrefab.transform.rotation);
-                    m_currentGameMode = m_modeHolder.GetComponent<DriveAndSeekMode>();
+                    //m_modeHolder = (GameObject)Instantiate(m_modePrefab, m_modePrefab.transform.position, m_modePrefab.transform.rotation);
+                    //m_currentGameMode = m_modeHolder.GetComponent<DriveAndSeekMode>();
                     break;
                 }
             default:
