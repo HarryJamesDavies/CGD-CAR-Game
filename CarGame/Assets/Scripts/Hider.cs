@@ -28,15 +28,15 @@ public class Hider : MonoBehaviour {
         {
             if (Input.GetButtonDown("P" + _playerNumber + ("-X(PS4)")))
             {
-                if (!m_controlsEnabled)
+                if (!m_carMovement.m_controls)
                 {
-                    m_controlsEnabled = true;
+                    m_carMovement.m_controls = true;
                     m_car.ToggleCamera(true);
                     m_carMovement.ToggleLights(true);
                 }
                 else
                 {
-                    m_controlsEnabled = false;
+                    m_carMovement.m_controls = false;
                     m_car.ToggleCamera(false);
                     m_carMovement.ToggleLights(false);
                 }
@@ -49,15 +49,15 @@ public class Hider : MonoBehaviour {
                 case 1:
                     if (Input.GetKeyDown("z"))
                     {
-                        if (!m_controlsEnabled)
+                        if (!m_carMovement.m_controls)
                         {
-                            m_controlsEnabled = true;
+                            m_carMovement.m_controls = true;
                             m_car.ToggleCamera(true);
                             m_carMovement.ToggleLights(true);
                         }
                         else
                         {
-                            m_controlsEnabled = false;
+                            m_carMovement.m_controls = false;
                             m_car.ToggleCamera(false);
                             m_carMovement.ToggleLights(false);
                         }
@@ -66,15 +66,15 @@ public class Hider : MonoBehaviour {
                 case 2:
                     if (Input.GetKeyDown("v"))
                     {
-                        if (!m_controlsEnabled)
+                        if (!m_carMovement.m_controls)
                         {
-                            m_controlsEnabled = true;
+                            m_carMovement.m_controls = true;
                             m_car.ToggleCamera(true);
                             m_carMovement.ToggleLights(true);
                         }
                         else
                         {
-                            m_controlsEnabled = false;
+                            m_carMovement.m_controls = false;
                             m_car.ToggleCamera(false);
                             m_carMovement.ToggleLights(false);
                         }
@@ -83,15 +83,15 @@ public class Hider : MonoBehaviour {
                 case 3:
                     if (Input.GetKeyDown("m"))
                     {
-                        if (!m_controlsEnabled)
+                        if (!m_carMovement.m_controls)
                         {
-                            m_controlsEnabled = true;
+                            m_carMovement.m_controls = true;
                             m_car.ToggleCamera(true);
                             m_carMovement.ToggleLights(true);
                         }
                         else
                         {
-                            m_controlsEnabled = false;
+                            m_carMovement.m_controls = false;
                             m_car.ToggleCamera(false);
                             m_carMovement.ToggleLights(false);
                         }
@@ -100,15 +100,15 @@ public class Hider : MonoBehaviour {
                 case 4:
                     if (Input.GetKeyDown("/"))
                     {
-                        if (!m_controlsEnabled)
+                        if (!m_carMovement.m_controls)
                         {
-                            m_controlsEnabled = true;
+                            m_carMovement.m_controls = true;
                             m_car.ToggleCamera(true);
                             m_carMovement.ToggleLights(true);
                         }
                         else
                         {
-                            m_controlsEnabled = false;
+                            m_carMovement.m_controls = false;
                             m_car.ToggleCamera(false);
                             m_carMovement.ToggleLights(false);
                         }
@@ -118,7 +118,5 @@ public class Hider : MonoBehaviour {
                     break;
             }
         }
-
-        m_carMovement.m_controls = m_controlsEnabled;
     }
 }
