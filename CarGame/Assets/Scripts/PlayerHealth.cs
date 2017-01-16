@@ -55,5 +55,7 @@ public class PlayerHealth : MonoBehaviour
     public void ResetHealth()
     {
         cur_Health = max_Health;
+        float calc_Health = cur_Health / max_Health;
+        SetHealthBar(calc_Health);
     }
 }

@@ -183,10 +183,12 @@ public class DriveAndSeekMode : GameMode
                 {
                     EventManager.m_instance.AddEvent(Events.Event.DS_FINISH);
 
-                    for(int iter = 0; iter <= m_playerScores.Count - 1; iter++)
+                    for (int iter = 0; iter <= m_playerScores.Count - 1; iter++)
                     {
                         m_playerScores[iter] = 0;
                     }
+
+                    ResetRound();
 
                     m_infoText.GetComponent<Text>().text = "Player " + m_gameWinner + " Wins!";
                     m_currentPhase = DriveAndSeekPhases.INACTIVE;
@@ -208,7 +210,7 @@ public class DriveAndSeekMode : GameMode
                 }
             case DriveAndSeekPhases.INACTIVE:
                 {
-                    m_infoText.GetComponent<Text>().text = "";
+                    //m_infoText.GetComponent<Text>().text = "";
                     break;
                 }
             default:
@@ -331,7 +333,11 @@ public class DriveAndSeekMode : GameMode
     {
         if (!m_hiderWon)
         {
-            m_hiderNumber = UnityEngine.Random.Range(1, PlayerManager.m_instance.m_numberOfCars + 1) - 1;           
+            int prevHiderNum = m_hiderNumber;
+            do
+            {
+                m_hiderNumber = UnityEngine.Random.Range(1, PlayerManager.m_instance.m_numberOfCars + 1) - 1;
+            } while (m_hiderNumber == prevHiderNum);        
         }
 
         PlayerManager.m_instance.m_playerCars[m_hiderNumber].GetComponent<Car>().SetHider();
@@ -394,9 +400,16 @@ public class DriveAndSeekMode : GameMode
             timer.ResetTimer();
         }
 
-        foreach(GameObject player in PlayerManager.m_instance.m_playerCars)
+        for (int iter = 0; iter <= PlayerManager.m_instance.m_numberOfCars - 1; iter++)
         {
-            player.GetComponent<Car>().ResetMode();
+            if (iter == m_hiderNumber)
+            {
+                PlayerManager.m_instance.m_playerCars[iter].GetComponent<Car>().ResetHider();
+            }
+            else
+            {
+                PlayerManager.m_instance.m_playerCars[iter].GetComponent<Car>().ResetSeeker();
+            }
         }
     }
 
