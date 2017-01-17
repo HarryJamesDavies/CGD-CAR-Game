@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 {
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if((Input.GetKeyDown(KeyCode.Escape)) || (Input.GetButtonDown("P1-TouchPad(PS4)")))
         {
             Application.Quit();
         }
