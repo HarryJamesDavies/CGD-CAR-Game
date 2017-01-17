@@ -104,6 +104,14 @@ public class Movement : MonoBehaviour {
                 }
             }
         }
+        else
+        {
+            forward = false;
+            backward = false;
+            left = false;
+            right = false;
+            xspeep = 0;
+        }
     }
 
     void PlayerMovement(int _controller)
