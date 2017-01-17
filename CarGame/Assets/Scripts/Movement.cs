@@ -133,10 +133,6 @@ public class Movement : MonoBehaviour {
             backward = false;
         }
 
-        //Debug.Log("R2: " + Input.GetAxis("P" + _controller + "-R2(PS4)"));
-        //Debug.Log("L2: " + Input.GetAxis("P" + _controller + "-L2(PS4)"));
-        //Debug.Log("LeftJoystickX: " + Input.GetAxis("P" + _controller + "-LeftJoystickX(PS4)"));
-
         if (Input.GetAxis("P" + _controller + ("-LeftJoystickX(PS4)")) > 0.5f)
         {
             right = true;
@@ -156,8 +152,8 @@ public class Movement : MonoBehaviour {
 
         if (Input.GetButtonDown("P" + _controller + ("-Triangle(PS4)")))
         {
-            transform.position += Vector3.up * 2.5f;
-            transform.rotation = startingRotation;
+            gameObject.transform.position += Vector3.up * 2.5f;
+            gameObject.transform.rotation = startingRotation;
         }
 
         if (Input.GetButtonDown("P" + _controller + ("-Square(PS4)")))

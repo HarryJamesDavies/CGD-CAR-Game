@@ -36,65 +36,65 @@ public class SeekerScript : MonoBehaviour
 
         //if using controllers do controller switch
         //else do keyboard switch
-        if (ControllerManager.m_instance.m_useController)
-        {
+        //if (ControllerManager.m_instance.m_useController)
+        //{
             //switch for checking player number and controller action press
-            switch (gameObject.tag)
-            {
-                case "Player1":
-                    if (Input.GetButtonDown("P1-X(PS4)"))
-                    {
-                        CheckItemsInRange();
-                    }
-                    break;
-                case "Player2":
-                    if (Input.GetButtonDown("P2-X(PS4)"))
-                    {
-                        CheckItemsInRange();
-                    }
-                    break;
-                case "Player3":
-                    if (Input.GetButtonDown("P3-X(PS4)"))
-                    {
-                        CheckItemsInRange();
-                    }
-                    break;
-                case "Player4":
-                    if (Input.GetButtonDown("P4-X(PS4)"))
-                    {
-                        CheckItemsInRange();
-                    }
-                    break;
-                default:
-                    Debug.Log("Controller Seeker Action Default");
-                    break;
-            }
-        }
-        else
-        {
+            //switch (gameObject.tag)
+            //{
+            //    case "Player1":
+            //        if (Input.GetButtonDown("P1-X(PS4)"))
+            //        {
+            //            CheckItemsInRange();
+            //        }
+            //        break;
+            //    case "Player2":
+            //        if (Input.GetButtonDown("P2-X(PS4)"))
+            //        {
+            //            CheckItemsInRange();
+            //        }
+            //        break;
+            //    case "Player3":
+            //        if (Input.GetButtonDown("P3-X(PS4)"))
+            //        {
+            //            CheckItemsInRange();
+            //        }
+            //        break;
+            //    case "Player4":
+            //        if (Input.GetButtonDown("P4-X(PS4)"))
+            //        {
+            //            CheckItemsInRange();
+            //        }
+            //        break;
+            //    default:
+            //        Debug.Log("Controller Seeker Action Default");
+            //        break;
+            //}
+        //}
+        //else
+        //{
             //switch for checking player number and action button press
             switch (m_playerNumber)
             {
                 case 1:
-                    if (Input.GetKeyDown(KeyCode.X))
+                    if ((Input.GetKeyDown(KeyCode.X)) || (Input.GetButtonDown("P1-X(PS4)")))
                     {
                         CheckItemsInRange();
                     }
                     break;
                 case 2:
-                    if (Input.GetKeyDown(KeyCode.RightAlt))
+                    if ((Input.GetKeyDown(KeyCode.RightAlt)) || (Input.GetButtonDown("P2-X(PS4)")))
                     {
                         CheckItemsInRange();
                     }
                     break;
                 case 3:
-                    if (Input.GetKeyDown("b"))
+                    if ((Input.GetKeyDown("b")) || (Input.GetButtonDown("P3-X(PS4)")))
                     {
                         CheckItemsInRange();
                     }
                     break;
                 case 4:
-                    if (Input.GetKeyDown(","))
+                    if ((Input.GetKeyDown(",")) || (Input.GetButtonDown("P4-X(PS4)")))
                     {
                         CheckItemsInRange();
                     }
@@ -103,7 +103,7 @@ public class SeekerScript : MonoBehaviour
                     Debug.Log("Keyboard Seeker Action Default");
                     break;
             }
-        }
+        //}
 
     }
 

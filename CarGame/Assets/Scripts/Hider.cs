@@ -39,63 +39,63 @@ public class Hider : MonoBehaviour {
 
     void SetLocation()
     {
-        if (ControllerManager.m_instance.m_useController)
-        {
-            switch(gameObject.tag)
-            {
-                case "Player1":
-                    if (Input.GetButtonDown("P1-X(PS4)"))
-                    {
-                        ToggleHide();
-                    }
-                    break;
-                case "Player2":
-                    if (Input.GetButtonDown("P2-X(PS4)"))
-                    {
-                        ToggleHide();
-                    }
-                    break;
-                case "Player3":
-                    if (Input.GetButtonDown("P3-X(PS4)"))
-                    {
-                        ToggleHide();
-                    }
-                    break;
-                case "Player4":
-                    if (Input.GetButtonDown("P4-X(PS4)"))
-                    {
-                        ToggleHide();
-                    }
-                    break;
-                default:
-                    Debug.Log("Controller Hider Action Default");
-                    break;
-            }
-        }
-        else
-        {
+        //if (ControllerManager.m_instance.m_useController)
+        //{
+        //    switch(gameObject.tag)
+        //    {
+        //        case "Player1":
+        //            if (Input.GetButtonDown("P1-X(PS4)"))
+        //            {
+        //                ToggleHide();
+        //            }
+        //            break;
+        //        case "Player2":
+        //            if (Input.GetButtonDown("P2-X(PS4)"))
+        //            {
+        //                ToggleHide();
+        //            }
+        //            break;
+        //        case "Player3":
+        //            if (Input.GetButtonDown("P3-X(PS4)"))
+        //            {
+        //                ToggleHide();
+        //            }
+        //            break;
+        //        case "Player4":
+        //            if (Input.GetButtonDown("P4-X(PS4)"))
+        //            {
+        //                ToggleHide();
+        //            }
+        //            break;
+        //        default:
+        //            Debug.Log("Controller Hider Action Default");
+        //            break;
+        //    }
+        //}
+        //else
+        //{
             switch (m_playerNumber)
             {
                 case 1:
-                    if (Input.GetKeyDown("z"))
+                    if ((Input.GetKeyDown("z")) || (Input.GetButtonDown("P1-X(PS4)")))
                     {
                         ToggleHide();
                     }
                     break;
                 case 2:
-                    if (Input.GetKeyDown(KeyCode.RightShift))
+                    if ((Input.GetKeyDown(KeyCode.RightShift)) || (Input.GetButtonDown("P2-X(PS4)")))
                     {
                         ToggleHide();
                     }
                     break;
                 case 3:
-                    if (Input.GetKeyDown("v"))
+                    if ((Input.GetKeyDown("v")) || (Input.GetButtonDown("P3-X(PS4)")))
                     {
                         ToggleHide();
                     }
                     break;
                 case 4:
-                    if (Input.GetKeyDown("m"))
+                    if ((Input.GetKeyDown("m")) || (Input.GetButtonDown("P4-X(PS4)")))
                     {
                         ToggleHide();
                     }
@@ -104,7 +104,7 @@ public class Hider : MonoBehaviour {
                     Debug.Log("keyboard Hider Action Default");
                     break;
             }
-        }
+        //}
     }
 
     void ToggleHide()
