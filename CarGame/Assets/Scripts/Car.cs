@@ -47,7 +47,7 @@ public class Car : MonoBehaviour {
 
     public void SetSeeker(string _hiderTag)
     {
-        m_seeker = true;
+        m_seeker = true;        
         m_seekerCone = Instantiate(m_seekerParam, transform.position, Quaternion.Euler(0.0f, 90.0f, 90.0f)) as GameObject;
         m_seekerCone.transform.parent = gameObject.transform;
         m_seekerCone.GetComponent<SeekerScript>().m_hiderTag = _hiderTag;
@@ -56,6 +56,7 @@ public class Car : MonoBehaviour {
     public void SetHider()
     {
         m_hider = true;
+        GetComponent<Movement>().m_power = 0.0045f;
         gameObject.AddComponent<Hider>();
     }
 
@@ -69,6 +70,7 @@ public class Car : MonoBehaviour {
     public void ResetHider()
     {
         m_hider = false;
+        GetComponent<Movement>().m_power = 0.005f;
         GetComponent<PlayerHealth>().ResetHealth();
         Destroy(GetComponent<Hider>());
     }

@@ -1041,7 +1041,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae2baccea41b538458af43c987de97d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  power: 0.005
+  m_power: 0.005
   fuel: 2000
   m_controls: 0
   m_direction: {x: 0, y: 0, z: 0}
