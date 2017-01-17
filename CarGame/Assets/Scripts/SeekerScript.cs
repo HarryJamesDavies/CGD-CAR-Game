@@ -39,27 +39,27 @@ public class SeekerScript : MonoBehaviour
         if (ControllerManager.m_instance.m_useController)
         {
             //switch for checking player number and controller action press
-            switch (m_playerNumber)
+            switch (gameObject.tag)
             {
-                case 1:
+                case "Player1":
                     if (Input.GetButtonDown("P1-X(PS4)"))
                     {
                         CheckItemsInRange();
                     }
                     break;
-                case 2:
+                case "Player2":
                     if (Input.GetButtonDown("P2-X(PS4)"))
                     {
                         CheckItemsInRange();
                     }
                     break;
-                case 3:
+                case "Player3":
                     if (Input.GetButtonDown("P3-X(PS4)"))
                     {
                         CheckItemsInRange();
                     }
                     break;
-                case 4:
+                case "Player4":
                     if (Input.GetButtonDown("P4-X(PS4)"))
                     {
                         CheckItemsInRange();
