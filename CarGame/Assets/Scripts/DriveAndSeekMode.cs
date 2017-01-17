@@ -384,6 +384,8 @@ public class DriveAndSeekMode : GameMode
                 SpawnsUsed++;
             }
         }
+
+        m_hiderWon = false;
     }
 
     bool CheckHidersCaught()
