@@ -37,7 +37,7 @@ public class PlayerManager : MonoBehaviour {
         m_numberOfCars = 0;
 	}
 	
-	void Update ()
+	void LateUpdate ()
     {
         if (m_spawned < 1)
         {

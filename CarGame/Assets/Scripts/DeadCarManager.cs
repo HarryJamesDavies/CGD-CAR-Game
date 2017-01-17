@@ -20,6 +20,7 @@ public class DeadCarManager : MonoBehaviour
 
     public List<GameObject> m_cars = new List<GameObject>();
     private Transform m_deadCarHolder;
+    private int m_hiderNumber;
 
 
     // Use this for initialization
@@ -62,6 +63,11 @@ public class DeadCarManager : MonoBehaviour
     {
         ResetSections();
         return;
+    }
+
+    public void SetHiderNumber(int _num)
+    {
+        m_hiderNumber = _num;
     }
 
     void SetSections()
@@ -128,7 +134,16 @@ public class DeadCarManager : MonoBehaviour
         for (int iter = 0; iter <= m_sections[_section].transform.childCount - 1; iter++)
         {
             Transform spawnLocation = m_sections[_section].transform.GetChild(iter).transform;
-            GameObject tempObject = (GameObject)Instantiate(m_prefabCars[GetRandomCar()], spawnLocation.position, spawnLocation.rotation);
+            //GameObject tempObject = (GameObject)Instantiate(m_prefabCars[GetRandomCar()], spawnLocation.position, spawnLocation.rotation);
+            int range = Random.Range(1, 11);
+            Quaternion rotation = spawnLocation.localRotation;
+            if (range <= 5)
+            {
+                Vector3 euler = rotation.eulerAngles;
+                euler = new Vector3(euler.x, euler.y + 180, euler.z);
+                rotation = Quaternion.Euler(euler);
+            }
+            GameObject tempObject = (GameObject)Instantiate(m_prefabCars[m_hiderNumber], spawnLocation.position, rotation);
             tempObject.transform.SetParent(m_deadCarHolder);
             m_cars.Add(tempObject);
         }

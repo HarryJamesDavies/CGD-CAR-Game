@@ -340,6 +340,8 @@ public class DriveAndSeekMode : GameMode
             } while (m_hiderNumber == prevHiderNum);
         }
 
+        DeadCarManager.m_instance.SetHiderNumber(m_hiderNumber);
+
         PlayerManager.m_instance.m_playerCars[m_hiderNumber].GetComponent<Car>().SetHider();
         string HiderTag = PlayerManager.m_instance.m_playerCars[m_hiderNumber].transform.tag;
         PlayerManager.m_instance.m_playerCars[m_hiderNumber].transform.position = m_hiderSpawn.position;
