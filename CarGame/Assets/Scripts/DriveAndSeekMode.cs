@@ -39,6 +39,10 @@ public class DriveAndSeekMode : GameMode
     private int m_gameWinner = -1;
     private bool m_hiderWon = false;
 
+    public AudioClip m_hornSounds;
+    public AudioClip m_backgroundSounds;
+    private AudioSource m_audioSource;
+
     public List<PhaseLenght> m_phaseLenghts;
     public List<int> m_playerScores;
     public List<Timer> m_timers;
@@ -52,6 +56,8 @@ public class DriveAndSeekMode : GameMode
     public BufferStruct m_bufferPhase;
     public GameObject m_infoText;
     public GameObject m_infoBox;
+
+    private bool m_music = false;
 
     new
     void Start()
@@ -78,6 +84,7 @@ public class DriveAndSeekMode : GameMode
 
         m_infoText = GameObject.FindGameObjectWithTag("DaSText");
         m_infoBox = GameObject.FindGameObjectWithTag("DaSBox");
+        m_audioSource = GetComponent<AudioSource>();
 
         m_currentPhase = DriveAndSeekPhases.INACTIVE;
     }
@@ -87,6 +94,11 @@ public class DriveAndSeekMode : GameMode
     {
         base.Start();
         UpdatePhase();
+
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            m_music = !m_music;
+        }
     }
 
     void InitializePhase()
@@ -147,6 +159,15 @@ public class DriveAndSeekMode : GameMode
             case DriveAndSeekPhases.CHASE:
                 {
                     EventManager.m_instance.AddEvent(Events.Event.DS_CHASE);
+                    m_infoText.GetComponent<Text>().text = "Chasing Time";
+
+                    if (!m_audioSource.isPlaying)
+                    {
+                        m_audioSource.volume = 0.1f;
+                        m_audioSource.clip = m_backgroundSounds;
+                        m_audioSource.Play();
+                    }
+
                     PlayerManager.m_instance.m_playerCars[m_hiderNumber].GetComponent<Car>().ToggleCamera(true);
                     m_timers[GetTimer("Chase")].StartTimer();
                     break;
@@ -154,6 +175,8 @@ public class DriveAndSeekMode : GameMode
             case DriveAndSeekPhases.RESET:
                 {
                     EventManager.m_instance.AddEvent(Events.Event.DS_RESET);
+
+                    m_audioSource.Stop();
 
                     if (m_hiderWon)
                     {
@@ -220,6 +243,13 @@ public class DriveAndSeekMode : GameMode
                 {
                     EventManager.m_instance.AddEvent(Events.Event.DS_BUFFER);
 
+                    if(m_bufferPhase.m_nextPhase == DriveAndSeekPhases.SEEKING)
+                    {
+                        m_audioSource.volume = 0.3f;
+                        m_audioSource.clip = m_hornSounds;
+                        m_audioSource.Play();
+                    }
+
                     ChangeAllPlayerMovement(false);
 
                     m_timers[GetTimer("Buffer")].m_timerLength = m_bufferPhase.m_lenght;
@@ -284,6 +314,17 @@ public class DriveAndSeekMode : GameMode
                         m_currentPhase = DriveAndSeekPhases.CHASE;
                         InitializePhase();
                     }
+
+                    //if(m_music && !m_audioSource.isPlaying)
+                    //{
+                    //    m_audioSource.volume = 0.1f;
+                    //    m_audioSource.clip = m_backgroundSounds;
+                    //    m_audioSource.Play();
+                    //}
+                    //else if (!m_music && m_audioSource.isPlaying)
+                    //{
+                    //    m_audioSource.Stop();
+                    //}
                     break;
                 }
             case DriveAndSeekPhases.CHASE:
@@ -307,6 +348,8 @@ public class DriveAndSeekMode : GameMode
                         m_currentPhase = DriveAndSeekPhases.RESET;
                         InitializePhase();
                     }
+
+                    
                     break;
                 }
             case DriveAndSeekPhases.RESET:
