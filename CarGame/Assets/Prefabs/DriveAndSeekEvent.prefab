@@ -545,6 +545,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_firstPlayerPlaying: 0
+  m_secondPlayerPlaying: 0
+  m_thirdPlayerPlaying: 0
+  m_fourthPlayerPlaying: 0
 --- !u!114 &11448154
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -664,6 +667,7 @@ MonoBehaviour:
   - {fileID: 455206}
   m_timerPrefab: {fileID: 194154, guid: 1106d9acb5bdfe44d8d29ffd6f7f0088, type: 2}
   m_infoText: {fileID: 0}
+  m_infoBox: {fileID: 0}
 --- !u!114 &11469480
 MonoBehaviour:
   m_ObjectHideFlags: 1

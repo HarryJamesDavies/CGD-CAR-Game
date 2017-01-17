@@ -51,6 +51,7 @@ public class DriveAndSeekMode : GameMode
 
     public BufferStruct m_bufferPhase;
     public GameObject m_infoText;
+    public GameObject m_infoBox;
 
     new
     void Start()
@@ -76,6 +77,7 @@ public class DriveAndSeekMode : GameMode
         }
 
         m_infoText = GameObject.FindGameObjectWithTag("DaSText");
+        m_infoBox = GameObject.FindGameObjectWithTag("DaSBox");
 
         m_currentPhase = DriveAndSeekPhases.INACTIVE;
     }
@@ -95,6 +97,8 @@ public class DriveAndSeekMode : GameMode
                 {
                     EventManager.m_instance.AddEvent(Events.Event.DS_SETUP);
                     SetupHiderAndSeekers();
+
+                    m_infoBox.GetComponent<Image>().enabled = true;
 
                     //Setup buffer phase
                     m_currentPhase = DriveAndSeekPhases.BUFFER;
@@ -190,11 +194,21 @@ public class DriveAndSeekMode : GameMode
 
                     ResetRound();
 
-                    m_infoText.GetComponent<Text>().text = "Player " + m_gameWinner + " Wins!";
-                    m_currentPhase = DriveAndSeekPhases.INACTIVE;
-                    InitializePhase();
                     m_active = false;
                     GameModeManager.m_instance.m_currentEvent = GameModeManager.GameModeState.FREEROAM;
+
+                    //Setup buffer phase
+                    m_currentPhase = DriveAndSeekPhases.BUFFER;
+                    m_bufferPhase.m_lenght = 5.0f;
+                    m_bufferPhase.m_nextPhase = DriveAndSeekPhases.INACTIVE;
+                    m_bufferPhase.m_message = "Player " + m_gameWinner + " Wins!";
+                    InitializePhase();
+
+                    //m_infoText.GetComponent<Text>().text = "Player " + m_gameWinner + " Wins!";
+                    //m_currentPhase = DriveAndSeekPhases.INACTIVE;
+                    //InitializePhase();
+                    //m_active = false;
+                    //GameModeManager.m_instance.m_currentEvent = GameModeManager.GameModeState.FREEROAM;
                     break;
                 }
             case DriveAndSeekPhases.BUFFER:
@@ -210,7 +224,9 @@ public class DriveAndSeekMode : GameMode
                 }
             case DriveAndSeekPhases.INACTIVE:
                 {
-                    //m_infoText.GetComponent<Text>().text = "";
+                    m_infoBox.GetComponent<Image>().enabled = false;
+                    m_infoText.GetComponent<Text>().text = "";
+                    ChangeAllPlayerMovement(true);
                     break;
                 }
             default:
