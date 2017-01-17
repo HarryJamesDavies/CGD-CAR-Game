@@ -14,6 +14,7 @@ public class SeekerScript : MonoBehaviour
 
     void Start()
     {
+        TurnLightsOn();
         m_playerNumber = transform.parent.GetComponent<Car>().m_playerNumber;
     }
 
@@ -33,145 +34,73 @@ public class SeekerScript : MonoBehaviour
             TurnLightsOn();
         }
 
+        //if using controllers do controller switch
+        //else do keyboard switch
         if (ControllerManager.m_instance.m_useController)
         {
-            if (Input.GetButtonDown("P" + m_playerNumber + ("-X(PS4)")))
+            //switch for checking player number and controller action press
+            switch (m_playerNumber)
             {
-                Collider[] m_itemsInRange = Physics.OverlapSphere(transform.parent.position, 2);
-
-                for (int i = 0; i < m_itemsInRange.Length; i++)
-                {
-                    if (m_itemsInRange[i].tag == m_hiderTag)
+                case 1:
+                    if (Input.GetButtonDown("P1-X(PS4)"))
                     {
-                        m_hiderHit = true;
-                        DamageHider(m_itemsInRange[i]);
-
+                        CheckItemsInRange();
                     }
-                }
-
-                if (!m_hiderHit)
-                {
-                    DamageSeeker();
-
-                }
-                else
-                {
-                    m_hiderHit = false;
-                }
-
+                    break;
+                case 2:
+                    if (Input.GetButtonDown("P2-X(PS4)"))
+                    {
+                        CheckItemsInRange();
+                    }
+                    break;
+                case 3:
+                    if (Input.GetButtonDown("P3-X(PS4)"))
+                    {
+                        CheckItemsInRange();
+                    }
+                    break;
+                case 4:
+                    if (Input.GetButtonDown("P4-X(PS4)"))
+                    {
+                        CheckItemsInRange();
+                    }
+                    break;
+                default:
+                    Debug.Log("Controller Seeker Action Default");
+                    break;
             }
-
         }
         else
         {
-            //check for the controller inpu
+            //switch for checking player number and action button press
             switch (m_playerNumber)
             {
                 case 1:
                     if (Input.GetKeyDown(KeyCode.X))
                     {
-                        Collider[] m_itemsInRange = Physics.OverlapSphere(transform.parent.position, 2);
-
-                        for (int i = 0; i < m_itemsInRange.Length; i++)
-                        {
-                            if (m_itemsInRange[i].tag == m_hiderTag)
-                            {
-                                m_hiderHit = true;
-                                DamageHider(m_itemsInRange[i]);
-
-                            }
-                        }
-
-                        if (!m_hiderHit)
-                        {
-                            DamageSeeker();
-
-                        }
-                        else
-                        {
-                            m_hiderHit = false;
-                        }
+                        CheckItemsInRange();
                     }
                     break;
                 case 2:
                     if (Input.GetKeyDown(KeyCode.RightAlt))
                     {
-                        Collider[] m_itemsInRange = Physics.OverlapSphere(transform.parent.position, 2);
-
-                        for (int i = 0; i < m_itemsInRange.Length; i++)
-                        {
-                            if (m_itemsInRange[i].tag == m_hiderTag)
-                            {
-                                m_hiderHit = true;
-                                DamageHider(m_itemsInRange[i]);
-
-                            }
-                        }
-
-                        if (!m_hiderHit)
-                        {
-                            DamageSeeker();
-
-                        }
-                        else
-                        {
-                            m_hiderHit = false;
-                        }
+                        CheckItemsInRange();
                     }
                     break;
                 case 3:
-                    if (Input.GetKeyDown(","))
+                    if (Input.GetKeyDown("b"))
                     {
-                        Collider[] m_itemsInRange = Physics.OverlapSphere(transform.parent.position, 2);
-
-                        for (int i = 0; i < m_itemsInRange.Length; i++)
-                        {
-                            if (m_itemsInRange[i].tag == m_hiderTag)
-                            {
-                                m_hiderHit = true;
-                                DamageHider(m_itemsInRange[i]);
-
-                            }
-                        }
-
-                        if (!m_hiderHit)
-                        {
-                            DamageSeeker();
-
-                        }
-                        else
-                        {
-                            m_hiderHit = false;
-                        }
+                        CheckItemsInRange();
                     }
                     break;
                 case 4:
-                    if (Input.GetKeyDown("b"))
+                    if (Input.GetKeyDown(","))
                     {
-                        Collider[] m_itemsInRange = Physics.OverlapSphere(transform.parent.position, 2);
-
-                        for (int i = 0; i < m_itemsInRange.Length; i++)
-                        {
-                            if (m_itemsInRange[i].tag == m_hiderTag)
-                            {
-                                m_hiderHit = true;
-                                DamageHider(m_itemsInRange[i]);
-
-                            }
-                        }
-
-                        if (!m_hiderHit)
-                        {
-                            DamageSeeker();
-
-                        }
-                        else
-                        {
-                            m_hiderHit = false;
-                        }
+                        CheckItemsInRange();
                     }
                     break;
                 default:
+                    Debug.Log("Keyboard Seeker Action Default");
                     break;
             }
         }
@@ -219,6 +148,32 @@ public class SeekerScript : MonoBehaviour
             other.gameObject.GetComponent<PlayerHealth>().decreasehealth();
             m_damageApplied++;
             TurnLightsOff();
+        }
+    }
+
+    void CheckItemsInRange()
+    {
+        //check collider items within range of this object
+        Collider[] m_itemsInRange = Physics.OverlapSphere(transform.parent.position, 2);
+
+        //iterate through items and check for hider
+        for (int i = 0; i < m_itemsInRange.Length; i++)
+        {
+            if (m_itemsInRange[i].tag == m_hiderTag)
+            {
+                m_hiderHit = true;
+                DamageHider(m_itemsInRange[i]);
+            }
+        }
+
+        //if hider hasn't been hit, damage the seeker
+        if (!m_hiderHit)
+        {
+            DamageSeeker();
+        }
+        else
+        {
+            m_hiderHit = false;
         }
     }
 
