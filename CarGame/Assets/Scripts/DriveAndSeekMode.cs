@@ -170,6 +170,11 @@ public class DriveAndSeekMode : GameMode
                         }
                     }
 
+                    for (int iter = 0; iter <= PlayerManager.m_instance.m_playerCars.Count - 1; iter++)
+                    {
+                        PlayerManager.m_instance.m_playerCars[iter].GetComponent<Car>().ToggleCamera(true);
+                    }
+
                     if (CheckFinished())
                     {
                         m_currentPhase = DriveAndSeekPhases.FINISH;
@@ -227,6 +232,11 @@ public class DriveAndSeekMode : GameMode
                     m_infoBox.GetComponent<Image>().enabled = false;
                     m_infoText.GetComponent<Text>().text = "";
                     ChangeAllPlayerMovement(true);
+
+                    for (int iter = 0; iter <= PlayerManager.m_instance.m_playerCars.Count - 1; iter++)
+                    {
+                        PlayerManager.m_instance.m_playerCars[iter].GetComponent<Car>().ToggleCamera(true);
+                    }
                     break;
                 }
             default:

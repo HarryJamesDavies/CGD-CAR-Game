@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class Movement : MonoBehaviour {
 
     float xspeep = 0f;
-    public float power = 0.01f;
+    public float m_power = 0.01f;
     float friction = 0.95f;
     bool forward = false;
     bool backward = false;
@@ -36,13 +36,13 @@ public class Movement : MonoBehaviour {
     {
         if (forward)
         {
-            xspeep += power;
-            fuel -= power;
+            xspeep += m_power;
+            fuel -= m_power;
         }
         if (backward)
         {
-            xspeep -= power;
-            fuel -= power;
+            xspeep -= m_power;
+            fuel -= m_power;
         }
 
         if(right)
