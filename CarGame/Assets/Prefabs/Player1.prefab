@@ -104,6 +104,7 @@ GameObject:
   - 114: {fileID: 11409956}
   - 114: {fileID: 11480388}
   - 114: {fileID: 11400596}
+  - 114: {fileID: 11447610}
   m_Layer: 8
   m_Name: HealthBar
   m_TagString: Untagged
@@ -1031,6 +1032,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &11447610
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 119564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a83962a41c2981e4b96ed114a36d2ed3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11461146
 MonoBehaviour:
   m_ObjectHideFlags: 1
