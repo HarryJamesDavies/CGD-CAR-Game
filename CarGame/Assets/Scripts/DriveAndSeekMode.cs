@@ -10,7 +10,6 @@ public class DriveAndSeekMode : GameMode
     {
         SETUP = 0,
         HIDING = 1,
-        SEEKING = 2,
         CHASE = 3,
         RESET = 4,
         FINISH = 5,
@@ -38,10 +37,6 @@ public class DriveAndSeekMode : GameMode
     public int m_hiderNumber = 0;
     private int m_gameWinner = -1;
     private bool m_hiderWon = false;
-
-    public AudioClip m_hornSounds;
-    public AudioClip m_backgroundSounds;
-    private AudioSource m_audioSource;
 
     public List<PhaseLenght> m_phaseLenghts;
     public List<int> m_playerScores;
@@ -84,7 +79,6 @@ public class DriveAndSeekMode : GameMode
 
         m_infoText = GameObject.FindGameObjectWithTag("DaSText");
         m_infoBox = GameObject.FindGameObjectWithTag("DaSBox");
-        m_audioSource = GetComponent<AudioSource>();
 
         m_currentPhase = DriveAndSeekPhases.INACTIVE;
     }
@@ -116,67 +110,33 @@ public class DriveAndSeekMode : GameMode
                     m_currentPhase = DriveAndSeekPhases.BUFFER;
                     m_bufferPhase.m_lenght = 5.0f;
                     m_bufferPhase.m_nextPhase = DriveAndSeekPhases.HIDING;
-                    m_bufferPhase.m_message = "Seekers Look Away!";
+                    m_bufferPhase.m_message = "Hiders Get Ready!";
                     InitializePhase();
                     break;
                 }
             case DriveAndSeekPhases.HIDING:
                 {
                     EventManager.m_instance.AddEvent(Events.Event.DS_HIDING);
-                    m_infoText.GetComponent<Text>().text = "Hiding Time!";
+                    m_infoText.GetComponent<Text>().text = "Run Hider Run!";
                     m_timers[GetTimer("Hide")].StartTimer();
 
                     ChangeAllPlayerMovement(false);
                     ChangePlayerMovement(m_hiderNumber, true);
-
-                    for (int iter = 0; iter <= PlayerManager.m_instance.m_playerCars.Count - 1; iter++)
-                    {
-                        if (iter != m_hiderNumber)
-                        {
-                            PlayerManager.m_instance.m_playerCars[iter].GetComponent<Car>().ToggleCamera(false);
-                        }
-                    }
-                    break;
-                }
-            case DriveAndSeekPhases.SEEKING:
-                {
-                    EventManager.m_instance.AddEvent(Events.Event.DS_SEEKING);
-                    m_infoText.GetComponent<Text>().text = "Seeking Time";
-
-                    ChangeAllPlayerMovement(true);
-
-                    for (int iter = 0; iter <= PlayerManager.m_instance.m_playerCars.Count - 1; iter++)
-                    {
-                        if (iter != m_hiderNumber)
-                        {
-                            PlayerManager.m_instance.m_playerCars[iter].GetComponent<Car>().ToggleCamera(true);
-                        }
-                    }
-
-                    m_timers[GetTimer("Seek")].StartTimer();
                     break;
                 }
             case DriveAndSeekPhases.CHASE:
                 {
                     EventManager.m_instance.AddEvent(Events.Event.DS_CHASE);
-                    m_infoText.GetComponent<Text>().text = "Chasing Time";
+                    m_infoText.GetComponent<Text>().text = "Go Seekers Go!";
 
-                    if (!m_audioSource.isPlaying)
-                    {
-                        m_audioSource.volume = 0.1f;
-                        m_audioSource.clip = m_backgroundSounds;
-                        m_audioSource.Play();
-                    }
+                    ChangeAllPlayerMovement(true);
 
-                    PlayerManager.m_instance.m_playerCars[m_hiderNumber].GetComponent<Car>().ToggleCamera(true);
                     m_timers[GetTimer("Chase")].StartTimer();
                     break;
                 }
             case DriveAndSeekPhases.RESET:
                 {
                     EventManager.m_instance.AddEvent(Events.Event.DS_RESET);
-
-                    m_audioSource.Stop();
 
                     if (m_hiderWon)
                     {
@@ -232,23 +192,11 @@ public class DriveAndSeekMode : GameMode
                     m_bufferPhase.m_message = "Player " + m_gameWinner + " Wins!";
                     InitializePhase();
 
-                    //m_infoText.GetComponent<Text>().text = "Player " + m_gameWinner + " Wins!";
-                    //m_currentPhase = DriveAndSeekPhases.INACTIVE;
-                    //InitializePhase();
-                    //m_active = false;
-                    //GameModeManager.m_instance.m_currentEvent = GameModeManager.GameModeState.FREEROAM;
                     break;
                 }
             case DriveAndSeekPhases.BUFFER:
                 {
                     EventManager.m_instance.AddEvent(Events.Event.DS_BUFFER);
-
-                    if(m_bufferPhase.m_nextPhase == DriveAndSeekPhases.SEEKING)
-                    {
-                        m_audioSource.volume = 0.3f;
-                        m_audioSource.clip = m_hornSounds;
-                        m_audioSource.Play();
-                    }
 
                     ChangeAllPlayerMovement(false);
 
@@ -262,11 +210,6 @@ public class DriveAndSeekMode : GameMode
                     m_infoBox.GetComponent<Image>().enabled = false;
                     m_infoText.GetComponent<Text>().text = "";
                     ChangeAllPlayerMovement(true);
-
-                    for (int iter = 0; iter <= PlayerManager.m_instance.m_playerCars.Count - 1; iter++)
-                    {
-                        PlayerManager.m_instance.m_playerCars[iter].GetComponent<Car>().ToggleCamera(true);
-                    }
                     break;
                 }
             default:
@@ -288,43 +231,9 @@ public class DriveAndSeekMode : GameMode
                 {
                     if (m_timers[GetTimer("Hide")].CheckFinished())
                     {
-                        for (int iter = 0; iter <= PlayerManager.m_instance.m_playerCars.Count - 1; iter++)
-                        {
-                            PlayerManager.m_instance.m_playerCars[iter].GetComponent<Car>().ToggleCamera(false);
-                        }
-
-                        m_currentPhase = DriveAndSeekPhases.BUFFER;
-                        m_bufferPhase.m_lenght = 5.0f;
-                        m_bufferPhase.m_nextPhase = DriveAndSeekPhases.SEEKING;
-                        m_bufferPhase.m_message = "Seekers Look Back!";
-                        InitializePhase();
-                    }
-                    break;
-                }
-            case DriveAndSeekPhases.SEEKING:
-                {
-                    if (CheckHidersCaught())
-                    {
-                        m_currentPhase = DriveAndSeekPhases.RESET;
-                        InitializePhase();
-                    }
-
-                    if (m_timers[GetTimer("Seek")].CheckFinished())
-                    {
                         m_currentPhase = DriveAndSeekPhases.CHASE;
                         InitializePhase();
                     }
-
-                    //if(m_music && !m_audioSource.isPlaying)
-                    //{
-                    //    m_audioSource.volume = 0.1f;
-                    //    m_audioSource.clip = m_backgroundSounds;
-                    //    m_audioSource.Play();
-                    //}
-                    //else if (!m_music && m_audioSource.isPlaying)
-                    //{
-                    //    m_audioSource.Stop();
-                    //}
                     break;
                 }
             case DriveAndSeekPhases.CHASE:
@@ -510,7 +419,7 @@ public class DriveAndSeekMode : GameMode
 
         m_currentPhase = DriveAndSeekPhases.BUFFER;
         m_bufferPhase.m_lenght = 5.0f;
-        m_bufferPhase.m_nextPhase = DriveAndSeekPhases.SEEKING;
+        m_bufferPhase.m_nextPhase = DriveAndSeekPhases.CHASE;
         m_bufferPhase.m_message = "Seekers Look Back!";
         InitializePhase();
     }
