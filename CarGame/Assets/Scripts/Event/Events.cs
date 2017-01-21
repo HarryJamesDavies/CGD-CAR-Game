@@ -21,7 +21,6 @@ public class Events : MonoBehaviour
         GM_DRIVEANDSEEK,
         DS_SETUP,
         DS_HIDING,
-        DS_SEEKING,
         DS_CHASE,
         DS_RESET,
         DS_FINISH,
