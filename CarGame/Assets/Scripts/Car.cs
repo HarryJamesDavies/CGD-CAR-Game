@@ -58,6 +58,7 @@ public class Car : MonoBehaviour {
         m_hider = true;
         GetComponent<Movement>().m_power = 0.0045f;
         gameObject.AddComponent<Hider>();
+        gameObject.AddComponent<HiderAbilities>();
     }
 
     public void ResetSeeker()
