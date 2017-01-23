@@ -185,6 +185,7 @@ GameObject:
   - 114: {fileID: 11488974}
   - 114: {fileID: 11413048}
   - 114: {fileID: 11420152}
+  - 114: {fileID: 11484576}
   m_Layer: 0
   m_Name: Player3
   m_TagString: Player3
@@ -1134,6 +1135,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &11484576
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 158980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 593f82a9300f39b43bd963bf73b2babb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_chaseBreaker: {fileID: 127268, guid: 6506bb3750cc77d4886ffa072debbafb, type: 2}
 --- !u!114 &11488974
 MonoBehaviour:
   m_ObjectHideFlags: 1

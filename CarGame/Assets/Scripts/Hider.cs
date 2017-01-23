@@ -11,6 +11,8 @@ public class Hider : MonoBehaviour {
 
     int m_playerNumber;
 
+    public GameObject chasebreaker;
+
     void Start()
     {
         EventManager.m_instance.SubscribeToEvent(Events.Event.DS_HIDING, EvFunc_HidingPhase);
