@@ -1,0 +1,25 @@
+Keyboard Controls
+
+Player 1:
+W, A, S, D - movement
+Q - reset rotation
+Z - hide (runner)
+X - attack (chaser) / chase breaker (hider)
+
+Player 2:
+Up, Left, Down, Right Arrows - movement
+/ - reset rotation
+Right Shift - hide (runner)
+Right Alt - attack (chaser) / chase breaker (hider)
+
+Player 3:
+T, F, G, H - movement
+R - reset rotation
+V - hide (runner)
+B - attack (chaser) / chase breaker (hider)
+
+Player 4:
+I, J, K, L - movement
+U - reset rotation
+M - hide (runner)
+, - attack (chaser) / chase breaker (hider)
