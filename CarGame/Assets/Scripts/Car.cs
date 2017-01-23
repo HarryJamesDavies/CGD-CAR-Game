@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class Car : MonoBehaviour {
@@ -13,6 +14,7 @@ public class Car : MonoBehaviour {
     public bool m_seeker;
     public bool m_isDead;
     private GameObject m_seekerCone;
+    public Text m_text;
 
     void Awake()
     {
@@ -43,6 +45,8 @@ public class Car : MonoBehaviour {
             m_hider = false;
             m_seeker = false;
         }
+
+        EventManager.m_instance.SubscribeToEvent(Events.Event.DS_SETUP, SetupText);
     }
 
     public void SetSeeker(string _hiderTag)
@@ -143,6 +147,23 @@ public class Car : MonoBehaviour {
             default:
                 break;
         }
+    }
+
+    void SetupText()
+    {
+        if (m_hider)
+        {
+            m_text.text = "You are a runner.";
+        }
+        else
+        {
+            m_text.text = "You are a chaser.";
+        }
+    }
+
+    void OnDestroy()
+    {
+        EventManager.m_instance.UnsubscribeToEvent(Events.Event.DS_SETUP, SetupText);
     }
 
     //void OnCollisionEnter(Collider _collider)

@@ -12,8 +12,10 @@ public class Movement : MonoBehaviour {
     bool right = false;
     bool left = false;
 
-    public float fuel = 2;
+    public float fuel = 2.0f;
+    public float m_maxFuel = 0.0f;
     public bool m_controls;
+    public bool m_setup = false;
 
     public Vector3 m_direction;
     Quaternion startingRotation;
@@ -37,12 +39,17 @@ public class Movement : MonoBehaviour {
         if (forward)
         {
             xspeep += m_power;
-            fuel -= m_power;
+            fuel -= m_power * 20;
         }
         if (backward)
         {
             xspeep -= m_power;
-            fuel -= m_power;
+            fuel -= m_power * 20;
+        }
+
+        if (fuel < 0.0f)
+        {
+            fuel = 0.0f;
         }
 
         if(right)
@@ -60,6 +67,20 @@ public class Movement : MonoBehaviour {
     void Update()
     {
         //Debug.Log(m_controls);
+
+        if (!m_setup)
+        {
+            if(GetComponent<Car>().m_hider)
+            {
+                fuel = 100.0f;
+                m_maxFuel = 100.0f;
+                m_setup = true;
+            }
+            else
+            {
+                m_maxFuel = 2000.0f;
+            }
+        }
 
         if (m_controls)
         {
@@ -111,6 +132,11 @@ public class Movement : MonoBehaviour {
             left = false;
             right = false;
             xspeep = 0;
+
+            if (fuel < m_maxFuel)
+            {
+                fuel += Time.deltaTime * 4;
+            }
         }
     }
 
@@ -366,7 +392,7 @@ public class Movement : MonoBehaviour {
         //    m_audioSource.Play();
         //}
 
-        if (fuel < 0)
+        if (fuel <= 0.0f)
         {
             xspeep = 0;
         }

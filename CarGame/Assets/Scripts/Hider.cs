@@ -120,11 +120,6 @@ public class Hider : MonoBehaviour {
             m_carMovement.m_controls = false;
             m_car.ToggleCamera(false);
             m_carMovement.ToggleLights(false);
-
-            if (m_hidingState)
-            {
-                EventManager.m_instance.AddEvent(Events.Event.DS_HIDERREADY);
-            }
         }
     }
 }
