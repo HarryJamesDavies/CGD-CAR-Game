@@ -25,11 +25,36 @@ public class ChaseBreaker : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-	    //if(Input.GetKeyDown(KeyCode.P))
-     //   {
-     //       ActivateChaseBreaker();
-     //   }
-	}
+        switch (m_car.m_playerNumber)
+        {
+            case 1:
+                if (Input.GetKeyDown(KeyCode.X))
+                {
+                    ActivateChaseBreaker();
+                }
+                break;
+            case 2:
+                if (Input.GetKeyDown(KeyCode.RightAlt))
+                {
+                    ActivateChaseBreaker();
+                }
+                break;
+            case 3:
+                if (Input.GetKeyDown(KeyCode.B))
+                {
+                    ActivateChaseBreaker();
+                }
+                break;
+            case 4:
+                if (Input.GetKeyDown(","))
+                {
+                    ActivateChaseBreaker();
+                }
+                break;
+            default:
+                break;
+        }
+    }
 
     void ActivateChaseBreaker()
     {
