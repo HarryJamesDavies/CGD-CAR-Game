@@ -51,6 +51,7 @@ public class Car : MonoBehaviour {
         m_seekerCone = Instantiate(m_seekerParam, transform.position, Quaternion.Euler(0.0f, 90.0f, 90.0f)) as GameObject;
         m_seekerCone.transform.parent = gameObject.transform;
         m_seekerCone.GetComponent<SeekerScript>().m_hiderTag = _hiderTag;
+        Destroy(GetComponent<ChaseBreaker>());
     }
 
     public void SetHider()

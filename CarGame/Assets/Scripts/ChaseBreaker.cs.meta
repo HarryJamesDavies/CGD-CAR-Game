@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 593f82a9300f39b43bd963bf73b2babb
+timeCreated: 1485175372
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - chaseBreaker: {fileID: 127268, guid: 6506bb3750cc77d4886ffa072debbafb, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
