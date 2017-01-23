@@ -14,7 +14,9 @@ public class Car : MonoBehaviour {
     public bool m_seeker;
     public bool m_isDead;
     private GameObject m_seekerCone;
-    public Text m_text;
+    public RawImage m_image;
+    public Texture m_chaserTitle;
+    public Texture m_runnerTitle;
 
     void Awake()
     {
@@ -47,6 +49,7 @@ public class Car : MonoBehaviour {
         }
 
         EventManager.m_instance.SubscribeToEvent(Events.Event.DS_SETUP, SetupText);
+        EventManager.m_instance.SubscribeToEvent(Events.Event.DS_HIDING, HideText);
     }
 
     public void SetSeeker(string _hiderTag)
@@ -64,6 +67,7 @@ public class Car : MonoBehaviour {
         GetComponent<Movement>().m_power = 0.0045f;
         gameObject.AddComponent<Hider>();
         gameObject.AddComponent<HiderAbilities>();
+        gameObject.GetComponent<ChaseBreaker>().enabled = true;
     }
 
     public void ResetSeeker()
@@ -154,17 +158,25 @@ public class Car : MonoBehaviour {
     {
         if (m_hider)
         {
-            m_text.text = "You are a runner.";
+            m_image.texture = m_runnerTitle;
+            m_image.enabled = true;
         }
         else
         {
-            m_text.text = "You are a chaser.";
+            m_image.texture = m_chaserTitle;
+            m_image.enabled = true;
         }
+    }
+
+    void HideText()
+    {
+        m_image.enabled = false;
     }
 
     void OnDestroy()
     {
         EventManager.m_instance.UnsubscribeToEvent(Events.Event.DS_SETUP, SetupText);
+        EventManager.m_instance.UnsubscribeToEvent(Events.Event.DS_HIDING, HideText);
     }
 
     //void OnCollisionEnter(Collider _collider)
