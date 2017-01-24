@@ -18,46 +18,85 @@ public class ChaseBreaker : MonoBehaviour {
     public int m_chaseBreakerCounter = 1;
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
         m_car = gameObject.GetComponent<Car>();
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update()
     {
         timer -= Time.deltaTime;
 
-        switch (m_car.m_playerNumber)
+
+        if (ControllerManager.m_instance.m_useController)
         {
-            case 1:
-                if (Input.GetKeyDown(KeyCode.X))
-                {
-                    ActivateChaseBreaker();
-                }
-                break;
-            case 2:
-                if (Input.GetKeyDown(KeyCode.X/*RightAlt*/))
-                {
-                    ActivateChaseBreaker();
-                }
-                break;
-            case 3:
-                if (Input.GetKeyDown(KeyCode.X/*B*/))
-                {
-                    ActivateChaseBreaker();
-                }
-                break;
-            case 4:
-                if (Input.GetKeyDown(KeyCode.X))/*GetKeyDown(",")*/
-                {
-                    ActivateChaseBreaker();
-                }
-                break;
-            default:
-                break;
+            switch (m_car.m_playerNumber)
+            {
+                case 1:
+                    if (Input.GetButtonDown("P1-Circle(PS4)"))
+                    {
+                        ActivateChaseBreaker();
+                    }
+                    break;
+                case 2:
+                    if (Input.GetButtonDown("P2-Circle(PS4)"))
+                    {
+                        ActivateChaseBreaker();
+                    }
+                    break;
+                case 3:
+                    if (Input.GetButtonDown("P3-Circle(PS4)"))
+                    {
+                        ActivateChaseBreaker();
+                    }
+                    break;
+                case 4:
+                    if (Input.GetButtonDown("P4-Circle(PS4)"))
+                    {
+                        ActivateChaseBreaker();
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+        else
+        {
+            switch (m_car.m_playerNumber)
+            {
+                case 1:
+                    if (Input.GetKeyDown(KeyCode.X))
+                    {
+                        ActivateChaseBreaker();
+                    }
+                    break;
+                case 2:
+                    if (Input.GetKeyDown(KeyCode.RightAlt))
+                    {
+                        ActivateChaseBreaker();
+                    }
+                    break;
+                case 3:
+                    if (Input.GetKeyDown(KeyCode.B))
+                    {
+                        ActivateChaseBreaker();
+                    }
+                    break;
+                case 4:
+                    if (Input.GetKeyDown(KeyCode.Comma))
+                    {
+                        ActivateChaseBreaker();
+                    }
+                    break;
+                default:
+                    break;
+            }
         }
     }
+
+
+
 
     void ActivateChaseBreaker()
     {
