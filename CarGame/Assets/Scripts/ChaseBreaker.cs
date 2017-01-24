@@ -2,7 +2,6 @@
 using System.Collections;
 
 public class ChaseBreaker : MonoBehaviour {
-
     Car m_car;
 
     public GameObject m_chaseBreaker;
@@ -15,6 +14,8 @@ public class ChaseBreaker : MonoBehaviour {
     Vector3 m_playerDir;
     Vector3 m_spawnPos;
 
+    float timer = 5.0f;
+    public int m_chaseBreakerCounter = 1;
 
     // Use this for initialization
     void Start ()
@@ -25,6 +26,8 @@ public class ChaseBreaker : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
+        timer -= Time.deltaTime;
+
         switch (m_car.m_playerNumber)
         {
             case 1:
@@ -34,19 +37,19 @@ public class ChaseBreaker : MonoBehaviour {
                 }
                 break;
             case 2:
-                if (Input.GetKeyDown(KeyCode.RightAlt))
+                if (Input.GetKeyDown(KeyCode.X/*RightAlt*/))
                 {
                     ActivateChaseBreaker();
                 }
                 break;
             case 3:
-                if (Input.GetKeyDown(KeyCode.B))
+                if (Input.GetKeyDown(KeyCode.X/*B*/))
                 {
                     ActivateChaseBreaker();
                 }
                 break;
             case 4:
-                if (Input.GetKeyDown(","))
+                if (Input.GetKeyDown(KeyCode.X))/*GetKeyDown(",")*/
                 {
                     ActivateChaseBreaker();
                 }
@@ -69,7 +72,20 @@ public class ChaseBreaker : MonoBehaviour {
         m_newRot = gameObject.transform.rotation * m_rotation1;
 
         //spawn the damn thing
-        GameObject cb = (GameObject)Instantiate(m_chaseBreaker, m_spawnPos, m_newRot) as GameObject;
+
+        if(timer <= 0.0f)
+        {
+            GameObject cb = (GameObject)Instantiate(m_chaseBreaker, m_spawnPos, m_newRot) as GameObject;
+            timer = 5.0f;
+            m_chaseBreakerCounter++;
+
+            //destroy any barriers that are greater than the count
+            if (m_chaseBreakerCounter > 3)
+            {
+                Destroy(cb);
+            }
+        }
+        
 
     }
 }

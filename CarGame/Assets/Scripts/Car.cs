@@ -22,6 +22,8 @@ public class Car : MonoBehaviour {
 
     public int m_currentFuel;
 
+    public Canvas chasebreakerUI;
+
     void Awake()
     {
         m_tag = gameObject.tag;
@@ -67,6 +69,9 @@ public class Car : MonoBehaviour {
         m_seeker = true;        
         m_seekerCone = Instantiate(m_seekerParam, transform.position, Quaternion.Euler(0.0f, 90.0f, 90.0f)) as GameObject;
         m_seekerCone.transform.parent = gameObject.transform;
+
+        Instantiate(chasebreakerUI, transform.position, transform.rotation);
+
         m_seekerCone.GetComponent<SeekerScript>().m_hiderTag = _hiderTag;
         Destroy(GetComponent<ChaseBreaker>());
     }
