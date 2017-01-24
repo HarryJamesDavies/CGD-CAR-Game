@@ -1006,6 +1006,7 @@ MonoBehaviour:
   m_image: {fileID: 11439090}
   m_chaserTitle: {fileID: 2800000, guid: 4add1dd262d9ff94b96a529bf13bf5b6, type: 3}
   m_runnerTitle: {fileID: 2800000, guid: 1b5fc48eea587ae47bb116cc5fc2daac, type: 3}
+  chasebreakerUI: {fileID: 22323634, guid: 1f459405af237c04baa0042317fdb7e7, type: 2}
 --- !u!114 &11409738
 MonoBehaviour:
   m_ObjectHideFlags: 1
