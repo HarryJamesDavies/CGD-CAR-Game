@@ -4,34 +4,27 @@ using System.Collections;
 public class HiderAbilities : MonoBehaviour {
 
     [SerializeField]
-    GameObject m_decoyReference;
+    GameObject m_oilReference;
 
-    GameObject m_decoy;
+    GameObject m_oil;
 
 	// Use this for initialization
 	void Start () {
-        m_decoyReference = gameObject;
-        
+
+        m_oilReference = GameObject.Find("OilSlick");
     }
 	
 	// Update is called once per frame
 	void Update () {
 	    if(Input.GetKeyDown(KeyCode.Z))
         {
-            SpawnDecoy();
+            SpawnOil();
         }
 	}
 
-    void SpawnDecoy()
+    void SpawnOil()
     {
-        m_decoy = Instantiate(m_decoyReference);
-        
-        Destroy(m_decoy.GetComponentInChildren<Camera>().gameObject);
-        Destroy(m_decoy.GetComponent<Car>());
-        Destroy(m_decoy.GetComponent<Rigidbody>());
-        Destroy(m_decoy.GetComponent<Collider>());
-        Destroy(m_decoy.GetComponent<Movement>());
-        Destroy(m_decoy.GetComponent<Hider>());
-        Destroy(m_decoy.GetComponent<HiderAbilities>());
+        m_oil = Instantiate(m_oilReference);
+        m_oil.transform.position = gameObject.transform.FindChild("BackSpawn").transform.position;
     }
 }
