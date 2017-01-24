@@ -50,7 +50,7 @@ public class DriveAndSeekMode : GameMode
 
     public BufferStruct m_bufferPhase;
     public GameObject m_infoText;
-    public GameObject m_infoBox;
+    //public GameObject m_infoBox;
 
     private bool m_music = false;
 
@@ -78,7 +78,7 @@ public class DriveAndSeekMode : GameMode
         }
 
         m_infoText = GameObject.FindGameObjectWithTag("DaSText");
-        m_infoBox = GameObject.FindGameObjectWithTag("DaSBox");
+        //m_infoBox = GameObject.FindGameObjectWithTag("DaSBox");
 
         m_currentPhase = DriveAndSeekPhases.INACTIVE;
     }
@@ -104,20 +104,20 @@ public class DriveAndSeekMode : GameMode
                     EventManager.m_instance.AddEvent(Events.Event.DS_SETUP);
                     SetupHiderAndSeekers();
 
-                    m_infoBox.GetComponent<Image>().enabled = true;
+                    //m_infoBox.GetComponent<Image>().enabled = true;
 
                     //Setup buffer phase
                     m_currentPhase = DriveAndSeekPhases.BUFFER;
                     m_bufferPhase.m_lenght = 5.0f;
                     m_bufferPhase.m_nextPhase = DriveAndSeekPhases.HIDING;
-                    m_bufferPhase.m_message = "Hiders Get Ready!";
+                    m_bufferPhase.m_message = "Runner Get Ready!";
                     InitializePhase();
                     break;
                 }
             case DriveAndSeekPhases.HIDING:
                 {
                     EventManager.m_instance.AddEvent(Events.Event.DS_HIDING);
-                    m_infoText.GetComponent<Text>().text = "Run Hider Run!";
+                    m_infoText.GetComponent<Text>().text = "Start Running!";
                     m_timers[GetTimer("Hide")].StartTimer();
 
                     ChangeAllPlayerMovement(false);
@@ -127,7 +127,7 @@ public class DriveAndSeekMode : GameMode
             case DriveAndSeekPhases.CHASE:
                 {
                     EventManager.m_instance.AddEvent(Events.Event.DS_CHASE);
-                    m_infoText.GetComponent<Text>().text = "Go Seekers Go!";
+                    m_infoText.GetComponent<Text>().text = "Catch the Runner!";
 
                     ChangeAllPlayerMovement(true);
 
@@ -207,7 +207,7 @@ public class DriveAndSeekMode : GameMode
                 }
             case DriveAndSeekPhases.INACTIVE:
                 {
-                    m_infoBox.GetComponent<Image>().enabled = false;
+                    //m_infoBox.GetComponent<Image>().enabled = false;
                     m_infoText.GetComponent<Text>().text = "";
                     ChangeAllPlayerMovement(true);
                     break;

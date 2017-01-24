@@ -10,7 +10,7 @@ public class Timer : MonoBehaviour
     public float m_startTime = 100000.0f;
     public float m_timerLength = 0.0f;
 
-    public GameObject m_box;
+    //public GameObject m_box;
     public GameObject m_text;
 
     void Update()
@@ -31,7 +31,7 @@ public class Timer : MonoBehaviour
     {
         m_counting = true;
         m_startTime = Time.time;
-        m_box.SetActive(true);
+        //m_box.SetActive(true);
         m_text.SetActive(true);
         m_text.GetComponent<Text>().text = "";
     }
@@ -40,7 +40,7 @@ public class Timer : MonoBehaviour
     {
         m_counting = false;
         m_startTime = 10000.0f;
-        m_box.SetActive(false);
+        //m_box.SetActive(false);
         m_text.SetActive(false);
         m_text.GetComponent<Text>().text = "";
     }
@@ -50,7 +50,7 @@ public class Timer : MonoBehaviour
         if (Time.time - m_startTime >= m_timerLength)
         {
             m_counting = false;
-            m_box.SetActive(false);
+            //m_box.SetActive(false);
             m_text.SetActive(false);
             m_text.GetComponent<Text>().text = "";
             return true;
