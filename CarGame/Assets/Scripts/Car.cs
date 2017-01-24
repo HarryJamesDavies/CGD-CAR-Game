@@ -14,9 +14,13 @@ public class Car : MonoBehaviour {
     public bool m_seeker;
     public bool m_isDead;
     private GameObject m_seekerCone;
+
     public RawImage m_image;
     public Texture m_chaserTitle;
     public Texture m_runnerTitle;
+    public Text m_fuel;
+
+    public int m_currentFuel;
 
     void Awake()
     {
@@ -50,6 +54,12 @@ public class Car : MonoBehaviour {
 
         EventManager.m_instance.SubscribeToEvent(Events.Event.DS_SETUP, SetupText);
         EventManager.m_instance.SubscribeToEvent(Events.Event.DS_HIDING, HideText);
+    }
+
+    void Update()
+    {
+        m_currentFuel = (int)GetComponent<Movement>().fuel;
+        m_fuel.text = "Fuel: " + m_currentFuel;
     }
 
     public void SetSeeker(string _hiderTag)
