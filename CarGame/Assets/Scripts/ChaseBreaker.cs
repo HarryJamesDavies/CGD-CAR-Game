@@ -15,12 +15,14 @@ public class ChaseBreaker : MonoBehaviour {
     Vector3 m_spawnPos;
 
     float timer = 5.0f;
+    float decayTimer = 0.0f;
     public int m_chaseBreakerCounter = 1;
 
     // Use this for initialization
     void Start()
     {
         m_car = gameObject.GetComponent<Car>();
+        EventManager.m_instance.SubscribeToEvent(Events.Event.DS_RESET, ResetBreakers);
     }
 
     // Update is called once per frame
@@ -115,11 +117,13 @@ public class ChaseBreaker : MonoBehaviour {
         if(timer <= 0.0f)
         {
             GameObject cb = (GameObject)Instantiate(m_chaseBreaker, m_spawnPos, m_newRot) as GameObject;
+            decayTimer += Time.deltaTime;
+
             timer = 5.0f;
             m_chaseBreakerCounter++;
 
             //destroy any barriers that are greater than the count
-            if (m_chaseBreakerCounter > 3)
+            if (m_chaseBreakerCounter >= 3)
             {
                 Destroy(cb);
             }
@@ -127,4 +131,18 @@ public class ChaseBreaker : MonoBehaviour {
         
 
     }
+
+    public void ResetBreakers()
+    {
+        foreach (GameObject obj in FindObjectsOfType(typeof(GameObject)))
+        {
+            if (obj.name == "ChaseBreaker(Clone)")
+            {
+                Destroy(obj);
+            }
+        }
+
+        m_chaseBreakerCounter = 1;
+        timer = 5.0f;
+    } 
 }
