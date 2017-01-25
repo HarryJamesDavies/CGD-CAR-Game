@@ -5,6 +5,7 @@ public class PlayerHealth : MonoBehaviour
 {
 	public float max_Health = 100f;
 	public float cur_Health = 0f;
+    public int m_damageCounter = 5;
 	public GameObject healthbar;
     public Car m_car;
     public Movement m_movement;
@@ -30,6 +31,8 @@ public class PlayerHealth : MonoBehaviour
 		cur_Health -= 20.0f;
 		float calc_Health = cur_Health / max_Health;
 		SetHealthBar (calc_Health);
+        //m_damageCounter--;
+        //m_car.ChangeMesh(m_damageCounter);
 	}
 
 	public void SetHealthBar(float myHealth)
