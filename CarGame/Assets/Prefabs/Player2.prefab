@@ -1306,7 +1306,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 154870}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 593f82a9300f39b43bd963bf73b2babb, type: 3}
   m_Name: 
@@ -1584,6 +1584,9 @@ MonoBehaviour:
   m_runnerTitle: {fileID: 2800000, guid: 1b5fc48eea587ae47bb116cc5fc2daac, type: 3}
   m_outOfFuel: {fileID: 2800000, guid: 3c9bfd0c465e1d6498c9fe1cc4b2919c, type: 3}
   m_fuel: {fileID: 11448096}
+  chasebreaker1: {fileID: 11463042}
+  chasebreaker2: {fileID: 11470180}
+  chasebreaker3: {fileID: 11453236}
   m_100HealthModel: {fileID: 100000, guid: 7b6e46ecbeb5d0d4fbe27aa62e0dba54, type: 3}
   m_80HealthModel: {fileID: 100000, guid: c52849d74335bbe4db20696e0dc2f59f, type: 3}
   m_60HealthModel: {fileID: 100000, guid: 169be1566be596344b195b4ed25a4779, type: 3}
@@ -1591,7 +1594,6 @@ MonoBehaviour:
   m_20HealthModel: {fileID: 100000, guid: 25cc0f870f4e7fa4a91242472bd5ca15, type: 3}
   m_0HealthModel: {fileID: 100000, guid: bf7d10308f164c74b8bba295e2f2d417, type: 3}
   m_currentModel: {fileID: 0}
-  chasebreakerUI: {fileID: 0}
 --- !u!114 &11493928
 MonoBehaviour:
   m_ObjectHideFlags: 1

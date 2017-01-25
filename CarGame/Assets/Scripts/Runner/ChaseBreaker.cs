@@ -126,7 +126,7 @@ namespace HF
                 m_chaseBreakerCounter++;
 
                 //destroy any barriers that are greater than the count
-                if (m_chaseBreakerCounter >= 3)
+                if (m_chaseBreakerCounter >= 5)
                 {
                     Destroy(cb);
                 }
@@ -145,6 +145,7 @@ namespace HF
                 }
             }
 
+            //reset the timer and the counter
             m_chaseBreakerCounter = 1;
             timer = 5.0f;
         }

@@ -24,6 +24,10 @@ namespace HF
         public Texture m_outOfFuel;
         public Text m_fuel;
 
+        public RawImage chasebreaker1;
+        public RawImage chasebreaker2;
+        public RawImage chasebreaker3;
+
         public GameObject m_100HealthModel;
         public GameObject m_80HealthModel;
         public GameObject m_60HealthModel;
@@ -32,7 +36,7 @@ namespace HF
         public GameObject m_0HealthModel;
         public GameObject m_currentModel;
 
-        public Canvas chasebreakerUI;
+        ChaseBreaker chaseBreakerInstance;
 
         void Awake()
         {
@@ -67,6 +71,9 @@ namespace HF
             m_fuel.enabled = false;
             EventManager.m_instance.SubscribeToEvent(Events.Event.DS_SETUP, SetupText);
             EventManager.m_instance.SubscribeToEvent(Events.Event.DS_HIDING, HideText);
+
+            //so we can access the cb counter
+            chaseBreakerInstance = GetComponent<ChaseBreaker>();
         }
 
         void Update()
@@ -76,10 +83,16 @@ namespace HF
             {
                 m_fuel.enabled = true;
                 m_fuel.text = "Fuel: " + (int)GetComponent<Movement>().fuel;
+                chasebreaker1.enabled = true;
+                chasebreaker2.enabled = true;
+                chasebreaker3.enabled = true;
             }
             else
             {
                 m_fuel.enabled = false;
+                chasebreaker1.enabled = false;
+                chasebreaker2.enabled = false;
+                chasebreaker3.enabled = false;
             }
 
             //checks when the out of fuel image is showing or not
@@ -91,6 +104,8 @@ namespace HF
             {
                 m_image.enabled = false;
             }
+
+            checkChaseBreakerNumber();
         }
 
         public void SetSeeker(string _hiderTag)
@@ -290,6 +305,28 @@ namespace HF
                 default:
                     m_currentModel.GetComponent<MeshFilter>().sharedMesh = m_100HealthModel.GetComponent<MeshFilter>().sharedMesh;
                     break;
+            }
+        }
+
+        //update the chasebreaker UI
+        public void checkChaseBreakerNumber()
+        {
+            if (chaseBreakerInstance.m_chaseBreakerCounter == 2)
+            {
+                chasebreaker1.enabled = false;
+            }
+
+            if (chaseBreakerInstance.m_chaseBreakerCounter == 3)
+            {
+                chasebreaker1.enabled = false;
+                chasebreaker2.enabled = false;
+            }
+
+            if (chaseBreakerInstance.m_chaseBreakerCounter >= 4)
+            {
+                chasebreaker1.enabled = false;
+                chasebreaker2.enabled = false;
+                chasebreaker3.enabled = false;
             }
         }
     }
