@@ -197,7 +197,7 @@ public class Movement : MonoBehaviour {
         //    m_audioSource.Play();
         //}
 
-        if (fuel < 0)
+        if (fuel <= 0.0f)
         {
             xspeep = 0;
         }
