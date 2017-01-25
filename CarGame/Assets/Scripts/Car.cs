@@ -54,14 +54,23 @@ public class Car : MonoBehaviour {
             m_seeker = false;
         }
 
+        m_fuel.enabled = false;
         EventManager.m_instance.SubscribeToEvent(Events.Event.DS_SETUP, SetupText);
         EventManager.m_instance.SubscribeToEvent(Events.Event.DS_HIDING, HideText);
     }
 
     void Update()
     {
-        m_currentFuel = (int)GetComponent<Movement>().fuel;
-        m_fuel.text = "Fuel: " + m_currentFuel;
+        if (m_hider)
+        {
+            m_fuel.enabled = true;
+            m_currentFuel = (int)GetComponent<Movement>().fuel;
+            m_fuel.text = "Fuel: " + m_currentFuel;
+        }
+        else
+        {
+            m_fuel.enabled = false;
+        }
     }
 
     public void SetSeeker(string _hiderTag)
@@ -79,8 +88,8 @@ public class Car : MonoBehaviour {
     public void SetHider()
     {
         m_hider = true;
-        GetComponent<Movement>().m_power = 0.0045f;
-        gameObject.AddComponent<Hider>();
+        GetComponent<Movement>().m_power = 0.0065f;
+        //gameObject.AddComponent<Hider>();
         gameObject.AddComponent<HiderAbilities>();
         gameObject.GetComponent<ChaseBreaker>().enabled = true;
     }

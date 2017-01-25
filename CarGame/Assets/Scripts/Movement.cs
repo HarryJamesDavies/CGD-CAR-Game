@@ -78,7 +78,7 @@ public class Movement : MonoBehaviour {
             }
             else
             {
-                m_maxFuel = 2000.0f;
+                m_maxFuel = 4000.0f;
             }
         }
 
@@ -132,11 +132,11 @@ public class Movement : MonoBehaviour {
             left = false;
             right = false;
             xspeep = 0;
+        }
 
-            if (fuel < m_maxFuel)
-            {
-                fuel += Time.deltaTime * 4;
-            }
+        if (forward == false && backward == false && left == false && right == false)
+        {
+            Refuel();
         }
     }
 
@@ -182,20 +182,20 @@ public class Movement : MonoBehaviour {
             gameObject.transform.rotation = startingRotation;
         }
 
-        if (Input.GetButtonDown("P" + _controller + ("-Square(PS4)")))
-        {
-            foreach (GameObject lights in m_lights)
-            {
-                lights.SetActive(!lights.activeInHierarchy);
-            }
-        }
+        //if (Input.GetButtonDown("P" + _controller + ("-Square(PS4)")))
+        //{
+        //    foreach (GameObject lights in m_lights)
+        //    {
+        //        lights.SetActive(!lights.activeInHierarchy);
+        //    }
+        //}
 
-        if (Input.GetButtonDown("P" + _controller + ("-Circle(PS4)")))
-        {
-            int sound = Random.Range(0, m_hornSounds.Count);
-            m_audioSource.clip = m_hornSounds[sound];
-            m_audioSource.Play();
-        }
+        //if (Input.GetButtonDown("P" + _controller + ("-Circle(PS4)")))
+        //{
+        //    int sound = Random.Range(0, m_hornSounds.Count);
+        //    m_audioSource.clip = m_hornSounds[sound];
+        //    m_audioSource.Play();
+        //}
 
         if (fuel < 0)
         {
@@ -406,6 +406,14 @@ public class Movement : MonoBehaviour {
         foreach (GameObject lights in m_lights)
         {
             lights.SetActive(_active);
+        }
+    }
+
+    void Refuel()
+    {
+        if (fuel < m_maxFuel)
+        {
+            fuel += Time.deltaTime * 8;
         }
     }
 }
