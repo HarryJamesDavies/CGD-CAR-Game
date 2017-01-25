@@ -411,7 +411,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 158980}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: -0.00000016292068}
-  m_LocalPosition: {x: 56.899, y: 3.5780642, z: 28.90027}
+  m_LocalPosition: {x: 59.917168, y: 3.5780647, z: 28.841085}
   m_LocalScale: {x: 25, y: 25, z: 25}
   m_Children:
   - {fileID: 447044}
@@ -1130,6 +1130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   max_Health: 100
   cur_Health: 0
+  m_damageCounter: 5
   healthbar: {fileID: 111226}
   m_car: {fileID: 0}
   m_movement: {fileID: 0}
@@ -1244,6 +1245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_chaseBreaker: {fileID: 127268, guid: 6506bb3750cc77d4886ffa072debbafb, type: 2}
+  m_chaseBreakerCounter: 1
 --- !u!114 &11488974
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1264,8 +1266,9 @@ MonoBehaviour:
   m_image: {fileID: 11489644}
   m_chaserTitle: {fileID: 2800000, guid: 4add1dd262d9ff94b96a529bf13bf5b6, type: 3}
   m_runnerTitle: {fileID: 2800000, guid: 1b5fc48eea587ae47bb116cc5fc2daac, type: 3}
+  m_outOfFuel: {fileID: 2800000, guid: 3c9bfd0c465e1d6498c9fe1cc4b2919c, type: 3}
   m_fuel: {fileID: 11478296}
-  m_currentFuel: 0
+  chasebreakerUI: {fileID: 0}
 --- !u!114 &11489644
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1410,13 +1413,13 @@ RectTransform:
   m_GameObject: {fileID: 165030}
   m_LocalRotation: {x: 1, y: -0.00000016292068, z: -0.00000016292068, w: 2.654315e-14}
   m_LocalPosition: {x: 0, y: 0, z: -8.8}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 22416042}
   m_RootOrder: 3
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.1, y: -4.8}
+  m_AnchoredPosition: {x: -0.1, y: -3.5}
   m_SizeDelta: {x: 40, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22416042
@@ -1448,14 +1451,14 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 180102}
   m_LocalRotation: {x: 1, y: -0.00000016292068, z: -0.00000016292068, w: 2.654315e-14}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.09}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 22416042}
   m_RootOrder: 4
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2.5, y: 0}
+  m_AnchoredPosition: {x: 2.26, y: -0.81}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22426790

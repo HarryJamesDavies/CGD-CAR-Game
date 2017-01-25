@@ -18,9 +18,8 @@ public class Car : MonoBehaviour {
     public RawImage m_image;
     public Texture m_chaserTitle;
     public Texture m_runnerTitle;
+    public Texture m_outOfFuel;
     public Text m_fuel;
-
-    public int m_currentFuel;
 
     public Canvas chasebreakerUI;
 
@@ -61,15 +60,25 @@ public class Car : MonoBehaviour {
 
     void Update()
     {
+        //updates the fuel text for the runner, and sets others to false
         if (m_hider)
         {
             m_fuel.enabled = true;
-            m_currentFuel = (int)GetComponent<Movement>().fuel;
-            m_fuel.text = "Fuel: " + m_currentFuel;
+            m_fuel.text = "Fuel: " + (int)GetComponent<Movement>().fuel;
         }
         else
         {
             m_fuel.enabled = false;
+        }
+
+        //checks when the out of fuel image is showing or not
+        if (GetComponent<Movement>().fuel == 0.0f)
+        {
+            ShowFuel();
+        }
+        else if (GetComponent<Movement>().m_controls == true)
+        {
+            m_image.enabled = false;
         }
     }
 
@@ -88,7 +97,7 @@ public class Car : MonoBehaviour {
     public void SetHider()
     {
         m_hider = true;
-        GetComponent<Movement>().m_power = 0.0065f;
+        GetComponent<Movement>().m_power = 0.006f;
         //gameObject.AddComponent<Hider>();
         gameObject.AddComponent<HiderAbilities>();
         gameObject.GetComponent<ChaseBreaker>().enabled = true;
@@ -197,11 +206,46 @@ public class Car : MonoBehaviour {
         m_image.enabled = false;
     }
 
+    void ShowFuel()
+    {
+        if (GetComponent<Movement>().fuel <= 0.0f)
+        {
+            m_image.enabled = true;
+            m_image.texture = m_outOfFuel;
+        }
+    }
+
     void OnDestroy()
     {
         EventManager.m_instance.UnsubscribeToEvent(Events.Event.DS_SETUP, SetupText);
         EventManager.m_instance.UnsubscribeToEvent(Events.Event.DS_HIDING, HideText);
+        EventManager.m_instance.UnsubscribeToEvent(Events.Event.DS_CHASE, ShowFuel);
     }
+
+    //public void ChangeMesh(int _damageCounter)
+    //{
+    //    switch(m_playerNumber)
+    //    {
+    //        case 1:
+    //            switch (_damageCounter)
+    //            {
+    //                case 4:
+    //                    break;
+    //                case 3:
+    //                    break;
+
+    //            }
+    //            break;
+    //        case 2:
+    //            break;
+    //        case 3:
+    //            break;
+    //        case 4:
+    //            break;
+    //        default:
+    //            break;
+    //    }
+    //}
 
     //void OnCollisionEnter(Collider _collider)
     //{
