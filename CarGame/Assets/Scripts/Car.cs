@@ -115,6 +115,7 @@ public class Car : MonoBehaviour {
     {
         m_seeker = false;
         GetComponent<PlayerHealth>().ResetHealth();
+        gameObject.AddComponent<ChaseBreaker>();
         Destroy(m_seekerCone);
 
         for (int i = 0; i <= transform.childCount - 1; i++)
