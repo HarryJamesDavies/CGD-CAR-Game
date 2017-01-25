@@ -1,45 +1,50 @@
 fileFormatVersion: 2
-guid: ff77feabccfba4c409c2a253cace2ced
-timeCreated: 1485299653
+guid: 49093632d6f62024baa74021d30bb423
+timeCreated: 1485357335
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: LMC_brakes
-    100002: LMC_headlights
-    100004: LMC_indicator_L
-    100006: LMC_indicator_R
-    100008: LMC_reverselights
-    100010: LMC_wheel
-    100012: //RootNode
-    400000: LMC_brakes
-    400002: LMC_headlights
-    400004: LMC_indicator_L
-    400006: LMC_indicator_R
-    400008: LMC_reverselights
-    400010: LMC_wheel
-    400012: //RootNode
-    2300000: LMC_brakes
-    2300002: LMC_headlights
-    2300004: LMC_indicator_L
-    2300006: LMC_indicator_R
-    2300008: LMC_reverselights
-    2300010: LMC_wheel
-    2300012: //RootNode
-    3300000: LMC_brakes
-    3300002: LMC_headlights
-    3300004: LMC_indicator_L
-    3300006: LMC_indicator_R
-    3300008: LMC_reverselights
-    3300010: LMC_wheel
-    3300012: //RootNode
-    4300000: LMC_body
-    4300002: LMC_wheel
-    4300004: LMC_headlights
-    4300006: LMC_indicator_R
-    4300008: LMC_brakes
-    4300010: LMC_reverselights
-    4300012: LMC_indicator_L
+    100000: //RootNode
+    100002: cavalier_calibre_brakelights
+    100004: cavalier_calibre_headlights
+    100006: cavalier_calibre_mistlights
+    100008: cavalier_calibre_reverselights
+    100010: cavalier_calibre_wheel
+    100012: Lotus-carlton_indicator_L
+    100014: Lotus-carlton_indicator_R
+    400000: //RootNode
+    400002: cavalier_calibre_brakelights
+    400004: cavalier_calibre_headlights
+    400006: cavalier_calibre_mistlights
+    400008: cavalier_calibre_reverselights
+    400010: cavalier_calibre_wheel
+    400012: Lotus-carlton_indicator_L
+    400014: Lotus-carlton_indicator_R
+    2300000: //RootNode
+    2300002: cavalier_calibre_brakelights
+    2300004: cavalier_calibre_headlights
+    2300006: cavalier_calibre_mistlights
+    2300008: cavalier_calibre_reverselights
+    2300010: cavalier_calibre_wheel
+    2300012: Lotus-carlton_indicator_L
+    2300014: Lotus-carlton_indicator_R
+    3300000: //RootNode
+    3300002: cavalier_calibre_brakelights
+    3300004: cavalier_calibre_headlights
+    3300006: cavalier_calibre_mistlights
+    3300008: cavalier_calibre_reverselights
+    3300010: cavalier_calibre_wheel
+    3300012: Lotus-carlton_indicator_L
+    3300014: Lotus-carlton_indicator_R
+    4300000: cavalier_calibre_body
+    4300002: cavalier_calibre_headlights
+    4300004: cavalier_calibre_wheel
+    4300006: Lotus-carlton_indicator_L
+    4300008: Lotus-carlton_indicator_R
+    4300010: cavalier_calibre_reverselights
+    4300012: cavalier_calibre_brakelights
+    4300014: cavalier_calibre_mistlights
   materials:
     importMaterials: 1
     materialName: 0

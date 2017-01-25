@@ -1,45 +1,20 @@
 fileFormatVersion: 2
-guid: 8161db91065b723479578c67d32480a2
-timeCreated: 1485299658
+guid: ae86bd6897a4a2d41b6aebf0156c2a93
+timeCreated: 1485357377
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: LMC_brakes
-    100002: LMC_headlights
-    100004: LMC_indicator_L
-    100006: LMC_indicator_R
-    100008: LMC_reverselights
-    100010: LMC_wheel
-    100012: //RootNode
-    400000: LMC_brakes
-    400002: LMC_headlights
-    400004: LMC_indicator_L
-    400006: LMC_indicator_R
-    400008: LMC_reverselights
-    400010: LMC_wheel
-    400012: //RootNode
-    2300000: LMC_brakes
-    2300002: LMC_headlights
-    2300004: LMC_indicator_L
-    2300006: LMC_indicator_R
-    2300008: LMC_reverselights
-    2300010: LMC_wheel
-    2300012: //RootNode
-    3300000: LMC_brakes
-    3300002: LMC_headlights
-    3300004: LMC_indicator_L
-    3300006: LMC_indicator_R
-    3300008: LMC_reverselights
-    3300010: LMC_wheel
-    3300012: //RootNode
-    4300000: LMC_body
-    4300002: LMC_wheel
-    4300004: LMC_headlights
-    4300006: LMC_indicator_R
-    4300008: LMC_brakes
-    4300010: LMC_reverselights
-    4300012: LMC_indicator_L
+    100000: //RootNode
+    100002: capri_wheel
+    400000: //RootNode
+    400002: capri_wheel
+    2300000: //RootNode
+    2300002: capri_wheel
+    3300000: //RootNode
+    3300002: capri_wheel
+    4300000: capri_body
+    4300002: capri_wheel
   materials:
     importMaterials: 1
     materialName: 0
