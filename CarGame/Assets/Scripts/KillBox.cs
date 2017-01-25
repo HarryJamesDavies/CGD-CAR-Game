@@ -1,18 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class KillBox : MonoBehaviour
+namespace HF
 {
-    public GameObject m_spawnPoint;
-    public Quaternion m_spawnRotation;
-
-    void OnTriggerEnter(Collider collision)
+    public class KillBox : MonoBehaviour
     {
-        if(collision.gameObject.CompareTag("Player1") || collision.gameObject.CompareTag("Player2")
-            || collision.gameObject.CompareTag("Player3") || collision.gameObject.CompareTag("Player4"))
+        public GameObject m_spawnPoint;
+        public Quaternion m_spawnRotation;
+
+        void OnTriggerEnter(Collider collision)
         {
-            collision.transform.position = m_spawnPoint.transform.position;
-            collision.transform.rotation = m_spawnRotation;
+            if (collision.gameObject.CompareTag("Player1") || collision.gameObject.CompareTag("Player2")
+                || collision.gameObject.CompareTag("Player3") || collision.gameObject.CompareTag("Player4"))
+            {
+                collision.transform.position = m_spawnPoint.transform.position;
+                collision.transform.rotation = m_spawnRotation;
+            }
         }
     }
 }
