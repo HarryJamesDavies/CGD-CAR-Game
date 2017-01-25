@@ -2,42 +2,46 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class PlayersConnected : MonoBehaviour {
-
-    public static PlayersConnected pc_instance;
-
-    public int m_playersconnected;
-    Text text;
-
-    void Awake()
+namespace HF
+{
+    public class PlayersConnected : MonoBehaviour
     {
-        text = GetComponent<Text>();
 
-        m_playersconnected = 0;
-    }
-    // Use this for initialization
+        public static PlayersConnected pc_instance;
 
-	void Start ()
-    {
-        if (pc_instance == null)
+        public int m_playersconnected;
+        Text text;
+
+        void Awake()
         {
-            pc_instance = this;
+            text = GetComponent<Text>();
+
+            m_playersconnected = 0;
         }
-        else
+        // Use this for initialization
+
+        void Start()
         {
-            Destroy(gameObject);
+            if (pc_instance == null)
+            {
+                pc_instance = this;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
-    }
 
-    void Update()
-    {
-        text.text = "Players Connected: " + m_playersconnected;
-    }
+        void Update()
+        {
+            text.text = "Players Connected: " + m_playersconnected;
+        }
 
-    //used to increment the number of active player visually 
-    public void IncrementPC()
-    {
-        m_playersconnected++;
-    }
+        //used to increment the number of active player visually 
+        public void IncrementPC()
+        {
+            m_playersconnected++;
+        }
 
+    }
 }
