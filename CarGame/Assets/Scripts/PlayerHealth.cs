@@ -10,6 +10,8 @@ public class PlayerHealth : MonoBehaviour
     public Car m_car;
     public Movement m_movement;
 
+	public ParticleSystem Smoke1;
+
     public string m_tag;
 
 	// Use this for initialization
@@ -18,6 +20,7 @@ public class PlayerHealth : MonoBehaviour
 		cur_Health = max_Health;
         m_car = gameObject.GetComponent<Car>();
         m_movement = gameObject.GetComponent<Movement>();
+		Smoke1 = gameObject.GetComponentInChildren<ParticleSystem> ();
 	}
 	
 	// Update is called once per frame
@@ -43,6 +46,31 @@ public class PlayerHealth : MonoBehaviour
 
     public void CheckHealth()
     {
+		if (cur_Health == 80.0f) 
+		{
+			Smoke1.Play();
+		}
+		if (cur_Health == 60.0f) 
+		{
+			this.GetComponentInChildren<ParticleSystem> ().startColor = new Color (204, 204, 204, 0.5f);
+			Smoke1.Play();
+		}
+		if (cur_Health == 40.0f) 
+		{
+			this.GetComponentInChildren<ParticleSystem> ().startColor = new Color (153, 153, 153, 0.5f);
+			Smoke1.Play();
+		}
+		if (cur_Health == 20.0f) 
+		{
+			this.GetComponentInChildren<ParticleSystem> ().startColor = new Color (102, 102, 102, 0.5f);
+			Smoke1.Play();
+		}
+		if (cur_Health == 0.0f) 
+		{
+			this.GetComponentInChildren<ParticleSystem> ().startColor = new Color (51, 51, 51, 0.5f);
+			Smoke1.Play();
+		}
+
         if (cur_Health <= 0.0f)
         {
             m_movement.m_controls = false;
