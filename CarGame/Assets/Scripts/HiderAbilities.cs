@@ -10,8 +10,6 @@ public class HiderAbilities : MonoBehaviour {
 
     bool m_timer;
 
-    //Coroutine oilCoroutine;
-
     float m_oilWaitTime =  5.0f;
 
 	// Use this for initialization
@@ -33,25 +31,10 @@ public class HiderAbilities : MonoBehaviour {
 
     void SpawnOil()
     {
-        RaycastHit[] hits = Physics.RaycastAll(gameObject.transform.position, new Vector3(0.0f, -10.0f, -10.0f));
-        Debug.DrawRay(gameObject.transform.position, Vector3.back);
-
-        for(int iter = 0; hits.Length > iter; iter++)
-        {
-            if(hits[iter].transform.gameObject.tag == "Level")
-            {
-                m_oil = Instantiate(m_oilReference);
-                m_oil.transform.position = hits[iter].transform.position;
-            }
-            else
-            {
-                Debug.Log("Blergygsgews");
-            }
-        }
-
-      
-        //m_oil.transform.position = gameObject.transform.FindChild("BackSpawn").transform.position;
-    }
+        m_oil = Instantiate(m_oilReference);
+        // m_oil.transform.position = m_spawnPos;
+        m_oil.transform.position = gameObject.transform.Find("BackSpawn").transform.position;
+      }
 
     IEnumerator OilTimer()
     {
