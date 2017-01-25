@@ -12,6 +12,7 @@ TagManager:
   - CarCamera
   - DaSText
   - Level
+  - CarModel
   layers:
   - Default
   - TransparentFX

@@ -21,6 +21,14 @@ public class Car : MonoBehaviour {
     public Texture m_outOfFuel;
     public Text m_fuel;
 
+    public GameObject m_100HealthModel;
+    public GameObject m_80HealthModel;
+    public GameObject m_60HealthModel;
+    public GameObject m_40HealthModel;
+    public GameObject m_20HealthModel;
+    public GameObject m_0HealthModel;
+    public GameObject m_currentModel;
+
     public Canvas chasebreakerUI;
 
     void Awake()
@@ -108,6 +116,18 @@ public class Car : MonoBehaviour {
         m_seeker = false;
         GetComponent<PlayerHealth>().ResetHealth();
         Destroy(m_seekerCone);
+
+        for (int i = 0; i <= transform.childCount - 1; i++)
+        {
+            string tempTag = transform.GetChild(i).gameObject.tag;
+
+            if (tempTag == "CarModel")
+            {
+                m_currentModel = transform.GetChild(i).gameObject;
+            }
+        }
+
+        m_currentModel.GetComponent<MeshFilter>().sharedMesh = m_100HealthModel.GetComponent<MeshFilter>().sharedMesh;
     }
 
     public void ResetHider()
@@ -116,6 +136,18 @@ public class Car : MonoBehaviour {
         GetComponent<Movement>().m_power = 0.005f;
         GetComponent<PlayerHealth>().ResetHealth();
         Destroy(GetComponent<Hider>());
+
+        for (int i = 0; i <= transform.childCount - 1; i++)
+        {
+            string tempTag = transform.GetChild(i).gameObject.tag;
+
+            if (tempTag == "CarModel")
+            {
+                m_currentModel = transform.GetChild(i).gameObject;
+            }
+        }
+
+        m_currentModel.GetComponent<MeshFilter>().sharedMesh = m_100HealthModel.GetComponent<MeshFilter>().sharedMesh;
     }
 
     public void ToggleCamera(bool _active)
@@ -222,46 +254,44 @@ public class Car : MonoBehaviour {
         EventManager.m_instance.UnsubscribeToEvent(Events.Event.DS_CHASE, ShowFuel);
     }
 
-    //public void ChangeMesh(int _damageCounter)
-    //{
-    //    switch(m_playerNumber)
-    //    {
-    //        case 1:
-    //            switch (_damageCounter)
-    //            {
-    //                case 4:
-    //                    break;
-    //                case 3:
-    //                    break;
+    public void ChangeMesh(int _damageCounter)
+    {
+        for (int i = 0; i <= transform.childCount - 1; i++)
+        {
+            string tempTag = transform.GetChild(i).gameObject.tag;
 
-    //            }
-    //            break;
-    //        case 2:
-    //            break;
-    //        case 3:
-    //            break;
-    //        case 4:
-    //            break;
-    //        default:
-    //            break;
-    //    }
-    //}
+            if (tempTag == "CarModel")
+            {
+                m_currentModel = transform.GetChild(i).gameObject;
+            }
+        }
 
-    //void OnCollisionEnter(Collider _collider)
-    //{
-    //    if(_collider.gameObject.GetComponent<Car>().m_hider == true 
-    //        || _collider.gameObject.GetComponent<Car>().m_seeker == true)
-    //    {
-    //        if(_collider.gameObject.GetComponent<Car>().m_seeker == true && m_hider == true)
-    //        {
-    //            if (StateManager.m_instance.gameManager.GetComponent<GameManager>().m_phaseDriveAndSeek 
-    //                == GameManager.DriveAndSeekPhases.seek)
-    //            {
-    //                StateManager.m_instance.gameManager.GetComponent<GameManager>().hiderCaught();
-    //            }
-
-    //            //some sort of logic to add points to a score
-    //        }
-    //    }
-    //}
+        switch (_damageCounter)
+        {
+            case 1:
+                Debug.Log("First damage");
+                m_currentModel.GetComponent<MeshFilter>().sharedMesh = m_80HealthModel.GetComponent<MeshFilter>().sharedMesh;
+                break;
+            case 2:
+                Debug.Log("Second damage");
+                m_currentModel.GetComponent<MeshFilter>().sharedMesh = m_60HealthModel.GetComponent<MeshFilter>().sharedMesh;
+                break;
+            case 3:
+                Debug.Log("Third damage");
+                m_currentModel.GetComponent<MeshFilter>().sharedMesh = m_40HealthModel.GetComponent<MeshFilter>().sharedMesh;
+                break;
+            case 4:
+                Debug.Log("Fourth damage");
+                m_currentModel.GetComponent<MeshFilter>().sharedMesh = m_20HealthModel.GetComponent<MeshFilter>().sharedMesh;
+                break;
+            case 5:
+                Debug.Log("Fifth damage");
+                m_currentModel.GetComponent<MeshFilter>().sharedMesh = m_0HealthModel.GetComponent<MeshFilter>().sharedMesh;
+                break;
+            default:
+                Debug.Log("Model");
+                m_currentModel.GetComponent<MeshFilter>().sharedMesh = m_100HealthModel.GetComponent<MeshFilter>().sharedMesh;
+                break;
+        }
+    }
 }

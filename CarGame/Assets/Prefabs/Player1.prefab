@@ -264,7 +264,7 @@ GameObject:
   - 23: {fileID: 2371422}
   m_Layer: 0
   m_Name: capri
-  m_TagString: Untagged
+  m_TagString: CarModel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1055,6 +1055,13 @@ MonoBehaviour:
   m_runnerTitle: {fileID: 2800000, guid: 1b5fc48eea587ae47bb116cc5fc2daac, type: 3}
   m_outOfFuel: {fileID: 2800000, guid: 3c9bfd0c465e1d6498c9fe1cc4b2919c, type: 3}
   m_fuel: {fileID: 11444494}
+  m_100HealthModel: {fileID: 100000, guid: 6be68c3f0ead28d45b84bc36ebf28bc8, type: 3}
+  m_80HealthModel: {fileID: 100000, guid: 0c931e9d50e47c4449e37bb92c95684f, type: 3}
+  m_60HealthModel: {fileID: 100000, guid: ae86bd6897a4a2d41b6aebf0156c2a93, type: 3}
+  m_40HealthModel: {fileID: 100000, guid: 2325a578981fd914f91da9c3aceeb831, type: 3}
+  m_20HealthModel: {fileID: 100000, guid: 94aa8e25f55372a40b1275440c600fea, type: 3}
+  m_0HealthModel: {fileID: 100000, guid: eba45d11b439066469d8e89e5c10afdb, type: 3}
+  m_currentModel: {fileID: 0}
   chasebreakerUI: {fileID: 0}
 --- !u!114 &11409738
 MonoBehaviour:
@@ -1227,7 +1234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   max_Health: 100
   cur_Health: 0
-  m_damageCounter: 5
+  m_damageCounter: 0
   healthbar: {fileID: 135982}
   m_car: {fileID: 0}
   m_movement: {fileID: 0}
