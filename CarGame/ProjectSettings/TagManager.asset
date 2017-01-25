@@ -11,6 +11,7 @@ TagManager:
   - Player4
   - CarCamera
   - DaSText
+  - Level
   layers:
   - Default
   - TransparentFX
