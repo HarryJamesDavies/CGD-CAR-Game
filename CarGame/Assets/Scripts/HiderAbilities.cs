@@ -3,8 +3,9 @@ using System.Collections;
 
 public class HiderAbilities : MonoBehaviour {
 
-    [SerializeField]
     GameObject m_oilReference;
+
+    GameObject m_oilHolder;
 
     GameObject m_oil;
 
@@ -15,7 +16,8 @@ public class HiderAbilities : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-        m_oilReference = GameObject.Find("OilSlick");
+        m_oilReference = (GameObject)Resources.Load("OilSlick");
+        m_oilHolder = Instantiate((GameObject)Resources.Load("OilHolder"));
         m_timer = false;
     }
 	
@@ -27,6 +29,13 @@ public class HiderAbilities : MonoBehaviour {
             StartCoroutine(OilTimer());
         }
 
+        if(GameModeManager.m_instance.m_currentEvent == GameModeManager.GameModeState.FREEROAM)
+        {
+            Destroy(m_oilHolder);
+            Destroy(m_oilReference);
+            Destroy(gameObject.GetComponent<HiderAbilities>());
+        }
+
 	}
 
     void SpawnOil()
@@ -34,6 +43,7 @@ public class HiderAbilities : MonoBehaviour {
         m_oil = Instantiate(m_oilReference);
         // m_oil.transform.position = m_spawnPos;
         m_oil.transform.position = gameObject.transform.Find("BackSpawn").transform.position;
+        m_oil.transform.parent = m_oilHolder.transform;
       }
 
     IEnumerator OilTimer()
