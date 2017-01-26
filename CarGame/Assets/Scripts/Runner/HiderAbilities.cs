@@ -16,25 +16,26 @@ namespace HF
 
         float m_oilWaitTime = 5.0f;
 
-        // Use this for initialization
         void Start()
         {
 
             m_oilReference = (GameObject)Resources.Load("OilSlick");
             m_oilHolder = Instantiate((GameObject)Resources.Load("OilHolder"));
-            m_timer = false;
+            m_timer = true;
         }
 
-        // Update is called once per frame
-        void Update()
+        
+        void Update() //check to see if the event has started, check to see if the car needs to start a timer to drop oil...
         {
+            EventManager.m_instance.SubscribeToEvent(Events.Event.DS_HIDING, StartOilSpawns);
+            //EventManager.m_instance.SubscribeToEvent(Events.Event.DS_CHASE, StartOilSpawns);
 
             if (m_timer == false)
             {
                 StartCoroutine(OilTimer());
             }
 
-            if (GameModeManager.m_instance.m_currentEvent == GameModeManager.GameModeState.FREEROAM)
+            if (GameModeManager.m_instance.m_currentEvent == GameModeManager.GameModeState.FREEROAM) //... check to see if I should be alive
             {
                 Destroy(m_oilHolder);
                 Destroy(m_oilReference);
@@ -42,8 +43,13 @@ namespace HF
             }
 
         }
+        
+        void StartOilSpawns() //this is the event trigger which flips a bool to allow the car to start leaking oil
+        {
+            m_timer = false;
+        }
 
-        void SpawnOil()
+        void SpawnOil() //this spawns the oil by the back spawn
         {
             m_oil = Instantiate(m_oilReference);
             // m_oil.transform.position = m_spawnPos;
@@ -51,7 +57,7 @@ namespace HF
             m_oil.transform.parent = m_oilHolder.transform;
         }
 
-        IEnumerator OilTimer()
+        IEnumerator OilTimer() //this is a timer to seperate out the oil slick drops
         {
             m_timer = true;
             yield return new WaitForSeconds(m_oilWaitTime);
