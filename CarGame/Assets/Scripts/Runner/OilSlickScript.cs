@@ -18,17 +18,17 @@ namespace HF
 
         }
 
-        void OnTriggerStay(Collider _collider)
+        void OnTriggerStay(Collider _collider) //debate to use ontriggerenter in the actual build, for now stay is better
         {
             if (_collider.tag == "Player1" || _collider.tag == "Player2" ||
-                _collider.tag == "Player3" || _collider.tag == "Player4")
+                _collider.tag == "Player3" || _collider.tag == "Player4") //check to see if it's a player
             {
                 //Vector3 vector = _collider.gameObject.GetComponent<Rigidbody>(). / 2;
-                if (_collider.gameObject.GetComponent<HiderAbilities>() != null)
+                if (_collider.gameObject.GetComponent<HiderAbilities>() != null) //check to see if it's the hider
                 {
 
                 }
-                else
+                else //if it's not, apply a force in a random direction
                 {
                     float force;
                     int random = Random.Range(0, 4);
