@@ -68,6 +68,17 @@ namespace HF
             }
 
             m_fuel.enabled = false;
+
+            for (int i = 0; i <= transform.childCount - 1; i++)
+            {
+                string tempTag = transform.GetChild(i).gameObject.tag;
+
+                if (tempTag == "CarModel")
+                {
+                    m_currentModel = transform.GetChild(i).gameObject;
+                }
+            }
+
             EventManager.m_instance.SubscribeToEvent(Events.Event.DS_SETUP, SetupText);
             EventManager.m_instance.SubscribeToEvent(Events.Event.DS_HIDING, HideText);
 

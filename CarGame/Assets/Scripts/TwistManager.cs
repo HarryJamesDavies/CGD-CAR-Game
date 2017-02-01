@@ -7,6 +7,7 @@ public class TwistManager : MonoBehaviour {
 
     public enum Twists
     {
+        NULL,
         speedUp,
         dissapear,
         tsunami,
@@ -31,7 +32,8 @@ public class TwistManager : MonoBehaviour {
         }
 
         m_timerStart = false;
-        
+
+        m_currentTwist = Twists.NULL;
 	}
 	
 	// Update is called once per frame
@@ -45,7 +47,7 @@ public class TwistManager : MonoBehaviour {
 
     void ChooseTwist()
     {
-        int twist = Random.Range(0, 5);
+        int twist = Random.Range(1, 6);
 
         BroadcastTwist(twist);
     }
