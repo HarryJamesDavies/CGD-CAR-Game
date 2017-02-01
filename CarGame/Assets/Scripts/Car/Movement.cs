@@ -6,7 +6,6 @@ namespace HF
 {
     public class Movement : MonoBehaviour
     {
-
         float xspeep = 0f;
         public float m_power = 0.01f;
         float friction = 0.95f;
@@ -34,7 +33,6 @@ namespace HF
             m_audioSource = GetComponent<AudioSource>();
             m_controls = true;
         }
-
 
         // Use this for initialization
         void FixedUpdate()
@@ -89,43 +87,89 @@ namespace HF
             {
                 if (ControllerManager.m_instance.m_useController)
                 {
-                    switch (gameObject.tag)
-                    {
-                        case "Player1":
-                            PlayerMovement(1);
-                            break;
-                        case "Player2":
-                            PlayerMovement(2);
-                            break;
-                        case "Player3":
-                            PlayerMovement(3);
-                            break;
-                        case "Player4":
-                            PlayerMovement(4);
-                            break;
-                        default:
-                            break;
-                    }
+                    //if (TwistManager.m_instance.m_currentTwist != Twists.flipControls)
+                    //{
+                        switch (gameObject.tag)
+                        {
+                            case "Player1":
+                                PlayerMovement(1);
+                                break;
+                            case "Player2":
+                                PlayerMovement(2);
+                                break;
+                            case "Player3":
+                                PlayerMovement(3);
+                                break;
+                            case "Player4":
+                                PlayerMovement(4);
+                                break;
+                            default:
+                                break;
+                        }
+                    //}
+                    //else
+                    //{
+                        //switch (gameObject.tag)
+                        //{
+                        //    case "Player1":
+                        //        FlipControls(1);
+                        //        break;
+                        //    case "Player2":
+                        //        FlipControls(2);
+                        //        break;
+                        //    case "Player3":
+                        //        FlipControls(3);
+                        //        break;
+                        //    case "Player4":
+                        //        FlipControls(4);
+                        //        break;
+                        //    default:
+                        //        break;
+                        //}
+                    //}
                 }
                 else
                 {
-                    switch (gameObject.tag)
-                    {
-                        case "Player1":
-                            KeyboardMovement(1);
-                            break;
-                        case "Player2":
-                            KeyboardMovement(2);
-                            break;
-                        case "Player3":
-                            KeyboardMovement(3);
-                            break;
-                        case "Player4":
-                            KeyboardMovement(4);
-                            break;
-                        default:
-                            break;
-                    }
+                    //if (TwistManager.m_instance.m_currentTwist != Twists.flipControls)
+                    //{
+                        switch (gameObject.tag)
+                        {
+                            case "Player1":
+                                KeyboardMovement(1);
+                                break;
+                            case "Player2":
+                                KeyboardMovement(2);
+                                break;
+                            case "Player3":
+                                KeyboardMovement(3);
+                                break;
+                            case "Player4":
+                                KeyboardMovement(4);
+                                break;
+                            default:
+                                break;
+                        }
+                    //}
+                    //else
+                    //{
+                        //switch (gameObject.tag)
+                        //{
+                        //    case "Player1":
+                        //        FlipControls(1);
+                        //        break;
+                        //    case "Player2":
+                        //        FlipControls(2);
+                        //        break;
+                        //    case "Player3":
+                        //        FlipControls(3);
+                        //        break;
+                        //    case "Player4":
+                        //        FlipControls(4);
+                        //        break;
+                        //    default:
+                        //        break;
+                        //}
+                    //}
                 }
             }
             else
@@ -417,6 +461,232 @@ namespace HF
             if (fuel < m_maxFuel)
             {
                 fuel += Time.deltaTime * 8;
+            }
+        }
+
+        void FlipControls(int _playerNumber)
+        {
+            if (ControllerManager.m_instance.m_useController)
+            {
+                if (Input.GetAxis("P" + _playerNumber + "-R2(PS4)") > -1.0f)
+                {
+                    backward = true;
+                }
+                if (Input.GetAxis("P" + _playerNumber + "-R2(PS4)") == -1.0f)
+                {
+                    backward = false;
+                }
+                if (Input.GetAxis("P" + _playerNumber + "-L2(PS4)") > -1.0f)
+                {
+                    forward = true;
+                }
+                if (Input.GetAxis("P" + _playerNumber + "-L2(PS4)") == -1.0f)
+                {
+                    forward = false;
+                }
+
+                if (Input.GetAxis("P" + _playerNumber + ("-LeftJoystickX(PS4)")) > 0.5f)
+                {
+                    left = true;
+                }
+                if (Input.GetAxis("P" + _playerNumber + ("-LeftJoystickX(PS4)")) < 0.5f)
+                {
+                    left = false;
+                }
+                if (Input.GetAxis("P" + _playerNumber + ("-LeftJoystickX(PS4)")) < -0.5f)
+                {
+                    right = true;
+                }
+                if (Input.GetAxis("P" + _playerNumber + ("-LeftJoystickX(PS4)")) > -0.5f)
+                {
+                    right = false;
+                }
+
+                if (Input.GetButtonDown("P" + _playerNumber + ("-Triangle(PS4)")))
+                {
+                    gameObject.transform.position += Vector3.up * 2.5f;
+                    gameObject.transform.rotation = startingRotation;
+                }
+
+                if (fuel < 0)
+                {
+                    xspeep = 0;
+                }
+
+                xspeep *= friction;
+                transform.Translate(Vector3.forward * -xspeep);
+            }
+            else
+            {
+                switch (_playerNumber)
+                {
+                    case 1:
+                        if (Input.GetKeyDown("w"))
+                        {
+                            backward = true;
+                        }
+                        if (Input.GetKeyUp("w"))
+                        {
+                            backward = false;
+                        }
+                        if (Input.GetKeyDown("s"))
+                        {
+                            forward = true;
+                        }
+                        if (Input.GetKeyUp("s"))
+                        {
+                            forward = false;
+                        }
+
+                        if (Input.GetKeyDown("d"))
+                        {
+                            left = true;
+                        }
+                        if (Input.GetKeyUp("d"))
+                        {
+                            left = false;
+                        }
+                        if (Input.GetKeyDown("a"))
+                        {
+                            right = true;
+                        }
+                        if (Input.GetKeyUp("a"))
+                        {
+                            right = false;
+                        }
+
+                        if (Input.GetKeyDown("q"))
+                        {
+                            transform.position += Vector3.up * 2.5f;
+                            transform.rotation = startingRotation;
+                        }
+                        break;
+                    case 2:
+                        if (Input.GetKeyDown(KeyCode.UpArrow))
+                        {
+                            backward = true;
+                        }
+                        if (Input.GetKeyUp(KeyCode.UpArrow))
+                        {
+                            backward = false;
+                        }
+                        if (Input.GetKeyDown(KeyCode.DownArrow))
+                        {
+                            forward = true;
+                        }
+                        if (Input.GetKeyUp(KeyCode.DownArrow))
+                        {
+                            forward = false;
+                        }
+
+                        if (Input.GetKeyDown(KeyCode.RightArrow))
+                        {
+                            left = true;
+                        }
+                        if (Input.GetKeyUp(KeyCode.RightArrow))
+                        {
+                            left = false;
+                        }
+                        if (Input.GetKeyDown(KeyCode.LeftArrow))
+                        {
+                            right = true;
+                        }
+                        if (Input.GetKeyUp(KeyCode.LeftArrow))
+                        {
+                            right = false;
+                        }
+
+                        if (Input.GetKeyDown("/"))
+                        {
+                            transform.position += Vector3.up * 2.5f;
+                            transform.rotation = startingRotation;
+                        }
+                        break;
+                    case 3:
+                        if (Input.GetKeyDown("t"))
+                        {
+                            backward = true;
+                        }
+                        if (Input.GetKeyUp("t"))
+                        {
+                            backward = false;
+                        }
+                        if (Input.GetKeyDown("g"))
+                        {
+                            forward = true;
+                        }
+                        if (Input.GetKeyUp("g"))
+                        {
+                            forward = false;
+                        }
+
+                        if (Input.GetKeyDown("h"))
+                        {
+                            left = true;
+                        }
+                        if (Input.GetKeyUp("h"))
+                        {
+                            left = false;
+                        }
+                        if (Input.GetKeyDown("f"))
+                        {
+                            right = true;
+                        }
+                        if (Input.GetKeyUp("f"))
+                        {
+                            right = false;
+                        }
+
+                        if (Input.GetKeyDown("r"))
+                        {
+                            transform.position += Vector3.up * 2.5f;
+                            transform.rotation = startingRotation;
+                        }
+                        break;
+                    case 4:
+                        if (Input.GetKeyDown("i"))
+                        {
+                            backward = true;
+                        }
+                        if (Input.GetKeyUp("i"))
+                        {
+                            backward = false;
+                        }
+                        if (Input.GetKeyDown("k"))
+                        {
+                            forward = true;
+                        }
+                        if (Input.GetKeyUp("k"))
+                        {
+                            forward = false;
+                        }
+
+                        if (Input.GetKeyDown("l"))
+                        {
+                            left = true;
+                        }
+                        if (Input.GetKeyUp("l"))
+                        {
+                            left = false;
+                        }
+                        if (Input.GetKeyDown("j"))
+                        {
+                            right = true;
+                        }
+                        if (Input.GetKeyUp("j"))
+                        {
+                            right = false;
+                        }
+
+                        if (Input.GetKeyDown("u"))
+                        {
+                            transform.position += Vector3.up * 2.5f;
+                            transform.rotation = startingRotation;
+                        }
+                        break;
+                    default:
+                        break;
+                }
             }
         }
     }

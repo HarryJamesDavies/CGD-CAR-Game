@@ -59,5 +59,11 @@ namespace HF
             }
             return false;
         }
+
+
+        public int GetTimeLeft()
+        {
+            return (int)(m_timerLength - (Time.time - m_startTime));
+        }
     }
 }

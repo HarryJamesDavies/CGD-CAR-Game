@@ -6,7 +6,6 @@ namespace HF
 {
     public class Car : MonoBehaviour
     {
-
         public string m_tag;
         public int m_playerNumber;
 
@@ -104,6 +103,15 @@ namespace HF
             {
                 m_image.enabled = false;
             }
+
+            //if (TwistManager.m_instance.m_currentTwist == Twists.dissapear)
+            //{
+                //m_currentModel.active = false;
+            //}
+            //else
+            //{
+                //m_currentModel.active = true;
+            //}
 
             checkChaseBreakerNumber();
         }
