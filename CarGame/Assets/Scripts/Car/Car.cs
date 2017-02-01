@@ -35,10 +35,13 @@ namespace HF
         public GameObject m_0HealthModel;
         public GameObject m_currentModel;
 
+        public bool m_teleportCooldown;
+
         ChaseBreaker chaseBreakerInstance;
 
         void Awake()
         {
+            m_teleportCooldown = false;
             m_tag = gameObject.tag;
             SetCamera();
 
@@ -347,6 +350,18 @@ namespace HF
                 chasebreaker2.enabled = false;
                 chasebreaker3.enabled = false;
             }
+        }
+
+        public void StartCooldown()
+        {
+            StartCoroutine(TeleportCooldown());
+        }
+
+        IEnumerator TeleportCooldown()
+        {
+            m_teleportCooldown = true;
+            yield return new WaitForSeconds(10);
+            m_teleportCooldown = false;
         }
     }
 }

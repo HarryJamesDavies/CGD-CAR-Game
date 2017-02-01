@@ -13,6 +13,7 @@ TagManager:
   - DaSText
   - Level
   - CarModel
+  - Teleporter
   layers:
   - Default
   - TransparentFX
