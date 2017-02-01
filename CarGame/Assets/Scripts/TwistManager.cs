@@ -16,7 +16,7 @@ public class TwistManager : MonoBehaviour {
 
     public Twists m_currentTwist;
 
-    TwistManager m_instance;
+    public static TwistManager m_instance;
 
 	// Use this for initialization
 	void Start () {
