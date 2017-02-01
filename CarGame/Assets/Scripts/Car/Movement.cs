@@ -185,6 +185,51 @@ namespace HF
             {
                 Refuel();
             }
+            else
+            {
+                switch (gameObject.tag)
+                {
+                    case "Player1":
+                        if (Input.GetKeyDown("e"))
+                        {
+                            if (fuel <= 50.0f)
+                            {
+                                Refuel();
+                            }
+                        }
+                        break;
+                    case "Player2":
+                        if (Input.GetKeyDown("."))
+                        {
+                            if (fuel <= 50.0f)
+                            {
+                                Refuel();
+                            }
+                        }
+                        break;
+                    case "Player3":
+                        if (Input.GetKeyDown("y"))
+                        {
+                            if (fuel <= 50.0f)
+                            {
+                                Refuel();
+                            }
+                        }
+                        break;
+                    case "Player4":
+                        if (Input.GetKeyDown("o"))
+                        {
+                            if (fuel <= 50.0f)
+                            {
+                                Refuel();
+                            }
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+            
         }
 
         void PlayerMovement(int _controller)
@@ -560,14 +605,6 @@ namespace HF
                             transform.position += Vector3.up * 2.5f;
                             transform.rotation = startingRotation;
                         }
-
-                        if (fuel < 0)
-                        {
-                            xspeep = 0;
-                        }
-
-                        xspeep *= friction;
-                        transform.Translate(Vector3.forward * -xspeep);
                         break;
                     case 2:
                         if (Input.GetKeyDown(KeyCode.UpArrow))
@@ -609,14 +646,6 @@ namespace HF
                             transform.position += Vector3.up * 2.5f;
                             transform.rotation = startingRotation;
                         }
-
-                        if (fuel < 0)
-                        {
-                            xspeep = 0;
-                        }
-
-                        xspeep *= friction;
-                        transform.Translate(Vector3.forward * -xspeep);
                         break;
                     case 3:
                         if (Input.GetKeyDown("t"))
@@ -658,14 +687,6 @@ namespace HF
                             transform.position += Vector3.up * 2.5f;
                             transform.rotation = startingRotation;
                         }
-
-                        if (fuel < 0)
-                        {
-                            xspeep = 0;
-                        }
-
-                        xspeep *= friction;
-                        transform.Translate(Vector3.forward * -xspeep);
                         break;
                     case 4:
                         if (Input.GetKeyDown("i"))
@@ -707,18 +728,18 @@ namespace HF
                             transform.position += Vector3.up * 2.5f;
                             transform.rotation = startingRotation;
                         }
-
-                        if (fuel < 0)
-                        {
-                            xspeep = 0;
-                        }
-
-                        xspeep *= friction;
-                        transform.Translate(Vector3.forward * -xspeep);
                         break;
                     default:
                         break;
                 }
+
+                if (fuel < 0)
+                {
+                    xspeep = 0;
+                }
+
+                xspeep *= friction;
+                transform.Translate(Vector3.forward * -xspeep);
             }
         }
     }
