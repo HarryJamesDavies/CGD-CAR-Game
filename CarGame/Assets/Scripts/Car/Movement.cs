@@ -87,8 +87,8 @@ namespace HF
             {
                 if (ControllerManager.m_instance.m_useController)
                 {
-                    //if (TwistManager.m_instance.m_currentTwist != Twists.flipControls)
-                    //{
+                    if (TwistManager.m_instance.m_currentTwist != TwistManager.Twists.flipControls)
+                    {
                         switch (gameObject.tag)
                         {
                             case "Player1":
@@ -106,32 +106,32 @@ namespace HF
                             default:
                                 break;
                         }
-                    //}
-                    //else
-                    //{
-                        //switch (gameObject.tag)
-                        //{
-                        //    case "Player1":
-                        //        FlipControls(1);
-                        //        break;
-                        //    case "Player2":
-                        //        FlipControls(2);
-                        //        break;
-                        //    case "Player3":
-                        //        FlipControls(3);
-                        //        break;
-                        //    case "Player4":
-                        //        FlipControls(4);
-                        //        break;
-                        //    default:
-                        //        break;
-                        //}
-                    //}
+                    }
+                    else
+                    {
+                        switch (gameObject.tag)
+                        {
+                            case "Player1":
+                                FlipControls(1);
+                                break;
+                            case "Player2":
+                                FlipControls(2);
+                                break;
+                            case "Player3":
+                                FlipControls(3);
+                                break;
+                            case "Player4":
+                                FlipControls(4);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
                 }
                 else
                 {
-                    //if (TwistManager.m_instance.m_currentTwist != Twists.flipControls)
-                    //{
+                    if (TwistManager.m_instance.m_currentTwist != TwistManager.Twists.flipControls)
+                    {
                         switch (gameObject.tag)
                         {
                             case "Player1":
@@ -149,27 +149,27 @@ namespace HF
                             default:
                                 break;
                         }
-                    //}
-                    //else
-                    //{
-                        //switch (gameObject.tag)
-                        //{
-                        //    case "Player1":
-                        //        FlipControls(1);
-                        //        break;
-                        //    case "Player2":
-                        //        FlipControls(2);
-                        //        break;
-                        //    case "Player3":
-                        //        FlipControls(3);
-                        //        break;
-                        //    case "Player4":
-                        //        FlipControls(4);
-                        //        break;
-                        //    default:
-                        //        break;
-                        //}
-                    //}
+                    }
+                    else
+                    {
+                        switch (gameObject.tag)
+                        {
+                            case "Player1":
+                                FlipControls(1);
+                                break;
+                            case "Player2":
+                                FlipControls(2);
+                                break;
+                            case "Player3":
+                                FlipControls(3);
+                                break;
+                            case "Player4":
+                                FlipControls(4);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
                 }
             }
             else
@@ -179,6 +179,11 @@ namespace HF
                 left = false;
                 right = false;
                 xspeep = 0;
+            }
+
+            if (TwistManager.m_instance.m_currentTwist == TwistManager.Twists.speedUp)
+            {
+                m_power = 0.01f;
             }
 
             if (forward == false && backward == false && left == false && right == false)

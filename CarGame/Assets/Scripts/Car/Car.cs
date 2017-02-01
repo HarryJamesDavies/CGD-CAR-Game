@@ -104,14 +104,14 @@ namespace HF
                 m_image.enabled = false;
             }
 
-            //if (TwistManager.m_instance.m_currentTwist == Twists.dissapear)
-            //{
-                //m_currentModel.active = false;
-            //}
-            //else
-            //{
-                //m_currentModel.active = true;
-            //}
+            if (TwistManager.m_instance.m_currentTwist == TwistManager.Twists.dissapear)
+            {
+                m_currentModel.SetActive(false);
+            }
+            else
+            {
+                m_currentModel.SetActive(true);
+            }
 
             checkChaseBreakerNumber();
         }
