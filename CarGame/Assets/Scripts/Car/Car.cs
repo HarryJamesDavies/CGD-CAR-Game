@@ -127,6 +127,22 @@ namespace HF
                 m_currentModel.SetActive(true);
             }
 
+            if (TwistManager.m_instance.m_currentTwist == TwistManager.Twists.speedUp)
+            {
+                GetComponent<Movement>().m_power = 0.01f;
+            }
+            else
+            {
+                if (m_hider)
+                {
+                    GetComponent<Movement>().m_power = 0.006f;
+                }
+                else
+                {
+                    GetComponent<Movement>().m_power = 0.005f;
+                }
+            }
+
             checkChaseBreakerNumber();
         }
 

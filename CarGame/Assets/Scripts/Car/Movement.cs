@@ -181,11 +181,6 @@ namespace HF
                 xspeep = 0;
             }
 
-            if (TwistManager.m_instance.m_currentTwist == TwistManager.Twists.speedUp)
-            {
-                m_power = 0.01f;
-            }
-
             if (forward == false && backward == false && left == false && right == false)
             {
                 Refuel();
@@ -565,6 +560,14 @@ namespace HF
                             transform.position += Vector3.up * 2.5f;
                             transform.rotation = startingRotation;
                         }
+
+                        if (fuel < 0)
+                        {
+                            xspeep = 0;
+                        }
+
+                        xspeep *= friction;
+                        transform.Translate(Vector3.forward * -xspeep);
                         break;
                     case 2:
                         if (Input.GetKeyDown(KeyCode.UpArrow))
@@ -606,6 +609,14 @@ namespace HF
                             transform.position += Vector3.up * 2.5f;
                             transform.rotation = startingRotation;
                         }
+
+                        if (fuel < 0)
+                        {
+                            xspeep = 0;
+                        }
+
+                        xspeep *= friction;
+                        transform.Translate(Vector3.forward * -xspeep);
                         break;
                     case 3:
                         if (Input.GetKeyDown("t"))
@@ -647,6 +658,14 @@ namespace HF
                             transform.position += Vector3.up * 2.5f;
                             transform.rotation = startingRotation;
                         }
+
+                        if (fuel < 0)
+                        {
+                            xspeep = 0;
+                        }
+
+                        xspeep *= friction;
+                        transform.Translate(Vector3.forward * -xspeep);
                         break;
                     case 4:
                         if (Input.GetKeyDown("i"))
@@ -688,6 +707,14 @@ namespace HF
                             transform.position += Vector3.up * 2.5f;
                             transform.rotation = startingRotation;
                         }
+
+                        if (fuel < 0)
+                        {
+                            xspeep = 0;
+                        }
+
+                        xspeep *= friction;
+                        transform.Translate(Vector3.forward * -xspeep);
                         break;
                     default:
                         break;
