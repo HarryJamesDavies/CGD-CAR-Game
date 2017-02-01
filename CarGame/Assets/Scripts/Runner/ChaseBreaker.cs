@@ -18,7 +18,6 @@ namespace HF
         Vector3 m_spawnPos;
 
         float timer = 5.0f;
-        float decayTimer = 0.0f;
         public int m_chaseBreakerCounter = 1;
 
         // Use this for initialization
@@ -32,7 +31,6 @@ namespace HF
         void Update()
         {
             timer -= Time.deltaTime;
-
 
             if (ControllerManager.m_instance.m_useController)
             {
@@ -120,7 +118,6 @@ namespace HF
             if (timer <= 0.0f)
             {
                 GameObject cb = (GameObject)Instantiate(m_chaseBreaker, m_spawnPos, m_newRot) as GameObject;
-                decayTimer += Time.deltaTime;
 
                 timer = 5.0f;
                 m_chaseBreakerCounter++;
@@ -130,6 +127,7 @@ namespace HF
                 {
                     Destroy(cb);
                 }
+
             }
 
 
