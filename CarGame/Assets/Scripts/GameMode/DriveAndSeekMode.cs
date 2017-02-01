@@ -55,8 +55,6 @@ namespace HF
 
         public GameObject m_twistManagerPrefab;
         public GameObject m_twistManager;
-        
-        //public GameObject m_infoBox;
 
         private bool m_music = false;
 
@@ -109,8 +107,6 @@ namespace HF
                     {
                         EventManager.m_instance.AddEvent(Events.Event.DS_SETUP);
                         SetupHiderAndSeekers();
-
-                        //m_infoBox.GetComponent<Image>().enabled = true;
 
                         //Setup buffer phase
                         m_currentPhase = DriveAndSeekPhases.BUFFER;

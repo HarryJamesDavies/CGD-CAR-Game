@@ -14,7 +14,7 @@ namespace HF
 
         private void OnTriggerStay(Collider other)
         {
-            if (!GetComponent<DriveAndSeekMode>().m_active)
+            if (!GetComponent<GameMode>().m_active)
             {
                 switch (other.tag)
                 {
@@ -126,13 +126,8 @@ namespace HF
                 ShootBeam.sb_instance.DisplayLine();
             }
 
-            ////start the event
-            //GameModeManager.m_instance.m_currentEvent = GameModeManager.GameModeState.DRIVEANDSEEK;
-            //Debug.Log("Drive and Seek started");
-            //m_firstPlayerPlaying = true;
-
             GetComponent<DriveAndSeekMode>().m_active = true;
-            GameModeManager.m_instance.m_currentGameMode = GetComponent<DriveAndSeekMode>();
+            GameModeManager.m_instance.m_currentGameMode = GetComponent<GameMode>();
             GameModeManager.m_instance.m_currentEvent = GameModeManager.GameModeState.DRIVEANDSEEK;
         }
     }

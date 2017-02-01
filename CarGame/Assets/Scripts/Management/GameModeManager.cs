@@ -63,15 +63,12 @@ namespace HF
                 case GameModeState.FREEROAM:
                     {
                         EventManager.m_instance.AddEvent(Events.Event.GM_FREEROAM);
-                        //Destroy(m_modeHolder.transform.GetChild(0));
                         m_currentGameMode = null;
                         break;
                     }
                 case GameModeState.DRIVEANDSEEK:
                     {
                         EventManager.m_instance.AddEvent(Events.Event.GM_DRIVEANDSEEK);
-                        //m_modeHolder = (GameObject)Instantiate(m_modePrefab, m_modePrefab.transform.position, m_modePrefab.transform.rotation);
-                        //m_currentGameMode = m_modeHolder.GetComponent<DriveAndSeekMode>();
                         break;
                     }
                 default:

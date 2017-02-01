@@ -60,7 +60,7 @@ public class TwistManager : MonoBehaviour {
     IEnumerator CountdownToTwist()
     {
         m_timerStart = true;
-        yield return new WaitForSeconds(100); //time that the thing will start
+        yield return new WaitForSeconds(20); //time that the thing will start
         ChooseTwist();
     }
 }
