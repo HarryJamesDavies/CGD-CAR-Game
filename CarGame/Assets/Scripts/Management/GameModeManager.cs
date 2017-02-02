@@ -21,8 +21,9 @@ namespace HF
         public GameModeState m_floatingEvent = GameModeState.FREEROAM;
 
         public GameMode m_currentGameMode;
-        public GameObject m_modePrefab;
         private GameObject m_modeHolder;
+
+        public string m_triggerTag;
 
         // Use this for initialization
         void Start()
@@ -51,12 +52,6 @@ namespace HF
             }
         }
 
-        void SetMode(GameMode _mode)
-        {
-            m_currentGameMode = _mode;
-            return;
-        }
-
         void UpdateEvent()
         {
             switch (m_currentEvent)
@@ -65,6 +60,7 @@ namespace HF
                     {
                         EventManager.m_instance.AddEvent(Events.Event.GM_FREEROAM);
                         m_currentGameMode = null;
+                        m_triggerTag = null;
                         break;
                     }
                 case GameModeState.DRIVEANDSEEK:

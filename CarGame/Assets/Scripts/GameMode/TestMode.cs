@@ -11,6 +11,7 @@ namespace HF
         {
             base.Start();
             Debug.Log("Start");
+            m_mode = GameModeManager.GameModeState.TEST;
         }
 
         new
