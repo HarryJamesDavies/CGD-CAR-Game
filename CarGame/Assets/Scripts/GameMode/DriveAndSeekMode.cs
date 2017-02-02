@@ -312,7 +312,7 @@ namespace HF
 
             DeadCarManager.m_instance.SetHiderNumber(m_hiderNumber);
 
-            PlayerManager.m_instance.m_playerCars[m_hiderNumber].GetComponent<Car>().SetHider();
+            PlayerManager.m_instance.m_playerCars[m_hiderNumber].GetComponent<Car>().SetRunner();
             string HiderTag = PlayerManager.m_instance.m_playerCars[m_hiderNumber].transform.tag;
             PlayerManager.m_instance.m_playerCars[m_hiderNumber].transform.position = m_hiderSpawn.position;
             PlayerManager.m_instance.m_playerCars[m_hiderNumber].transform.rotation = m_hiderSpawn.rotation;
@@ -322,7 +322,7 @@ namespace HF
             {
                 if (iter != m_hiderNumber)
                 {
-                    PlayerManager.m_instance.m_playerCars[iter].GetComponent<Car>().SetSeeker(HiderTag);
+                    PlayerManager.m_instance.m_playerCars[iter].GetComponent<Car>().SetChaser(HiderTag);
                     PlayerManager.m_instance.m_playerCars[iter].transform.position = m_seekerSpawns[SpawnsUsed].position;
                     PlayerManager.m_instance.m_playerCars[iter].transform.rotation = m_seekerSpawns[SpawnsUsed].rotation;
                     SpawnsUsed++;
@@ -380,11 +380,11 @@ namespace HF
             {
                 if (iter == m_hiderNumber)
                 {
-                    PlayerManager.m_instance.m_playerCars[iter].GetComponent<Car>().ResetHider();
+                    PlayerManager.m_instance.m_playerCars[iter].GetComponent<Car>().ResetRunner();
                 }
                 else
                 {
-                    PlayerManager.m_instance.m_playerCars[iter].GetComponent<Car>().ResetSeeker();
+                    PlayerManager.m_instance.m_playerCars[iter].GetComponent<Car>().ResetChaser();
                 }
             }
         }
