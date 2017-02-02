@@ -406,7 +406,6 @@ GameObject:
   - 223: {fileID: 22302086}
   - 114: {fileID: 11404260}
   - 114: {fileID: 11443544}
-  - 114: {fileID: 11436790}
   - 114: {fileID: 11449148}
   m_Layer: 9
   m_Name: HealthBar
@@ -1289,17 +1288,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &11436790
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 194532}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ba8770dc702e1e4d8c3df772a5eafba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11436818
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1594,6 +1582,7 @@ MonoBehaviour:
   m_20HealthModel: {fileID: 100000, guid: 25cc0f870f4e7fa4a91242472bd5ca15, type: 3}
   m_0HealthModel: {fileID: 100000, guid: bf7d10308f164c74b8bba295e2f2d417, type: 3}
   m_currentModel: {fileID: 0}
+  m_teleportCooldown: 0
 --- !u!114 &11493928
 MonoBehaviour:
   m_ObjectHideFlags: 1

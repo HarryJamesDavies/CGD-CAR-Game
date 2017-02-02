@@ -132,7 +132,6 @@ GameObject:
   - 223: {fileID: 22373412}
   - 114: {fileID: 11476898}
   - 114: {fileID: 11431812}
-  - 114: {fileID: 11463626}
   - 114: {fileID: 11476808}
   m_Layer: 11
   m_Name: HealthBar
@@ -897,6 +896,7 @@ MonoBehaviour:
   m_20HealthModel: {fileID: 100000, guid: ddae23e4807a4f047aeb3ea501b60015, type: 3}
   m_0HealthModel: {fileID: 100000, guid: 6230ef2ce6df48743a80106a67297e40, type: 3}
   m_currentModel: {fileID: 0}
+  m_teleportCooldown: 0
 --- !u!114 &11456794
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -942,17 +942,6 @@ MonoBehaviour:
   m_movement: {fileID: 0}
   Smoke1: {fileID: 19892700}
   m_tag: 
---- !u!114 &11463626
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 125176}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ba8770dc702e1e4d8c3df772a5eafba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11465968
 MonoBehaviour:
   m_ObjectHideFlags: 1

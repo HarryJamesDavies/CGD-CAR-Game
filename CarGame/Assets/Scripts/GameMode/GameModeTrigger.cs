@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace HF
 {
-    public class EventCollider : MonoBehaviour
+    public class GameModeTrigger : MonoBehaviour
     {
         private void OnTriggerStay(Collider other)
         {
@@ -104,3 +104,4 @@ namespace HF
         }
     }
 }
+

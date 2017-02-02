@@ -135,7 +135,6 @@ GameObject:
   - 223: {fileID: 22392542}
   - 114: {fileID: 11409956}
   - 114: {fileID: 11480388}
-  - 114: {fileID: 11400596}
   - 114: {fileID: 11447610}
   m_Layer: 8
   m_Name: HealthBar
@@ -1073,17 +1072,6 @@ Light:
   m_ShadowRadius: 0
   m_ShadowAngle: 0
   m_AreaSize: {x: 1, y: 1}
---- !u!114 &11400596
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 119564}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ba8770dc702e1e4d8c3df772a5eafba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11403476
 MonoBehaviour:
   m_ObjectHideFlags: 1

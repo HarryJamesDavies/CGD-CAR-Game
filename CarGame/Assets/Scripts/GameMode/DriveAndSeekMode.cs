@@ -34,7 +34,7 @@ namespace HF
             public string m_message;
         }
 
-        public DriveAndSeekPhases m_currentPhase;
+        private DriveAndSeekPhases m_currentPhase;
 
         [HideInInspector]
         public List<int> m_playerScores;
@@ -44,17 +44,17 @@ namespace HF
         private bool m_hiderWon = false;
 
         public List<PhaseLenght> m_phaseLenghts;
-        public BufferStruct m_bufferPhase;   
-
-        public Transform m_hiderSpawn;
-        public List<Transform> m_seekerSpawns;
+        private BufferStruct m_bufferPhase;   
 
         [HideInInspector]
         public List<Timer> m_timers;
-        private Transform m_timerHolder;
         public GameObject m_timerPrefab;
+        private Transform m_timerHolder;
 
-        public GameObject m_infoText;
+        private GameObject m_infoText;
+
+        public Transform m_hiderSpawn;
+        public List<Transform> m_seekerSpawns;
 
         new
         void Start()
@@ -80,6 +80,7 @@ namespace HF
             m_infoText = GameObject.FindGameObjectWithTag("DaSText");
 
             m_currentPhase = DriveAndSeekPhases.INACTIVE;
+            m_mode = GameModeManager.GameModeState.DRIVEANDSEEK;
         }
 
         new
@@ -110,7 +111,7 @@ namespace HF
                     {
                         EventManager.m_instance.AddEvent(Events.Event.DS_RUNNING);
                         m_infoText.GetComponent<Text>().text = "Start Running!";
-                        m_timers[GetTimer("Hide")].StartTimer();
+                        m_timers[GetTimer("Running")].StartTimer();
 
                         ChangeAllPlayerMovement(false);
                         ChangePlayerMovement(m_hiderNumber, true);
@@ -124,7 +125,7 @@ namespace HF
 
                         ChangeAllPlayerMovement(true);
 
-                        m_timers[GetTimer("Chase")].StartTimer();
+                        m_timers[GetTimer("Chasing")].StartTimer();
                         break;
                     }
                 case DriveAndSeekPhases.RESET:
@@ -221,7 +222,7 @@ namespace HF
                     }
                 case DriveAndSeekPhases.RUNNING:
                     {
-                        if (m_timers[GetTimer("Hide")].CheckFinished())
+                        if (m_timers[GetTimer("Running")].CheckFinished())
                         {
                             m_currentPhase = DriveAndSeekPhases.CHASING;
                             InitializePhase();
@@ -243,7 +244,7 @@ namespace HF
                             InitializePhase();
                         }
 
-                        if (m_timers[GetTimer("Chase")].CheckFinished())
+                        if (m_timers[GetTimer("Chasing")].CheckFinished())
                         {
                             m_hiderWon = true;
                             m_currentPhase = DriveAndSeekPhases.RESET;
