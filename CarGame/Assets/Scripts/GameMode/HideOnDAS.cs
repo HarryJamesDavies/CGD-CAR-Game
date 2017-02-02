@@ -12,6 +12,12 @@ namespace HF
             EventManager.m_instance.SubscribeToEvent(Events.Event.GM_DRIVEANDSEEK, EvFunc_HideEvent);
         }
 
+        private void OnDestroy()
+        {
+            EventManager.m_instance.UnsubscribeToEvent(Events.Event.GM_FREEROAM, EvFunc_RevealEvent);
+            EventManager.m_instance.UnsubscribeToEvent(Events.Event.GM_DRIVEANDSEEK, EvFunc_HideEvent);
+        }
+
         void EvFunc_RevealEvent()
         {
             gameObject.SetActive(true);

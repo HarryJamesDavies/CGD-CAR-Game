@@ -16,12 +16,13 @@ public class Events : MonoBehaviour
 	public enum Event
     {
         ST_STATECHANGED,
-        UI_UICHANGED,
+        UI_UICHANGED,        
         GM_FREEROAM,
         GM_DRIVEANDSEEK,
+        GM_TEST,        
         DS_SETUP,
-        DS_HIDING,
-        DS_CHASE,
+        DS_RUNNING,
+        DS_CHASING,
         DS_RESET,
         DS_FINISH,
         DS_BUFFER,

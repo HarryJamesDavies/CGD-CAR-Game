@@ -22,7 +22,7 @@ namespace HF
         public Vector3 m_direction;
         Quaternion startingRotation;
         public List<AudioClip> m_hornSounds;
-        AudioSource m_audioSource;
+        //AudioSource m_audioSource;
 
         public List<GameObject> m_lights;
 
@@ -30,7 +30,7 @@ namespace HF
         {
             m_direction = Vector3.forward;
             startingRotation = transform.rotation;
-            m_audioSource = GetComponent<AudioSource>();
+            //m_audioSource = GetComponent<AudioSource>();
             m_controls = true;
         }
 
@@ -270,7 +270,7 @@ namespace HF
 
             if (Input.GetButtonDown("P" + _controller + ("-Triangle(PS4)")))
             {
-                gameObject.transform.position += Vector3.up * 2.5f;
+                gameObject.transform.position += Vector3.up * 1.5f;
                 gameObject.transform.rotation = startingRotation;
             }
 
@@ -338,7 +338,7 @@ namespace HF
 
                 if (Input.GetKeyDown("q"))
                 {
-                    transform.position += Vector3.up * 2.5f;
+                    transform.position += Vector3.up * 1.5f;
                     transform.rotation = startingRotation;
                 }
             }
@@ -380,7 +380,7 @@ namespace HF
 
                 if (Input.GetKeyDown("/"))
                 {
-                    transform.position += Vector3.up * 2.5f;
+                    transform.position += Vector3.up * 1.5f;
                     transform.rotation = startingRotation;
                 }
             }
@@ -422,7 +422,7 @@ namespace HF
 
                 if (Input.GetKeyDown("r"))
                 {
-                    transform.position += Vector3.up * 2.5f;
+                    transform.position += Vector3.up * 1.5f;
                     transform.rotation = startingRotation;
                 }
             }
@@ -464,7 +464,7 @@ namespace HF
 
                 if (Input.GetKeyDown("u"))
                 {
-                    transform.position += Vector3.up * 2.5f;
+                    transform.position += Vector3.up * 1.5f;
                     transform.rotation = startingRotation;
                 }
             }

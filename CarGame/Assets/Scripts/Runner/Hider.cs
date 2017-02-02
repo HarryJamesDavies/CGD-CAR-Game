@@ -10,7 +10,7 @@ namespace HF
         Car m_car;
 
         private Camera m_hiderCam;
-        private bool m_hidingState = false;
+        //private bool m_hidingState = false;
 
         int m_playerNumber;
 
@@ -18,23 +18,23 @@ namespace HF
 
         void Start()
         {
-            EventManager.m_instance.SubscribeToEvent(Events.Event.DS_HIDING, EvFunc_HidingPhase);
-            EventManager.m_instance.SubscribeToEvent(Events.Event.DS_BUFFER, EvFunc_BufferPhase);
+            //EventManager.m_instance.SubscribeToEvent(Events.Event.DS_RUNNING, EvFunc_RunningPhase);
+            //EventManager.m_instance.SubscribeToEvent(Events.Event.DS_BUFFER, EvFunc_BufferPhase);
 
             m_carMovement = gameObject.GetComponent<Movement>();
             m_car = gameObject.GetComponent<Car>();
             m_playerNumber = m_car.m_playerNumber;
         }
 
-        void EvFunc_HidingPhase()
-        {
-            m_hidingState = true;
-        }
+        //void EvFunc_RunningPhase()
+        //{
+        //    m_hidingState = true;
+        //}
 
-        void EvFunc_BufferPhase()
-        {
-            m_hidingState = false;
-        }
+        //void EvFunc_BufferPhase()
+        //{
+        //    m_hidingState = false;
+        //}
 
         // Update is called once per frame
         void Update()

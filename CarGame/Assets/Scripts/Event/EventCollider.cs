@@ -25,14 +25,14 @@ namespace HF
                             {
                                 if (Input.GetButtonDown("P1-X(PS4)"))
                                 {
-                                    SetDSM(other);
+                                    SetEvent(other);
                                 }
                             }
                             else
                             {
                                 if (Input.GetKeyDown(KeyCode.E))
                                 {
-                                    SetDSM(other);
+                                    SetEvent(other);
                                 }
                             }
                         }
@@ -44,14 +44,14 @@ namespace HF
                             {
                                 if (Input.GetButtonDown("P2-X(PS4)"))
                                 {
-                                    SetDSM(other);
+                                    SetEvent(other);
                                 }
                             }
                             else
                             {
                                 if (Input.GetKeyDown("."))
                                 {
-                                    SetDSM(other);
+                                    SetEvent(other);
                                 }
                             }
                         }
@@ -63,14 +63,14 @@ namespace HF
                             {
                                 if (Input.GetButtonDown("P3-X(PS4)"))
                                 {
-                                    SetDSM(other);
+                                    SetEvent(other);
                                 }
                             }
                             else
                             {
                                 if (Input.GetKeyDown(KeyCode.Y))
                                 {
-                                    SetDSM(other);
+                                    SetEvent(other);
                                 }
                             }
                         }
@@ -82,20 +82,20 @@ namespace HF
                             {
                                 if (Input.GetButtonDown("P4-X(PS4)"))
                                 {
-                                    SetDSM(other);
+                                    SetEvent(other);
                                 }
                             }
                             else
                             {
                                 if (Input.GetKeyDown(KeyCode.O))
                                 {
-                                    SetDSM(other);
+                                    SetEvent(other);
                                 }
                             }
                         }
                         break;
                     default:
-                        Debug.Log("Default for event trigger");
+                        //Debug.Log("Default for event trigger");
                         break;
                 }
             }
@@ -113,7 +113,7 @@ namespace HF
 
         }
 
-        void SetDSM(Collider _other)
+        void SetEvent(Collider _other)
         {
             Debug.Log(_other.tag + " wants to connect!");
 
@@ -126,9 +126,9 @@ namespace HF
                 ShootBeam.sb_instance.DisplayLine();
             }
 
-            GetComponent<DriveAndSeekMode>().m_active = true;
+            GetComponent<GameMode>().m_active = true;
             GameModeManager.m_instance.m_currentGameMode = GetComponent<GameMode>();
-            GameModeManager.m_instance.m_currentEvent = GameModeManager.GameModeState.DRIVEANDSEEK;
+            GameModeManager.m_instance.m_currentEvent = GetComponent<GameMode>().m_mode;
         }
     }
 }

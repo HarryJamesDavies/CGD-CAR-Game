@@ -11,8 +11,8 @@ namespace HF
         public enum DriveAndSeekPhases
         {
             SETUP = 0,
-            HIDING = 1,
-            CHASE = 3,
+            RUNNING = 1,
+            CHASING = 3,
             RESET = 4,
             FINISH = 5,
             BUFFER = 6,
@@ -35,35 +35,31 @@ namespace HF
         }
 
         public DriveAndSeekPhases m_currentPhase;
+
+        [HideInInspector]
+        public List<int> m_playerScores;
         public int m_winningScore = 3;
-        public int m_hiderNumber = 0;
+        private int m_hiderNumber = 0;
         private int m_gameWinner = -1;
         private bool m_hiderWon = false;
 
         public List<PhaseLenght> m_phaseLenghts;
-        public List<int> m_playerScores;
-        public List<Timer> m_timers;
+        public BufferStruct m_bufferPhase;   
 
         public Transform m_hiderSpawn;
         public List<Transform> m_seekerSpawns;
 
+        [HideInInspector]
+        public List<Timer> m_timers;
         private Transform m_timerHolder;
         public GameObject m_timerPrefab;
 
-        public BufferStruct m_bufferPhase;
         public GameObject m_infoText;
-
-        public GameObject m_twistManagerPrefab;
-        public GameObject m_twistManager;
-
-        private bool m_music = false;
 
         new
         void Start()
         {
             base.Start();
-
-            EventManager.m_instance.SubscribeToEvent(Events.Event.DS_HIDERREADY, EvFunc_HiderReady);
 
             m_timerHolder = new GameObject("TimerHolder").transform;
             m_timerHolder.transform.SetParent(transform);
@@ -82,7 +78,6 @@ namespace HF
             }
 
             m_infoText = GameObject.FindGameObjectWithTag("DaSText");
-            //m_infoBox = GameObject.FindGameObjectWithTag("DaSBox");
 
             m_currentPhase = DriveAndSeekPhases.INACTIVE;
         }
@@ -90,13 +85,8 @@ namespace HF
         new
         void Update()
         {
-            base.Start();
+            base.Update();
             UpdatePhase();
-
-            if (Input.GetKeyDown(KeyCode.Return))
-            {
-                m_music = !m_music;
-            }
         }
 
         void InitializePhase()
@@ -111,14 +101,14 @@ namespace HF
                         //Setup buffer phase
                         m_currentPhase = DriveAndSeekPhases.BUFFER;
                         m_bufferPhase.m_lenght = 5.0f;
-                        m_bufferPhase.m_nextPhase = DriveAndSeekPhases.HIDING;
+                        m_bufferPhase.m_nextPhase = DriveAndSeekPhases.RUNNING;
                         m_bufferPhase.m_message = "Runner Get Ready!";
                         InitializePhase();
                         break;
                     }
-                case DriveAndSeekPhases.HIDING:
+                case DriveAndSeekPhases.RUNNING:
                     {
-                        EventManager.m_instance.AddEvent(Events.Event.DS_HIDING);
+                        EventManager.m_instance.AddEvent(Events.Event.DS_RUNNING);
                         m_infoText.GetComponent<Text>().text = "Start Running!";
                         m_timers[GetTimer("Hide")].StartTimer();
 
@@ -126,11 +116,10 @@ namespace HF
                         ChangePlayerMovement(m_hiderNumber, true);
                         break;
                     }
-                case DriveAndSeekPhases.CHASE:
+                case DriveAndSeekPhases.CHASING:
                     {
-                        EventManager.m_instance.AddEvent(Events.Event.DS_CHASE);
+                        EventManager.m_instance.AddEvent(Events.Event.DS_CHASING);
 
-                        m_twistManager = Instantiate(m_twistManagerPrefab);
                         m_infoText.GetComponent<Text>().text = "Catch the Runner!";
 
                         ChangeAllPlayerMovement(true);
@@ -211,7 +200,6 @@ namespace HF
                     }
                 case DriveAndSeekPhases.INACTIVE:
                     {
-                        //m_infoBox.GetComponent<Image>().enabled = false;
                         m_infoText.GetComponent<Text>().text = "";
                         ChangeAllPlayerMovement(true);
                         break;
@@ -231,16 +219,16 @@ namespace HF
                     {
                         break;
                     }
-                case DriveAndSeekPhases.HIDING:
+                case DriveAndSeekPhases.RUNNING:
                     {
                         if (m_timers[GetTimer("Hide")].CheckFinished())
                         {
-                            m_currentPhase = DriveAndSeekPhases.CHASE;
+                            m_currentPhase = DriveAndSeekPhases.CHASING;
                             InitializePhase();
                         }
                         break;
                     }
-                case DriveAndSeekPhases.CHASE:
+                case DriveAndSeekPhases.CHASING:
                     {
                         if (CheckHidersCaught())
                         {
@@ -412,20 +400,6 @@ namespace HF
             {
                 PlayerManager.m_instance.m_playerCars[iter].GetComponent<Movement>().m_controls = _state;
             }
-        }
-
-        void EvFunc_HiderReady()
-        {
-            for (int iter = 0; iter <= PlayerManager.m_instance.m_playerCars.Count - 1; iter++)
-            {
-                PlayerManager.m_instance.m_playerCars[iter].GetComponent<Car>().ToggleCamera(false);
-            }
-
-            m_currentPhase = DriveAndSeekPhases.BUFFER;
-            m_bufferPhase.m_lenght = 5.0f;
-            m_bufferPhase.m_nextPhase = DriveAndSeekPhases.CHASE;
-            m_bufferPhase.m_message = "Seekers Look Back!";
-            InitializePhase();
         }
     }
 }

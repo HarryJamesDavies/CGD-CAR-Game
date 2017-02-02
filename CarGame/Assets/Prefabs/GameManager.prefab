@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3b7c748ff64cfb49a7308a00cfbf712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_active: 0
   m_currentTwist: 0
 --- !u!1001 &100100000
 Prefab:

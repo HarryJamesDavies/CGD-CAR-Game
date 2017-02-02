@@ -27,7 +27,7 @@ namespace HF
         
         void Update() //check to see if the event has started, check to see if the car needs to start a timer to drop oil...
         {
-            EventManager.m_instance.SubscribeToEvent(Events.Event.DS_HIDING, StartOilSpawns);
+            EventManager.m_instance.SubscribeToEvent(Events.Event.DS_RUNNING, StartOilSpawns);
             //EventManager.m_instance.SubscribeToEvent(Events.Event.DS_CHASE, StartOilSpawns);
 
             if (m_timer == false)
@@ -38,7 +38,7 @@ namespace HF
             if (GameModeManager.m_instance.m_currentEvent == GameModeManager.GameModeState.FREEROAM) //... check to see if I should be alive
             {
                 Destroy(m_oilHolder);
-                Destroy(m_oilReference);
+                //Destroy(m_oilReference);
                 Destroy(gameObject.GetComponent<HiderAbilities>());
             }
 

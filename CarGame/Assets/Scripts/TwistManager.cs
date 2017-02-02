@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TwistManager : MonoBehaviour {
+public class TwistManager : MonoBehaviour
+{
+    public bool m_active = true;
 
     bool m_timerStart;
 
@@ -39,9 +41,12 @@ public class TwistManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        if(m_timerStart == false)
+        if (m_active)
         {
-            StartCoroutine(CountdownToTwist());
+            if (m_timerStart == false)
+            {
+                StartCoroutine(CountdownToTwist());
+            }
         }
 	}
 

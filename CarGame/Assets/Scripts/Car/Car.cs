@@ -83,7 +83,7 @@ namespace HF
             }
 
             EventManager.m_instance.SubscribeToEvent(Events.Event.DS_SETUP, SetupText);
-            EventManager.m_instance.SubscribeToEvent(Events.Event.DS_HIDING, HideText);
+            EventManager.m_instance.SubscribeToEvent(Events.Event.DS_RUNNING, RunningText);
 
             //so we can access the cb counter
             chaseBreakerInstance = GetComponent<ChaseBreaker>();
@@ -290,7 +290,7 @@ namespace HF
             }
         }
 
-        void HideText()
+        void RunningText()
         {
             m_image.enabled = false;
         }
@@ -307,8 +307,8 @@ namespace HF
         void OnDestroy()
         {
             EventManager.m_instance.UnsubscribeToEvent(Events.Event.DS_SETUP, SetupText);
-            EventManager.m_instance.UnsubscribeToEvent(Events.Event.DS_HIDING, HideText);
-            EventManager.m_instance.UnsubscribeToEvent(Events.Event.DS_CHASE, ShowFuel);
+            EventManager.m_instance.UnsubscribeToEvent(Events.Event.DS_RUNNING, RunningText);
+            EventManager.m_instance.UnsubscribeToEvent(Events.Event.DS_CHASING, ShowFuel);
         }
 
         public void ChangeMesh(int _damageCounter)

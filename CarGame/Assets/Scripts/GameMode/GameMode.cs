@@ -13,6 +13,8 @@ namespace HF
 
         public Rect m_eventRect;
 
+        public GameModeManager.GameModeState m_mode;
+
         // Use this for initialization
         protected void Start()
         {

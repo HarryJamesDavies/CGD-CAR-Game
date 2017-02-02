@@ -12,12 +12,13 @@ namespace HF
         {
             FREEROAM = 0,
             DRIVEANDSEEK = 1,
+            TEST = 2,
             Count
         };
 
         public GameModeState m_currentEvent = GameModeState.FREEROAM;
         public GameModeState m_prevEvent = GameModeState.FREEROAM;
-        private GameModeState m_floatingEvent = GameModeState.FREEROAM;
+        public GameModeState m_floatingEvent = GameModeState.FREEROAM;
 
         public GameMode m_currentGameMode;
         public GameObject m_modePrefab;
@@ -69,6 +70,11 @@ namespace HF
                 case GameModeState.DRIVEANDSEEK:
                     {
                         EventManager.m_instance.AddEvent(Events.Event.GM_DRIVEANDSEEK);
+                        break;
+                    }
+                case GameModeState.TEST:
+                    {
+                        EventManager.m_instance.AddEvent(Events.Event.GM_TEST);
                         break;
                     }
                 default:
