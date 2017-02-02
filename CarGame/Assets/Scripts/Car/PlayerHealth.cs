@@ -1,6 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//===================== Kojima Drive - Half-Full Games 2017 ====================//
+//
+// Author(s): JOE PLANT, ADAM MOOREY
+// Purpose: Health system for the players
+// Namespace: HF
+//
+//===============================================================================//
+
 namespace HF
 {
     public class PlayerHealth : MonoBehaviour

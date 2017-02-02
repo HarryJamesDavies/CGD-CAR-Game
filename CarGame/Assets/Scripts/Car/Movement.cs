@@ -26,6 +26,7 @@ namespace HF
         public float m_maxFuel = 0.0f;
         public bool m_controls;
         public bool m_setup = false;
+        public bool m_reduceFuel = false;
 
         public Vector3 m_direction;
         Quaternion startingRotation;
@@ -38,6 +39,9 @@ namespace HF
             m_direction = Vector3.forward;
             startingRotation = transform.rotation;
             m_controls = true;
+
+            EventManager.m_instance.SubscribeToEvent(Events.Event.GM_DRIVEANDSEEK, ActivateFuel);
+            EventManager.m_instance.SubscribeToEvent(Events.Event.GM_FREEROAM, DeactivateFuel);
         }
 
         // Use this for initialization
@@ -47,13 +51,21 @@ namespace HF
             if (m_forward)
             {
                 m_appliedForce += m_power;
-                m_fuel -= m_power * 20;
+
+                if (m_reduceFuel)
+                {
+                    m_fuel -= m_power * 20;
+                }
             }
 
             if (m_backward)
             {
                 m_appliedForce -= m_power;
-                m_fuel -= m_power * 20;
+
+                if (m_reduceFuel)
+                {
+                    m_fuel -= m_power * 20;
+                }
             }
 
             //make sure fuel doesn't go below 0
@@ -724,6 +736,16 @@ namespace HF
                 m_appliedForce *= m_friction;
                 transform.Translate(Vector3.forward * -m_appliedForce);
             }
+        }
+
+        void ActivateFuel()
+        {
+            m_reduceFuel = true;
+        }
+
+        void DeactivateFuel()
+        {
+            m_reduceFuel = false;
         }
     }
 }
