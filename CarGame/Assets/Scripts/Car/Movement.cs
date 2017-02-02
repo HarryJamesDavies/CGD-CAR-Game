@@ -2,19 +2,27 @@
 using System.Collections;
 using System.Collections.Generic;
 
+//===================== Kojima Drive - Half-Full Games 2017 ====================//
+//
+// Author(s): HARRY DAVIES, ADAM MOOREY
+// Purpose: Movement for the car and control handling
+// Namespace: HF
+//
+//===============================================================================//
+
 namespace HF
 {
     public class Movement : MonoBehaviour
     {
-        float xspeep = 0f;
+        float m_appliedForce = 0f;
         public float m_power = 0.01f;
-        float friction = 0.95f;
-        bool forward = false;
-        bool backward = false;
-        bool right = false;
-        bool left = false;
+        float m_friction = 0.95f;
+        bool m_forward = false;
+        bool m_backward = false;
+        bool m_right = false;
+        bool m_left = false;
 
-        public float fuel = 2.0f;
+        public float m_fuel = 2.0f;
         public float m_maxFuel = 0.0f;
         public bool m_controls;
         public bool m_setup = false;
@@ -22,7 +30,6 @@ namespace HF
         public Vector3 m_direction;
         Quaternion startingRotation;
         public List<AudioClip> m_hornSounds;
-        //AudioSource m_audioSource;
 
         public List<GameObject> m_lights;
 
@@ -30,35 +37,38 @@ namespace HF
         {
             m_direction = Vector3.forward;
             startingRotation = transform.rotation;
-            //m_audioSource = GetComponent<AudioSource>();
             m_controls = true;
         }
 
         // Use this for initialization
         void FixedUpdate()
         {
-            if (forward)
+            //apply the direction to the car
+            if (m_forward)
             {
-                xspeep += m_power;
-                fuel -= m_power * 20;
-            }
-            if (backward)
-            {
-                xspeep -= m_power;
-                fuel -= m_power * 20;
+                m_appliedForce += m_power;
+                m_fuel -= m_power * 20;
             }
 
-            if (fuel < 0.0f)
+            if (m_backward)
             {
-                fuel = 0.0f;
+                m_appliedForce -= m_power;
+                m_fuel -= m_power * 20;
             }
 
-            if (right)
+            //make sure fuel doesn't go below 0
+            if (m_fuel < 0.0f)
+            {
+                m_fuel = 0.0f;
+            }
+
+            //rotate the car dependent on direction facing
+            if (m_right)
             {
                 transform.Rotate(new Vector3(0.0f, 1.0f, 0.0f));
             }
 
-            if (left)
+            if (m_left)
             {
                 transform.Rotate(new Vector3(0.0f, -1.0f, 0.0f));
             }
@@ -67,13 +77,11 @@ namespace HF
         // Update is called once per frame
         void Update()
         {
-            //Debug.Log(m_controls);
-
             if (!m_setup)
             {
-                if (GetComponent<Car>().m_hider)
+                if (GetComponent<Car>().m_runner)
                 {
-                    fuel = 100.0f;
+                    m_fuel = 100.0f;
                     m_maxFuel = 100.0f;
                     m_setup = true;
                 }
@@ -83,10 +91,13 @@ namespace HF
                 }
             }
 
+            //if the controls are enabled then determine 
             if (m_controls)
             {
+                //if a controller is being used use correct controls
                 if (ControllerManager.m_instance.m_useController)
                 {
+                    //if flipcontrols is not currently active, use normal controls
                     if (TwistManager.m_instance.m_currentTwist != TwistManager.Twists.flipControls)
                     {
                         switch (gameObject.tag)
@@ -130,6 +141,7 @@ namespace HF
                 }
                 else
                 {
+                    //if flipcontrols is not currently active, use normal controls
                     if (TwistManager.m_instance.m_currentTwist != TwistManager.Twists.flipControls)
                     {
                         switch (gameObject.tag)
@@ -174,14 +186,15 @@ namespace HF
             }
             else
             {
-                forward = false;
-                backward = false;
-                left = false;
-                right = false;
-                xspeep = 0;
+                m_forward = false;
+                m_backward = false;
+                m_left = false;
+                m_right = false;
+                m_appliedForce = 0;
             }
 
-            if (forward == false && backward == false && left == false && right == false)
+            //when no force is being applied refuel, or use button to refuel so long as fuel is less than 50
+            if (m_forward == false && m_backward == false && m_left == false && m_right == false)
             {
                 Refuel();
             }
@@ -192,7 +205,7 @@ namespace HF
                     case "Player1":
                         if (Input.GetKeyDown("e"))
                         {
-                            if (fuel <= 50.0f)
+                            if (m_fuel <= 50.0f)
                             {
                                 Refuel();
                             }
@@ -201,7 +214,7 @@ namespace HF
                     case "Player2":
                         if (Input.GetKeyDown("."))
                         {
-                            if (fuel <= 50.0f)
+                            if (m_fuel <= 50.0f)
                             {
                                 Refuel();
                             }
@@ -210,7 +223,7 @@ namespace HF
                     case "Player3":
                         if (Input.GetKeyDown("y"))
                         {
-                            if (fuel <= 50.0f)
+                            if (m_fuel <= 50.0f)
                             {
                                 Refuel();
                             }
@@ -219,7 +232,7 @@ namespace HF
                     case "Player4":
                         if (Input.GetKeyDown("o"))
                         {
-                            if (fuel <= 50.0f)
+                            if (m_fuel <= 50.0f)
                             {
                                 Refuel();
                             }
@@ -236,36 +249,36 @@ namespace HF
         {
             if (Input.GetAxis("P" + _controller + "-R2(PS4)") > -1.0f)
             {
-                forward = true;
+                m_forward = true;
             }
             if (Input.GetAxis("P" + _controller + "-R2(PS4)") == -1.0f)
             {
-                forward = false;
+                m_forward = false;
             }
             if (Input.GetAxis("P" + _controller + "-L2(PS4)") > -1.0f)
             {
-                backward = true;
+                m_backward = true;
             }
             if (Input.GetAxis("P" + _controller + "-L2(PS4)") == -1.0f)
             {
-                backward = false;
+                m_backward = false;
             }
 
             if (Input.GetAxis("P" + _controller + ("-LeftJoystickX(PS4)")) > 0.5f)
             {
-                right = true;
+                m_right = true;
             }
             if (Input.GetAxis("P" + _controller + ("-LeftJoystickX(PS4)")) < 0.5f)
             {
-                right = false;
+                m_right = false;
             }
             if (Input.GetAxis("P" + _controller + ("-LeftJoystickX(PS4)")) < -0.5f)
             {
-                left = true;
+                m_left = true;
             }
             if (Input.GetAxis("P" + _controller + ("-LeftJoystickX(PS4)")) > -0.5f)
             {
-                left = false;
+                m_left = false;
             }
 
             if (Input.GetButtonDown("P" + _controller + ("-Triangle(PS4)")))
@@ -274,28 +287,13 @@ namespace HF
                 gameObject.transform.rotation = startingRotation;
             }
 
-            //if (Input.GetButtonDown("P" + _controller + ("-Square(PS4)")))
-            //{
-            //    foreach (GameObject lights in m_lights)
-            //    {
-            //        lights.SetActive(!lights.activeInHierarchy);
-            //    }
-            //}
-
-            //if (Input.GetButtonDown("P" + _controller + ("-Circle(PS4)")))
-            //{
-            //    int sound = Random.Range(0, m_hornSounds.Count);
-            //    m_audioSource.clip = m_hornSounds[sound];
-            //    m_audioSource.Play();
-            //}
-
-            if (fuel < 0)
+            if (m_fuel < 0)
             {
-                xspeep = 0;
+                m_appliedForce = 0;
             }
 
-            xspeep *= friction;
-            transform.Translate(Vector3.forward * -xspeep);
+            m_appliedForce *= m_friction;
+            transform.Translate(Vector3.forward * -m_appliedForce);
         }
 
         void KeyboardMovement(int _playerNumber)
@@ -304,36 +302,36 @@ namespace HF
             {
                 if (Input.GetKeyDown("w"))
                 {
-                    forward = true;
+                    m_forward = true;
                 }
                 if (Input.GetKeyUp("w"))
                 {
-                    forward = false;
+                    m_forward = false;
                 }
                 if (Input.GetKeyDown("s"))
                 {
-                    backward = true;
+                    m_backward = true;
                 }
                 if (Input.GetKeyUp("s"))
                 {
-                    backward = false;
+                    m_backward = false;
                 }
 
                 if (Input.GetKeyDown("d"))
                 {
-                    right = true;
+                    m_right = true;
                 }
                 if (Input.GetKeyUp("d"))
                 {
-                    right = false;
+                    m_right = false;
                 }
                 if (Input.GetKeyDown("a"))
                 {
-                    left = true;
+                    m_left = true;
                 }
                 if (Input.GetKeyUp("a"))
                 {
-                    left = false;
+                    m_left = false;
                 }
 
                 if (Input.GetKeyDown("q"))
@@ -346,36 +344,36 @@ namespace HF
             {
                 if (Input.GetKeyDown(KeyCode.UpArrow))
                 {
-                    forward = true;
+                    m_forward = true;
                 }
                 if (Input.GetKeyUp(KeyCode.UpArrow))
                 {
-                    forward = false;
+                    m_forward = false;
                 }
                 if (Input.GetKeyDown(KeyCode.DownArrow))
                 {
-                    backward = true;
+                    m_backward = true;
                 }
                 if (Input.GetKeyUp(KeyCode.DownArrow))
                 {
-                    backward = false;
+                    m_backward = false;
                 }
 
                 if (Input.GetKeyDown(KeyCode.RightArrow))
                 {
-                    right = true;
+                    m_right = true;
                 }
                 if (Input.GetKeyUp(KeyCode.RightArrow))
                 {
-                    right = false;
+                    m_right = false;
                 }
                 if (Input.GetKeyDown(KeyCode.LeftArrow))
                 {
-                    left = true;
+                    m_left = true;
                 }
                 if (Input.GetKeyUp(KeyCode.LeftArrow))
                 {
-                    left = false;
+                    m_left = false;
                 }
 
                 if (Input.GetKeyDown("/"))
@@ -388,36 +386,36 @@ namespace HF
             {
                 if (Input.GetKeyDown("t"))
                 {
-                    forward = true;
+                    m_forward = true;
                 }
                 if (Input.GetKeyUp("t"))
                 {
-                    forward = false;
+                    m_forward = false;
                 }
                 if (Input.GetKeyDown("g"))
                 {
-                    backward = true;
+                    m_backward = true;
                 }
                 if (Input.GetKeyUp("g"))
                 {
-                    backward = false;
+                    m_backward = false;
                 }
 
                 if (Input.GetKeyDown("h"))
                 {
-                    right = true;
+                    m_right = true;
                 }
                 if (Input.GetKeyUp("h"))
                 {
-                    right = false;
+                    m_right = false;
                 }
                 if (Input.GetKeyDown("f"))
                 {
-                    left = true;
+                    m_left = true;
                 }
                 if (Input.GetKeyUp("f"))
                 {
-                    left = false;
+                    m_left = false;
                 }
 
                 if (Input.GetKeyDown("r"))
@@ -430,36 +428,36 @@ namespace HF
             {
                 if (Input.GetKeyDown("i"))
                 {
-                    forward = true;
+                    m_forward = true;
                 }
                 if (Input.GetKeyUp("i"))
                 {
-                    forward = false;
+                    m_forward = false;
                 }
                 if (Input.GetKeyDown("k"))
                 {
-                    backward = true;
+                    m_backward = true;
                 }
                 if (Input.GetKeyUp("k"))
                 {
-                    backward = false;
+                    m_backward = false;
                 }
 
                 if (Input.GetKeyDown("l"))
                 {
-                    right = true;
+                    m_right = true;
                 }
                 if (Input.GetKeyUp("l"))
                 {
-                    right = false;
+                    m_right = false;
                 }
                 if (Input.GetKeyDown("j"))
                 {
-                    left = true;
+                    m_left = true;
                 }
                 if (Input.GetKeyUp("j"))
                 {
-                    left = false;
+                    m_left = false;
                 }
 
                 if (Input.GetKeyDown("u"))
@@ -469,28 +467,13 @@ namespace HF
                 }
             }
 
-            //if (Input.GetKeyDown("l"))
-            //{
-            //    foreach (GameObject lights in m_lights)
-            //    {
-            //        lights.SetActive(!lights.activeInHierarchy);
-            //    }
-            //}
-
-            //if (Input.GetKeyDown("h"))
-            //{
-            //    int sound = Random.Range(0, m_hornSounds.Count);
-            //    m_audioSource.clip = m_hornSounds[sound];
-            //    m_audioSource.Play();
-            //}
-
-            if (fuel <= 0.0f)
+            if (m_fuel <= 0.0f)
             {
-                xspeep = 0;
+                m_appliedForce = 0;
             }
 
-            xspeep *= friction;
-            transform.Translate(Vector3.forward * -xspeep);
+            m_appliedForce *= m_friction;
+            transform.Translate(Vector3.forward * -m_appliedForce);
         }
 
         public void ToggleLights(bool _active)
@@ -503,9 +486,9 @@ namespace HF
 
         void Refuel()
         {
-            if (fuel < m_maxFuel)
+            if (m_fuel < m_maxFuel)
             {
-                fuel += Time.deltaTime * 8;
+                m_fuel += Time.deltaTime * 8;
             }
         }
 
@@ -515,36 +498,36 @@ namespace HF
             {
                 if (Input.GetAxis("P" + _playerNumber + "-R2(PS4)") > -1.0f)
                 {
-                    backward = true;
+                    m_backward = true;
                 }
                 if (Input.GetAxis("P" + _playerNumber + "-R2(PS4)") == -1.0f)
                 {
-                    backward = false;
+                    m_backward = false;
                 }
                 if (Input.GetAxis("P" + _playerNumber + "-L2(PS4)") > -1.0f)
                 {
-                    forward = true;
+                    m_forward = true;
                 }
                 if (Input.GetAxis("P" + _playerNumber + "-L2(PS4)") == -1.0f)
                 {
-                    forward = false;
+                    m_forward = false;
                 }
 
                 if (Input.GetAxis("P" + _playerNumber + ("-LeftJoystickX(PS4)")) > 0.5f)
                 {
-                    left = true;
+                    m_left = true;
                 }
                 if (Input.GetAxis("P" + _playerNumber + ("-LeftJoystickX(PS4)")) < 0.5f)
                 {
-                    left = false;
+                    m_left = false;
                 }
                 if (Input.GetAxis("P" + _playerNumber + ("-LeftJoystickX(PS4)")) < -0.5f)
                 {
-                    right = true;
+                    m_right = true;
                 }
                 if (Input.GetAxis("P" + _playerNumber + ("-LeftJoystickX(PS4)")) > -0.5f)
                 {
-                    right = false;
+                    m_right = false;
                 }
 
                 if (Input.GetButtonDown("P" + _playerNumber + ("-Triangle(PS4)")))
@@ -553,13 +536,13 @@ namespace HF
                     gameObject.transform.rotation = startingRotation;
                 }
 
-                if (fuel < 0)
+                if (m_fuel < 0)
                 {
-                    xspeep = 0;
+                    m_appliedForce = 0;
                 }
 
-                xspeep *= friction;
-                transform.Translate(Vector3.forward * -xspeep);
+                m_appliedForce *= m_friction;
+                transform.Translate(Vector3.forward * -m_appliedForce);
             }
             else
             {
@@ -568,36 +551,36 @@ namespace HF
                     case 1:
                         if (Input.GetKeyDown("w"))
                         {
-                            backward = true;
+                            m_backward = true;
                         }
                         if (Input.GetKeyUp("w"))
                         {
-                            backward = false;
+                            m_backward = false;
                         }
                         if (Input.GetKeyDown("s"))
                         {
-                            forward = true;
+                            m_forward = true;
                         }
                         if (Input.GetKeyUp("s"))
                         {
-                            forward = false;
+                            m_forward = false;
                         }
 
                         if (Input.GetKeyDown("d"))
                         {
-                            left = true;
+                            m_left = true;
                         }
                         if (Input.GetKeyUp("d"))
                         {
-                            left = false;
+                            m_left = false;
                         }
                         if (Input.GetKeyDown("a"))
                         {
-                            right = true;
+                            m_right = true;
                         }
                         if (Input.GetKeyUp("a"))
                         {
-                            right = false;
+                            m_right = false;
                         }
 
                         if (Input.GetKeyDown("q"))
@@ -609,36 +592,36 @@ namespace HF
                     case 2:
                         if (Input.GetKeyDown(KeyCode.UpArrow))
                         {
-                            backward = true;
+                            m_backward = true;
                         }
                         if (Input.GetKeyUp(KeyCode.UpArrow))
                         {
-                            backward = false;
+                            m_backward = false;
                         }
                         if (Input.GetKeyDown(KeyCode.DownArrow))
                         {
-                            forward = true;
+                            m_forward = true;
                         }
                         if (Input.GetKeyUp(KeyCode.DownArrow))
                         {
-                            forward = false;
+                            m_forward = false;
                         }
 
                         if (Input.GetKeyDown(KeyCode.RightArrow))
                         {
-                            left = true;
+                            m_left = true;
                         }
                         if (Input.GetKeyUp(KeyCode.RightArrow))
                         {
-                            left = false;
+                            m_left = false;
                         }
                         if (Input.GetKeyDown(KeyCode.LeftArrow))
                         {
-                            right = true;
+                            m_right = true;
                         }
                         if (Input.GetKeyUp(KeyCode.LeftArrow))
                         {
-                            right = false;
+                            m_right = false;
                         }
 
                         if (Input.GetKeyDown("/"))
@@ -650,36 +633,36 @@ namespace HF
                     case 3:
                         if (Input.GetKeyDown("t"))
                         {
-                            backward = true;
+                            m_backward = true;
                         }
                         if (Input.GetKeyUp("t"))
                         {
-                            backward = false;
+                            m_backward = false;
                         }
                         if (Input.GetKeyDown("g"))
                         {
-                            forward = true;
+                            m_forward = true;
                         }
                         if (Input.GetKeyUp("g"))
                         {
-                            forward = false;
+                            m_forward = false;
                         }
 
                         if (Input.GetKeyDown("h"))
                         {
-                            left = true;
+                            m_left = true;
                         }
                         if (Input.GetKeyUp("h"))
                         {
-                            left = false;
+                            m_left = false;
                         }
                         if (Input.GetKeyDown("f"))
                         {
-                            right = true;
+                            m_right = true;
                         }
                         if (Input.GetKeyUp("f"))
                         {
-                            right = false;
+                            m_right = false;
                         }
 
                         if (Input.GetKeyDown("r"))
@@ -691,36 +674,36 @@ namespace HF
                     case 4:
                         if (Input.GetKeyDown("i"))
                         {
-                            backward = true;
+                            m_backward = true;
                         }
                         if (Input.GetKeyUp("i"))
                         {
-                            backward = false;
+                            m_backward = false;
                         }
                         if (Input.GetKeyDown("k"))
                         {
-                            forward = true;
+                            m_forward = true;
                         }
                         if (Input.GetKeyUp("k"))
                         {
-                            forward = false;
+                            m_forward = false;
                         }
 
                         if (Input.GetKeyDown("l"))
                         {
-                            left = true;
+                            m_left = true;
                         }
                         if (Input.GetKeyUp("l"))
                         {
-                            left = false;
+                            m_left = false;
                         }
                         if (Input.GetKeyDown("j"))
                         {
-                            right = true;
+                            m_right = true;
                         }
                         if (Input.GetKeyUp("j"))
                         {
-                            right = false;
+                            m_right = false;
                         }
 
                         if (Input.GetKeyDown("u"))
@@ -733,13 +716,13 @@ namespace HF
                         break;
                 }
 
-                if (fuel < 0)
+                if (m_fuel < 0)
                 {
-                    xspeep = 0;
+                    m_appliedForce = 0;
                 }
 
-                xspeep *= friction;
-                transform.Translate(Vector3.forward * -xspeep);
+                m_appliedForce *= m_friction;
+                transform.Translate(Vector3.forward * -m_appliedForce);
             }
         }
     }

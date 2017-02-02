@@ -2,31 +2,44 @@
 using UnityEngine.UI;
 using System.Collections;
 
+//===================== Kojima Drive - Half-Full Games 2017 ====================//
+//
+// Author(s): ADAM MOOREY, MATTHEW WYNTER, HARRY DAVIES
+// Purpose: Main car script for the key player car requirements
+// Namespace: HF
+//
+//===============================================================================//
+
 namespace HF
 {
     public class Car : MonoBehaviour
     {
+        //key player identifiers
         public string m_tag;
         public int m_playerNumber;
 
         private Camera m_playerCam;
         public GameObject m_seekerParam;
 
-        public bool m_hider;
-        public bool m_seeker;
+        //detection variables
+        public bool m_runner;
+        public bool m_chaser;
         public bool m_isDead;
         private GameObject m_seekerCone;
 
+        //UI image variables
         public RawImage m_image;
         public Texture m_chaserTitle;
         public Texture m_runnerTitle;
         public Texture m_outOfFuel;
         public Text m_fuel;
 
+        //chase breaker images
         public RawImage chasebreaker1;
         public RawImage chasebreaker2;
         public RawImage chasebreaker3;
 
+        //the meshs for replacement based on damage
         public GameObject m_100HealthModel;
         public GameObject m_80HealthModel;
         public GameObject m_60HealthModel;
@@ -43,35 +56,35 @@ namespace HF
         {
             m_teleportCooldown = false;
             m_tag = gameObject.tag;
+
             SetCamera();
 
-            if (m_tag == "Player1")
+            m_runner = false;
+            m_chaser = false;
+
+            //assigns the player numbers based on gameobjects tag
+            switch (m_tag)
             {
-                m_playerNumber = 1;
-                m_hider = false;
-                m_seeker = false;
-            }
-            else if (m_tag == "Player2")
-            {
-                m_playerNumber = 2;
-                m_hider = false;
-                m_seeker = false;
-            }
-            else if (m_tag == "Player3")
-            {
-                m_playerNumber = 3;
-                m_hider = false;
-                m_seeker = false;
-            }
-            else if (m_tag == "Player4")
-            {
-                m_playerNumber = 4;
-                m_hider = false;
-                m_seeker = false;
+                case "Player1":
+                    m_playerNumber = 1;
+                    break;
+                case "Player2":
+                    m_playerNumber = 2;
+                    break;
+                case "Player3":
+                    m_playerNumber = 3;
+                    break;
+                case "Player4":
+                    m_playerNumber = 4;
+                    break;
+                default:
+                    Debug.Log("Error: Player tag doesn't match.");
+                    break;
             }
 
             m_fuel.enabled = false;
 
+            //finds the car model for changing in the damage system
             for (int i = 0; i <= transform.childCount - 1; i++)
             {
                 string tempTag = transform.GetChild(i).gameObject.tag;
@@ -82,6 +95,7 @@ namespace HF
                 }
             }
 
+            //subscribe the text setup to the necessary events
             EventManager.m_instance.SubscribeToEvent(Events.Event.DS_SETUP, SetupText);
             EventManager.m_instance.SubscribeToEvent(Events.Event.DS_RUNNING, RunningText);
 
@@ -92,10 +106,10 @@ namespace HF
         void Update()
         {
             //updates the fuel text for the runner, and sets others to false
-            if (m_hider)
+            if (m_runner)
             {
                 m_fuel.enabled = true;
-                m_fuel.text = "Fuel: " + (int)GetComponent<Movement>().fuel;
+                m_fuel.text = "Fuel: " + (int)GetComponent<Movement>().m_fuel;
                 chasebreaker1.enabled = true;
                 chasebreaker2.enabled = true;
                 chasebreaker3.enabled = true;
@@ -109,7 +123,7 @@ namespace HF
             }
 
             //checks when the out of fuel image is showing or not
-            if (GetComponent<Movement>().fuel == 0.0f)
+            if (GetComponent<Movement>().m_fuel == 0.0f)
             {
                 ShowFuel();
             }
@@ -118,6 +132,7 @@ namespace HF
                 m_image.enabled = false;
             }
 
+            //if the twist is dissappear, set player mesh to active/inactive
             if (TwistManager.m_instance.m_currentTwist == TwistManager.Twists.dissapear)
             {
                 m_currentModel.SetActive(false);
@@ -127,13 +142,14 @@ namespace HF
                 m_currentModel.SetActive(true);
             }
 
+            //if the twist is speedup increase the vehicle power
             if (TwistManager.m_instance.m_currentTwist == TwistManager.Twists.speedUp)
             {
                 GetComponent<Movement>().m_power = 0.01f;
             }
             else
             {
-                if (m_hider)
+                if (m_runner)
                 {
                     GetComponent<Movement>().m_power = 0.006f;
                 }
@@ -146,30 +162,31 @@ namespace HF
             checkChaseBreakerNumber();
         }
 
-        public void SetSeeker(string _hiderTag)
+        public void SetChaser(string _runnerTag)
         {
-            m_seeker = true;
+            m_chaser = true;
             m_seekerCone = Instantiate(m_seekerParam, transform.position, Quaternion.Euler(0.0f, 90.0f, 90.0f)) as GameObject;
             m_seekerCone.transform.parent = gameObject.transform;
 
             //Instantiate(chasebreakerUI, transform.position, transform.rotation);
 
-            m_seekerCone.GetComponent<SeekerScript>().m_hiderTag = _hiderTag;
+            m_seekerCone.GetComponent<SeekerScript>().m_hiderTag = _runnerTag;
             Destroy(GetComponent<ChaseBreaker>());
         }
 
-        public void SetHider()
+        public void SetRunner()
         {
-            m_hider = true;
+            //set the runners base variables
+            m_runner = true;
             GetComponent<Movement>().m_power = 0.006f;
-            //gameObject.AddComponent<Hider>();
             gameObject.AddComponent<HiderAbilities>();
             gameObject.GetComponent<ChaseBreaker>().enabled = true;
         }
 
-        public void ResetSeeker()
+        public void ResetChaser()
         {
-            m_seeker = false;
+            //reset the seekers current variables
+            m_chaser = false;
             GetComponent<PlayerHealth>().ResetHealth();
             gameObject.AddComponent<ChaseBreaker>();
             Destroy(m_seekerCone);
@@ -187,9 +204,10 @@ namespace HF
             m_currentModel.GetComponent<MeshFilter>().sharedMesh = m_100HealthModel.GetComponent<MeshFilter>().sharedMesh;
         }
 
-        public void ResetHider()
+        public void ResetRunner()
         {
-            m_hider = false;
+            //reset the runner variables
+            m_runner = false;
             GetComponent<Movement>().m_power = 0.005f;
             GetComponent<PlayerHealth>().ResetHealth();
             Destroy(GetComponent<Hider>());
@@ -214,6 +232,7 @@ namespace HF
 
         void SetCamera()
         {
+            //find the camera component tagged carcamera
             for (int i = 0; i <= transform.childCount - 1; i++)
             {
                 string tempTag = transform.GetChild(i).gameObject.tag;
@@ -224,6 +243,7 @@ namespace HF
                 }
             }
 
+            //change the camera render dependent on the number of players spawned
             switch (PlayerManager.m_instance.m_numberOfCars)
             {
                 case 1:
@@ -278,7 +298,8 @@ namespace HF
 
         void SetupText()
         {
-            if (m_hider)
+            //set the intital role text based on players role
+            if (m_runner)
             {
                 m_image.texture = m_runnerTitle;
                 m_image.enabled = true;
@@ -297,7 +318,8 @@ namespace HF
 
         void ShowFuel()
         {
-            if (GetComponent<Movement>().fuel <= 0.0f)
+            //when fuel is empty display image
+            if (GetComponent<Movement>().m_fuel <= 0.0f)
             {
                 m_image.enabled = true;
                 m_image.texture = m_outOfFuel;
@@ -306,6 +328,7 @@ namespace HF
 
         void OnDestroy()
         {
+            //unsubscribe functions that aren't needed anymore
             EventManager.m_instance.UnsubscribeToEvent(Events.Event.DS_SETUP, SetupText);
             EventManager.m_instance.UnsubscribeToEvent(Events.Event.DS_RUNNING, RunningText);
             EventManager.m_instance.UnsubscribeToEvent(Events.Event.DS_CHASING, ShowFuel);
@@ -313,16 +336,7 @@ namespace HF
 
         public void ChangeMesh(int _damageCounter)
         {
-            for (int i = 0; i <= transform.childCount - 1; i++)
-            {
-                string tempTag = transform.GetChild(i).gameObject.tag;
-
-                if (tempTag == "CarModel")
-                {
-                    m_currentModel = transform.GetChild(i).gameObject;
-                }
-            }
-
+            //change the mesh accordingly
             switch (_damageCounter)
             {
                 case 1:
