@@ -1,6 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//===================== Kojima Drive - Half-Full Games 2017 ====================//
+//
+// Author(s): ADAM MOOREY, MATTHEW WYNTER
+// Purpose: Script used for runner functionalty, hide cam, toggle controls etc.
+// Namespace: HF
+//
+//===============================================================================//
+
 namespace HF
 {
     public class Hider : MonoBehaviour

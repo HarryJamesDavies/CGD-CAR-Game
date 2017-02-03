@@ -1,6 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//===================== Kojima Drive - Half-Full Games 2017 ====================//
+//
+// Author(s): MATTHEW WYNTER
+// Purpose: Set the hide and seek gamemode to be triggered. 
+// Namespace: HF
+//
+//===============================================================================//
+
 namespace HF
 {
     public class EventCollider : MonoBehaviour
