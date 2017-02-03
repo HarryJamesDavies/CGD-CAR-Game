@@ -22,11 +22,7 @@ namespace HF
         bool m_right = false;
         bool m_left = false;
 
-        public float m_fuel = 2.0f;
-        public float m_maxFuel = 0.0f;
         public bool m_controls;
-        public bool m_setup = false;
-        public bool m_reduceFuel = false;
 
         public Vector3 m_direction;
         Quaternion startingRotation;
@@ -34,14 +30,15 @@ namespace HF
 
         public List<GameObject> m_lights;
 
+        public FuelSystem m_fuelSystem;
+
         void Start()
         {
             m_direction = Vector3.forward;
             startingRotation = transform.rotation;
             m_controls = true;
 
-            EventManager.m_instance.SubscribeToEvent(Events.Event.GM_DRIVEANDSEEK, ActivateFuel);
-            EventManager.m_instance.SubscribeToEvent(Events.Event.GM_FREEROAM, DeactivateFuel);
+            m_fuelSystem = gameObject.GetComponent<FuelSystem>();
         }
 
         // Use this for initialization
@@ -52,9 +49,9 @@ namespace HF
             {
                 m_appliedForce += m_power;
 
-                if (m_reduceFuel)
+                if (m_fuelSystem.m_reduceFuel)
                 {
-                    m_fuel -= m_power * 20;
+                    m_fuelSystem.m_fuel -= m_power * 20;
                 }
             }
 
@@ -62,16 +59,10 @@ namespace HF
             {
                 m_appliedForce -= m_power;
 
-                if (m_reduceFuel)
+                if (m_fuelSystem.m_reduceFuel)
                 {
-                    m_fuel -= m_power * 20;
+                    m_fuelSystem.m_fuel -= m_power * 20;
                 }
-            }
-
-            //make sure fuel doesn't go below 0
-            if (m_fuel < 0.0f)
-            {
-                m_fuel = 0.0f;
             }
 
             //rotate the car dependent on direction facing
@@ -89,20 +80,6 @@ namespace HF
         // Update is called once per frame
         void Update()
         {
-            if (!m_setup)
-            {
-                if (GetComponent<Car>().m_runner)
-                {
-                    m_fuel = 100.0f;
-                    m_maxFuel = 100.0f;
-                    m_setup = true;
-                }
-                else
-                {
-                    m_maxFuel = 4000.0f;
-                }
-            }
-
             //if the controls are enabled then determine 
             if (m_controls)
             {
@@ -206,53 +183,34 @@ namespace HF
             }
 
             //when no force is being applied refuel, or use button to refuel so long as fuel is less than 50
-            if (m_forward == false && m_backward == false && m_left == false && m_right == false)
+            switch (gameObject.tag)
             {
-                Refuel();
-            }
-            else
-            {
-                switch (gameObject.tag)
-                {
-                    case "Player1":
-                        if (Input.GetKeyDown("e"))
-                        {
-                            if (m_fuel <= 50.0f)
-                            {
-                                Refuel();
-                            }
-                        }
-                        break;
-                    case "Player2":
-                        if (Input.GetKeyDown("."))
-                        {
-                            if (m_fuel <= 50.0f)
-                            {
-                                Refuel();
-                            }
-                        }
-                        break;
-                    case "Player3":
-                        if (Input.GetKeyDown("y"))
-                        {
-                            if (m_fuel <= 50.0f)
-                            {
-                                Refuel();
-                            }
-                        }
-                        break;
-                    case "Player4":
-                        if (Input.GetKeyDown("o"))
-                        {
-                            if (m_fuel <= 50.0f)
-                            {
-                                Refuel();
-                            }
-                        }
-                        break;
-                    default:
-                        break;
-                }
+                case "Player1":
+                    if (Input.GetKeyDown("e"))
+                    {
+                        m_fuelSystem.Refuel();
+                    }
+                    break;
+                case "Player2":
+                    if (Input.GetKeyDown("."))
+                    {
+                        m_fuelSystem.Refuel();
+                    }
+                    break;
+                case "Player3":
+                    if (Input.GetKeyDown("y"))
+                    {
+                        m_fuelSystem.Refuel();
+                    }
+                    break;
+                case "Player4":
+                    if (Input.GetKeyDown("o"))
+                    {
+                        m_fuelSystem.Refuel();
+                    }
+                    break;
+                default:
+                    break;
             }
             
         }
@@ -299,7 +257,7 @@ namespace HF
                 gameObject.transform.rotation = startingRotation;
             }
 
-            if (m_fuel < 0)
+            if (m_fuelSystem.m_fuel < 0)
             {
                 m_appliedForce = 0;
             }
@@ -479,7 +437,7 @@ namespace HF
                 }
             }
 
-            if (m_fuel <= 0.0f)
+            if (m_fuelSystem.m_fuel <= 0.0f)
             {
                 m_appliedForce = 0;
             }
@@ -493,14 +451,6 @@ namespace HF
             foreach (GameObject lights in m_lights)
             {
                 lights.SetActive(_active);
-            }
-        }
-
-        void Refuel()
-        {
-            if (m_fuel < m_maxFuel)
-            {
-                m_fuel += Time.deltaTime * 8;
             }
         }
 
@@ -548,7 +498,7 @@ namespace HF
                     gameObject.transform.rotation = startingRotation;
                 }
 
-                if (m_fuel < 0)
+                if (m_fuelSystem.m_fuel < 0)
                 {
                     m_appliedForce = 0;
                 }
@@ -728,7 +678,7 @@ namespace HF
                         break;
                 }
 
-                if (m_fuel < 0)
+                if (m_fuelSystem.m_fuel < 0)
                 {
                     m_appliedForce = 0;
                 }
@@ -736,16 +686,6 @@ namespace HF
                 m_appliedForce *= m_friction;
                 transform.Translate(Vector3.forward * -m_appliedForce);
             }
-        }
-
-        void ActivateFuel()
-        {
-            m_reduceFuel = true;
-        }
-
-        void DeactivateFuel()
-        {
-            m_reduceFuel = false;
         }
     }
 }

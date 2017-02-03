@@ -39,15 +39,6 @@ namespace HF
         public RawImage chasebreaker2;
         public RawImage chasebreaker3;
 
-        //the meshs for replacement based on damage
-        public GameObject m_100HealthModel;
-        public GameObject m_80HealthModel;
-        public GameObject m_60HealthModel;
-        public GameObject m_40HealthModel;
-        public GameObject m_20HealthModel;
-        public GameObject m_0HealthModel;
-        public GameObject m_currentModel;
-
         public bool m_teleportCooldown;
 
         ChaseBreaker chaseBreakerInstance;
@@ -84,17 +75,6 @@ namespace HF
 
             m_fuel.enabled = false;
 
-            //finds the car model for changing in the damage system
-            for (int i = 0; i <= transform.childCount - 1; i++)
-            {
-                string tempTag = transform.GetChild(i).gameObject.tag;
-
-                if (tempTag == "CarModel")
-                {
-                    m_currentModel = transform.GetChild(i).gameObject;
-                }
-            }
-
             //subscribe the text setup to the necessary events
             EventManager.m_instance.SubscribeToEvent(Events.Event.DS_SETUP, SetupText);
             EventManager.m_instance.SubscribeToEvent(Events.Event.DS_RUNNING, RunningText);
@@ -109,7 +89,7 @@ namespace HF
             if (m_runner)
             {
                 m_fuel.enabled = true;
-                m_fuel.text = "Fuel: " + (int)GetComponent<Movement>().m_fuel;
+                m_fuel.text = "Fuel: " + (int)GetComponent<FuelSystem>().m_fuel;
                 chasebreaker1.enabled = true;
                 chasebreaker2.enabled = true;
                 chasebreaker3.enabled = true;
@@ -123,23 +103,13 @@ namespace HF
             }
 
             //checks when the out of fuel image is showing or not
-            if (GetComponent<Movement>().m_fuel == 0.0f)
+            if (GetComponent<FuelSystem>().m_fuel == 0.0f)
             {
                 ShowFuel();
             }
             else if (GetComponent<Movement>().m_controls == true)
             {
                 m_image.enabled = false;
-            }
-
-            //if the twist is dissappear, set player mesh to active/inactive
-            if (TwistManager.m_instance.m_currentTwist == TwistManager.Twists.dissapear)
-            {
-                m_currentModel.SetActive(false);
-            }
-            else
-            {
-                m_currentModel.SetActive(true);
             }
 
             //if the twist is speedup increase the vehicle power
@@ -190,18 +160,6 @@ namespace HF
             GetComponent<PlayerHealth>().ResetHealth();
             gameObject.AddComponent<ChaseBreaker>();
             Destroy(m_seekerCone);
-
-            for (int i = 0; i <= transform.childCount - 1; i++)
-            {
-                string tempTag = transform.GetChild(i).gameObject.tag;
-
-                if (tempTag == "CarModel")
-                {
-                    m_currentModel = transform.GetChild(i).gameObject;
-                }
-            }
-
-            m_currentModel.GetComponent<MeshFilter>().sharedMesh = m_100HealthModel.GetComponent<MeshFilter>().sharedMesh;
         }
 
         public void ResetRunner()
@@ -211,18 +169,6 @@ namespace HF
             GetComponent<Movement>().m_power = 0.005f;
             GetComponent<PlayerHealth>().ResetHealth();
             Destroy(GetComponent<Hider>());
-
-            for (int i = 0; i <= transform.childCount - 1; i++)
-            {
-                string tempTag = transform.GetChild(i).gameObject.tag;
-
-                if (tempTag == "CarModel")
-                {
-                    m_currentModel = transform.GetChild(i).gameObject;
-                }
-            }
-
-            m_currentModel.GetComponent<MeshFilter>().sharedMesh = m_100HealthModel.GetComponent<MeshFilter>().sharedMesh;
         }
 
         public void ToggleCamera(bool _active)
@@ -319,7 +265,7 @@ namespace HF
         void ShowFuel()
         {
             //when fuel is empty display image
-            if (GetComponent<Movement>().m_fuel <= 0.0f)
+            if (GetComponent<FuelSystem>().m_refuel)
             {
                 m_image.enabled = true;
                 m_image.texture = m_outOfFuel;
@@ -332,32 +278,6 @@ namespace HF
             EventManager.m_instance.UnsubscribeToEvent(Events.Event.DS_SETUP, SetupText);
             EventManager.m_instance.UnsubscribeToEvent(Events.Event.DS_RUNNING, RunningText);
             EventManager.m_instance.UnsubscribeToEvent(Events.Event.DS_CHASING, ShowFuel);
-        }
-
-        public void ChangeMesh(int _damageCounter)
-        {
-            //change the mesh accordingly
-            switch (_damageCounter)
-            {
-                case 1:
-                    m_currentModel.GetComponent<MeshFilter>().sharedMesh = m_80HealthModel.GetComponent<MeshFilter>().sharedMesh;
-                    break;
-                case 2:
-                    m_currentModel.GetComponent<MeshFilter>().sharedMesh = m_60HealthModel.GetComponent<MeshFilter>().sharedMesh;
-                    break;
-                case 3:
-                    m_currentModel.GetComponent<MeshFilter>().sharedMesh = m_40HealthModel.GetComponent<MeshFilter>().sharedMesh;
-                    break;
-                case 4:
-                    m_currentModel.GetComponent<MeshFilter>().sharedMesh = m_20HealthModel.GetComponent<MeshFilter>().sharedMesh;
-                    break;
-                case 5:
-                    m_currentModel.GetComponent<MeshFilter>().sharedMesh = m_0HealthModel.GetComponent<MeshFilter>().sharedMesh;
-                    break;
-                default:
-                    m_currentModel.GetComponent<MeshFilter>().sharedMesh = m_100HealthModel.GetComponent<MeshFilter>().sharedMesh;
-                    break;
-            }
         }
 
         //update the chasebreaker UI

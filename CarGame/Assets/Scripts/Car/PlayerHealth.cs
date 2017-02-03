@@ -18,6 +18,7 @@ namespace HF
         public int m_damageCounter = 0;
         public GameObject healthbar;
         public Car m_car;
+        public DamageSystem m_damage;
         public Movement m_movement;
 
         public ParticleSystem Smoke1;
@@ -29,6 +30,7 @@ namespace HF
         {
             cur_Health = max_Health;
             m_car = gameObject.GetComponent<Car>();
+            m_damage = gameObject.GetComponent<DamageSystem>();
             m_movement = gameObject.GetComponent<Movement>();
             Smoke1 = gameObject.GetComponentInChildren<ParticleSystem>();
         }
@@ -45,7 +47,7 @@ namespace HF
             float calc_Health = cur_Health / max_Health;
             SetHealthBar(calc_Health);
             m_damageCounter++;
-            m_car.ChangeMesh(m_damageCounter);
+            m_damage.ChangeMesh(m_damageCounter);
         }
 
         public void SetHealthBar(float myHealth)
@@ -91,6 +93,9 @@ namespace HF
 
         public void ResetHealth()
         {
+            Debug.Log("Health has been reset");
+            m_damageCounter = 0;
+            m_damage.ChangeMesh(m_damageCounter);
             cur_Health = max_Health;
             float calc_Health = cur_Health / max_Health;
             SetHealthBar(calc_Health);

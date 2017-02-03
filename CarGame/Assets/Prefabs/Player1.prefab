@@ -259,9 +259,10 @@ GameObject:
   - 114: {fileID: 11487354}
   - 82: {fileID: 8207214}
   - 114: {fileID: 11403476}
-  - 114: {fileID: 11497562}
   - 114: {fileID: 11461146}
   - 114: {fileID: 11420404}
+  - 114: {fileID: 11400054}
+  - 114: {fileID: 11430798}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Player1
@@ -1072,6 +1073,24 @@ Light:
   m_ShadowRadius: 0
   m_ShadowAngle: 0
   m_AreaSize: {x: 1, y: 1}
+--- !u!114 &11400054
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 159256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1111e570f399fd40b69c4c0c0e6e07f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_100Model: {fileID: 100000, guid: 6be68c3f0ead28d45b84bc36ebf28bc8, type: 3}
+  m_80Model: {fileID: 100000, guid: 0c931e9d50e47c4449e37bb92c95684f, type: 3}
+  m_60Model: {fileID: 100000, guid: ae86bd6897a4a2d41b6aebf0156c2a93, type: 3}
+  m_40Model: {fileID: 100000, guid: 2325a578981fd914f91da9c3aceeb831, type: 3}
+  m_20Model: {fileID: 100000, guid: 94aa8e25f55372a40b1275440c600fea, type: 3}
+  m_0Model: {fileID: 100000, guid: eba45d11b439066469d8e89e5c10afdb, type: 3}
+  m_currentModel: {fileID: 0}
 --- !u!114 &11403476
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1086,8 +1105,8 @@ MonoBehaviour:
   m_tag: 
   m_playerNumber: 0
   m_seekerParam: {fileID: 192426, guid: 54d99531f0c1c4c409ad6e4bb48bc7a2, type: 2}
-  m_hider: 0
-  m_seeker: 0
+  m_runner: 0
+  m_chaser: 0
   m_isDead: 0
   m_image: {fileID: 11439090}
   m_chaserTitle: {fileID: 2800000, guid: 4add1dd262d9ff94b96a529bf13bf5b6, type: 3}
@@ -1097,13 +1116,6 @@ MonoBehaviour:
   chasebreaker1: {fileID: 11430690}
   chasebreaker2: {fileID: 11431774}
   chasebreaker3: {fileID: 11429258}
-  m_100HealthModel: {fileID: 100000, guid: 6be68c3f0ead28d45b84bc36ebf28bc8, type: 3}
-  m_80HealthModel: {fileID: 100000, guid: 0c931e9d50e47c4449e37bb92c95684f, type: 3}
-  m_60HealthModel: {fileID: 100000, guid: ae86bd6897a4a2d41b6aebf0156c2a93, type: 3}
-  m_40HealthModel: {fileID: 100000, guid: 2325a578981fd914f91da9c3aceeb831, type: 3}
-  m_20HealthModel: {fileID: 100000, guid: 94aa8e25f55372a40b1275440c600fea, type: 3}
-  m_0HealthModel: {fileID: 100000, guid: eba45d11b439066469d8e89e5c10afdb, type: 3}
-  m_currentModel: {fileID: 0}
   m_teleportCooldown: 0
 --- !u!114 &11409738
 MonoBehaviour:
@@ -1218,6 +1230,21 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
+--- !u!114 &11430798
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 159256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c06ff35ccda6404aad7c187670a0922, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_fuel: 2
+  m_maxFuel: 0
+  m_setup: 0
+  m_reduceFuel: 0
 --- !u!114 &11431774
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1357,6 +1384,7 @@ MonoBehaviour:
   m_damageCounter: 0
   healthbar: {fileID: 135982}
   m_car: {fileID: 0}
+  m_damage: {fileID: 0}
   m_movement: {fileID: 0}
   Smoke1: {fileID: 19849156}
   m_tag: 
@@ -1415,10 +1443,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_power: 0.005
-  fuel: 2000
-  m_maxFuel: 0
   m_controls: 0
-  m_setup: 0
   m_direction: {x: 0, y: 0, z: 0}
   m_hornSounds:
   - {fileID: 8300000, guid: a3b756b5779801844ae5ceb3eceb3276, type: 3}
@@ -1427,23 +1452,7 @@ MonoBehaviour:
   - {fileID: 182784}
   - {fileID: 169816}
   - {fileID: 175472}
---- !u!114 &11497562
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 159256}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 200d7ae1362a4b244ab903574f33b809, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxMoveDelta: 0.25
-  maxCollisionStrength: 7.5
-  yForceDamp: 0.075
-  demolutionRange: 0.15
-  impactDirManipulator: 0.1875
-  optionalMeshList: []
+  m_fuelSystem: {fileID: 0}
 --- !u!124 &12475152
 Behaviour:
   m_ObjectHideFlags: 1

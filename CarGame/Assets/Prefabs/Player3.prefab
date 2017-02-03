@@ -231,9 +231,10 @@ GameObject:
   - 114: {fileID: 11414692}
   - 82: {fileID: 8274074}
   - 114: {fileID: 11488974}
-  - 114: {fileID: 11413048}
   - 114: {fileID: 11420152}
   - 114: {fileID: 11484576}
+  - 114: {fileID: 11419006}
+  - 114: {fileID: 11411584}
   m_Layer: 0
   m_Name: Player3
   m_TagString: Player3
@@ -1182,7 +1183,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &11413048
+--- !u!114 &11411584
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1190,15 +1191,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 158980}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 200d7ae1362a4b244ab903574f33b809, type: 3}
+  m_Script: {fileID: 11500000, guid: 7c06ff35ccda6404aad7c187670a0922, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxMoveDelta: 0.25
-  maxCollisionStrength: 7.5
-  yForceDamp: 0.075
-  demolutionRange: 0.15
-  impactDirManipulator: 0.1875
-  optionalMeshList: []
+  m_fuel: 2
+  m_maxFuel: 0
+  m_setup: 0
+  m_reduceFuel: 0
 --- !u!114 &11414692
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1211,10 +1210,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_power: 0.005
-  fuel: 2000
-  m_maxFuel: 0
   m_controls: 0
-  m_setup: 0
   m_direction: {x: 0, y: 0, z: 0}
   m_hornSounds:
   - {fileID: 8300000, guid: a3b756b5779801844ae5ceb3eceb3276, type: 3}
@@ -1223,6 +1219,25 @@ MonoBehaviour:
   - {fileID: 146206}
   - {fileID: 130078}
   - {fileID: 120284}
+  m_fuelSystem: {fileID: 0}
+--- !u!114 &11419006
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 158980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1111e570f399fd40b69c4c0c0e6e07f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_100Model: {fileID: 100012, guid: 3e29cb83d7ad27e4bb1fa7750f25411a, type: 3}
+  m_80Model: {fileID: 100012, guid: 628ac392df09d3f45b8004b1d2f61db3, type: 3}
+  m_60Model: {fileID: 100012, guid: 9c4c4796e1d515b45b283a2b1c4503c5, type: 3}
+  m_40Model: {fileID: 100012, guid: 6116e6994f121c047b1b5f7d537961a2, type: 3}
+  m_20Model: {fileID: 100012, guid: 15cf9c092ffff864eaba630b923edead, type: 3}
+  m_0Model: {fileID: 100012, guid: 626da1f62eaf59240b5a99dd24f07293, type: 3}
+  m_currentModel: {fileID: 0}
 --- !u!114 &11420152
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1239,6 +1254,7 @@ MonoBehaviour:
   m_damageCounter: 0
   healthbar: {fileID: 111226}
   m_car: {fileID: 0}
+  m_damage: {fileID: 0}
   m_movement: {fileID: 0}
   Smoke1: {fileID: 19829106}
   m_tag: 
@@ -1408,8 +1424,8 @@ MonoBehaviour:
   m_tag: 
   m_playerNumber: 0
   m_seekerParam: {fileID: 192426, guid: 54d99531f0c1c4c409ad6e4bb48bc7a2, type: 2}
-  m_hider: 0
-  m_seeker: 0
+  m_runner: 0
+  m_chaser: 0
   m_isDead: 0
   m_image: {fileID: 11489644}
   m_chaserTitle: {fileID: 2800000, guid: 4add1dd262d9ff94b96a529bf13bf5b6, type: 3}
@@ -1419,13 +1435,6 @@ MonoBehaviour:
   chasebreaker1: {fileID: 11474404}
   chasebreaker2: {fileID: 11440844}
   chasebreaker3: {fileID: 11401224}
-  m_100HealthModel: {fileID: 100012, guid: 3e29cb83d7ad27e4bb1fa7750f25411a, type: 3}
-  m_80HealthModel: {fileID: 100012, guid: 628ac392df09d3f45b8004b1d2f61db3, type: 3}
-  m_60HealthModel: {fileID: 100012, guid: 9c4c4796e1d515b45b283a2b1c4503c5, type: 3}
-  m_40HealthModel: {fileID: 100012, guid: 6116e6994f121c047b1b5f7d537961a2, type: 3}
-  m_20HealthModel: {fileID: 100012, guid: 15cf9c092ffff864eaba630b923edead, type: 3}
-  m_0HealthModel: {fileID: 100012, guid: 626da1f62eaf59240b5a99dd24f07293, type: 3}
-  m_currentModel: {fileID: 0}
   m_teleportCooldown: 0
 --- !u!114 &11489644
 MonoBehaviour:

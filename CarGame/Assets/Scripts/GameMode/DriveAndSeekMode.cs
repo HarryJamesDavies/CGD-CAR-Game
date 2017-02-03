@@ -34,7 +34,7 @@ namespace HF
             public string m_message;
         }
 
-        private DriveAndSeekPhases m_currentPhase;
+        public DriveAndSeekPhases m_currentPhase;
 
         [HideInInspector]
         public List<int> m_playerScores;
