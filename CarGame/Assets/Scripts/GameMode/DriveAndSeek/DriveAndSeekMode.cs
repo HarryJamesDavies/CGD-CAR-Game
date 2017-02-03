@@ -311,7 +311,7 @@ namespace HF
                 } while (m_hiderNumber == prevHiderNum);
             }
 
-            DeadCarManager.m_instance.SetHiderNumber(m_hiderNumber);
+            //DeadCarManager.m_instance.SetHiderNumber(m_hiderNumber);
 
             PlayerManager.m_instance.m_playerCars[m_hiderNumber].GetComponent<Car>().SetRunner();
             string HiderTag = PlayerManager.m_instance.m_playerCars[m_hiderNumber].transform.tag;

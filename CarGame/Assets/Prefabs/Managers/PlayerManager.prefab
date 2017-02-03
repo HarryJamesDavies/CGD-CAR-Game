@@ -45,10 +45,10 @@ MonoBehaviour:
   m_p2Prefab: {fileID: 154870, guid: b630053dc4ac0a14887340986a414daf, type: 2}
   m_p3Prefab: {fileID: 158980, guid: d2a0d793d362abf42b41f7f127cb6ac6, type: 2}
   m_p4Prefab: {fileID: 114516, guid: 0cd8f425be1049a4895ed465754835f5, type: 2}
-  m_p1Start: {fileID: 492958, guid: fbf158fd3b27e864c8a9ea3d00518094, type: 2}
-  m_p2Start: {fileID: 483572, guid: fbf158fd3b27e864c8a9ea3d00518094, type: 2}
-  m_p3Start: {fileID: 453868, guid: fbf158fd3b27e864c8a9ea3d00518094, type: 2}
-  m_p4Start: {fileID: 469164, guid: fbf158fd3b27e864c8a9ea3d00518094, type: 2}
+  m_p1Start: {fileID: 0}
+  m_p2Start: {fileID: 0}
+  m_p3Start: {fileID: 0}
+  m_p4Start: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
