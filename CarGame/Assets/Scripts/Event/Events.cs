@@ -1,15 +1,24 @@
-﻿using UnityEngine;
+﻿//===================== Kojima Drive - Half-Full Games 2017 ====================//
+//
+// Author:  Harry Davies
+// Purpose: Used to create event call lists, by adding a new entry, adds a new 
+//          event call list.
+// Namespace: HF
+//
+//===============================================================================//
+
+using UnityEngine;
 using System.Collections;
 
-/* ####################################### */
-//                                         //
-//         ST_ = State Events              //
-//         UI_ = UI Event                  //
-//         GM_ = Game Mode Events          //
-//         DS_ = Drive and Seek            //
-//                                         //
-//                                         //
-/* ####################################### */
+//================================== Event Key ==================================//
+//
+//                              ST_ = State Events
+//                              UI_ = UI Event
+//                              GM_ = Game Mode Events 
+//                              DS_ = Drive and Seek
+//
+//
+//===============================================================================//
 
 namespace HF
 {

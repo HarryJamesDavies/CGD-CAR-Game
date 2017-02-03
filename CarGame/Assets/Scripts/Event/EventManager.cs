@@ -1,10 +1,13 @@
-﻿/*
- * Acts as a middle man for handling event calls.
- * Functions can be subscribed to event call list 
- * to be triggered when the event is called.
- * 
- * Created by: Harry Davies, Half-Full Games, 31/01/2017
- */
+﻿//===================== Kojima Drive - Half-Full Games 2017 ====================//
+//
+// Author:  Harry Davies
+// Purpose: Acts as a middle man for handling event calls. Functions can be 
+//          subscribed to event call list to be triggered when the event is 
+//          called.
+// Namespace: HF
+//
+//===============================================================================//
+
 using UnityEngine;
 using System;
 using System.Collections;

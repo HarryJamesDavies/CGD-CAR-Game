@@ -11,7 +11,7 @@ GameObject:
   - 223: {fileID: 22383764}
   - 114: {fileID: 11405922}
   - 114: {fileID: 11448154}
-  - 114: {fileID: 11424946}
+  - 114: {fileID: 11496644}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -43,7 +43,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 465038}
   - 108: {fileID: 10837450}
-  - 114: {fileID: 11442336}
+  - 114: {fileID: 11419660}
   m_Layer: 0
   m_Name: Spotlight
   m_TagString: Untagged
@@ -159,7 +159,7 @@ GameObject:
   - 4: {fileID: 427868}
   - 198: {fileID: 19890840}
   - 199: {fileID: 19972606}
-  - 114: {fileID: 11463736}
+  - 114: {fileID: 11451768}
   m_Layer: 0
   m_Name: Particle System
   m_TagString: Untagged
@@ -211,7 +211,7 @@ GameObject:
   - 33: {fileID: 3376584}
   - 120: {fileID: 12058978}
   - 114: {fileID: 11416714}
-  - 114: {fileID: 11453782}
+  - 114: {fileID: 11480720}
   m_Layer: 0
   m_Name: LaserBeamBase
   m_TagString: Untagged
@@ -477,18 +477,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d3e193b8d7d3854096b80b4a0365f21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &11424946
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 103304}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c71903b8752cb794588e27fafd173252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &11442336
+--- !u!114 &11419660
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -496,9 +485,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 108454}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c71903b8752cb794588e27fafd173252, type: 3}
+  m_Script: {fileID: 11500000, guid: 9dea7b93db186094b9dbe035a0ce5546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_revealEvent: 02000000
+  m_hideEvent: 0300000004000000
 --- !u!114 &11442852
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -521,6 +512,7 @@ MonoBehaviour:
     width: 0
     height: 0
   m_mode: 1
+  m_currentPhase: 0
   m_playerScores: 
   m_winningScore: 3
   m_phaseLenghts:
@@ -613,18 +605,7 @@ MonoBehaviour:
   m_Text: 'Press E to Play
 
 '
---- !u!114 &11453782
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 195870}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c71903b8752cb794588e27fafd173252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &11463736
+--- !u!114 &11451768
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -632,9 +613,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 172868}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c71903b8752cb794588e27fafd173252, type: 3}
+  m_Script: {fileID: 11500000, guid: 9dea7b93db186094b9dbe035a0ce5546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_revealEvent: 02000000
+  m_hideEvent: 0300000004000000
+--- !u!114 &11480720
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 195870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dea7b93db186094b9dbe035a0ce5546, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_revealEvent: 02000000
+  m_hideEvent: 0300000004000000
 --- !u!114 &11486800
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -668,6 +664,19 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Drive and Seek!
+--- !u!114 &11496644
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 103304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dea7b93db186094b9dbe035a0ce5546, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_revealEvent: 02000000
+  m_hideEvent: 0300000004000000
 --- !u!120 &12058978
 LineRenderer:
   m_ObjectHideFlags: 1

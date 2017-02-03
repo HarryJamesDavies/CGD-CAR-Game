@@ -135,7 +135,7 @@ GameObject:
   - 223: {fileID: 22392542}
   - 114: {fileID: 11409956}
   - 114: {fileID: 11480388}
-  - 114: {fileID: 11447610}
+  - 114: {fileID: 11443950}
   m_Layer: 8
   m_Name: HealthBar
   m_TagString: Untagged
@@ -1243,8 +1243,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_fuel: 2
   m_maxFuel: 0
+  m_refuelTimer: 0
+  m_refuelTime: 2
   m_setup: 0
   m_reduceFuel: 0
+  m_refuel: 0
 --- !u!114 &11431774
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1324,6 +1327,19 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
+--- !u!114 &11443950
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 119564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dea7b93db186094b9dbe035a0ce5546, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_revealEvent: 0300000004000000
+  m_hideEvent: 02000000
 --- !u!114 &11444494
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1357,17 +1373,6 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: 'Fuel:'
---- !u!114 &11447610
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 119564}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a83962a41c2981e4b96ed114a36d2ed3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11461146
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -39,7 +39,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 405352}
   - 108: {fileID: 10800688}
-  - 114: {fileID: 11450366}
+  - 114: {fileID: 11481854}
   m_Layer: 0
   m_Name: Spotlight
   m_TagString: Untagged
@@ -143,7 +143,7 @@ GameObject:
   - 33: {fileID: 3337960}
   - 120: {fileID: 12011078}
   - 114: {fileID: 11417204}
-  - 114: {fileID: 11443806}
+  - 114: {fileID: 11495148}
   m_Layer: 0
   m_Name: LaserBeamBase
   m_TagString: Untagged
@@ -162,7 +162,7 @@ GameObject:
   - 223: {fileID: 22313462}
   - 114: {fileID: 11492030}
   - 114: {fileID: 11487734}
-  - 114: {fileID: 11404968}
+  - 114: {fileID: 11494364}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -213,7 +213,7 @@ GameObject:
   - 4: {fileID: 432728}
   - 198: {fileID: 19832346}
   - 199: {fileID: 19947388}
-  - 114: {fileID: 11455796}
+  - 114: {fileID: 11493162}
   m_Layer: 0
   m_Name: Particle System
   m_TagString: Untagged
@@ -431,17 +431,6 @@ Light:
   m_ShadowRadius: 0
   m_ShadowAngle: 0
   m_AreaSize: {x: 1, y: 1}
---- !u!114 &11404968
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 163912}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c71903b8752cb794588e27fafd173252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11411004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -486,17 +475,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d3e193b8d7d3854096b80b4a0365f21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &11443806
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 123318}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c71903b8752cb794588e27fafd173252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11447810
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -511,28 +489,6 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 2, y: -2}
   m_UseGraphicAlpha: 1
---- !u!114 &11450366
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 115800}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c71903b8752cb794588e27fafd173252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &11455796
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 195504}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c71903b8752cb794588e27fafd173252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11461870
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -566,6 +522,19 @@ MonoBehaviour:
     width: 0
     height: 0
   m_mode: 2
+--- !u!114 &11481854
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 115800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dea7b93db186094b9dbe035a0ce5546, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_revealEvent: 02000000
+  m_hideEvent: 0300000004000000
 --- !u!114 &11482536
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -652,6 +621,45 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &11493162
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 195504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dea7b93db186094b9dbe035a0ce5546, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_revealEvent: 02000000
+  m_hideEvent: 0300000004000000
+--- !u!114 &11494364
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 163912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dea7b93db186094b9dbe035a0ce5546, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_revealEvent: 02000000
+  m_hideEvent: 0300000004000000
+--- !u!114 &11495148
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 123318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dea7b93db186094b9dbe035a0ce5546, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_revealEvent: 02000000
+  m_hideEvent: 0300000004000000
 --- !u!120 &12011078
 LineRenderer:
   m_ObjectHideFlags: 1
@@ -690,7 +698,7 @@ LineRenderer:
     m_EndColor:
       serializedVersion: 2
       rgba: 4294967295
-  m_UseWorldSpace: 0
+  m_UseWorldSpace: 1
 --- !u!198 &19832346
 ParticleSystem:
   m_ObjectHideFlags: 1
