@@ -1,6 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//===================== Kojima Drive - Half-Full Games 2017 ====================//
+//
+// Author(s): MATTHEW WYNTER
+// Purpose: Bilboard cam for an object
+// Namespace: HF
+//
+//===============================================================================//
+
 namespace HF
 {
     public class BilboardCam : MonoBehaviour

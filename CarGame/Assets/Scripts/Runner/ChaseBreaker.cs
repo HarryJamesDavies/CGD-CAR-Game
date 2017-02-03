@@ -1,6 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//===================== Kojima Drive - Half-Full Games 2017 ====================//
+//
+// Author(s): MATTHEW WYNTER
+// Purpose: This script sets the spawn and position of the active chase breaker component (purple blocks)
+// Namespace: HF
+//
+//===============================================================================//
+
 namespace HF
 {
     public class ChaseBreaker : MonoBehaviour

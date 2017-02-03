@@ -1,6 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//===================== Kojima Drive - Half-Full Games 2017 ====================//
+//
+// Author(s): MATTHEW WYNTER
+// Purpose: Script attached to each chase breaker to destroy after a certain amount of time has passed. 
+// Namespace: HF
+//
+//===============================================================================//
+
 namespace HF
 {
     public class ChaseBreakerTimer : MonoBehaviour
