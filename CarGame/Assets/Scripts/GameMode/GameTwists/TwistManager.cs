@@ -55,7 +55,7 @@ namespace HF
         // Update is called once per frame
         void Update()
         {
-            EventManager.m_instance.SubscribeToEvent(Events.Event.DS_CHASE, StartTwists);
+            EventManager.m_instance.SubscribeToEvent(Events.Event.DS_CHASING, StartTwists);
 
             if (m_timerStart == false)
             {
