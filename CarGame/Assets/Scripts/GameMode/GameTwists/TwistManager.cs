@@ -3,9 +3,20 @@ using System.Collections;
 
 namespace HF
 {
+
     public class TwistManager : MonoBehaviour
     {
-        public bool m_active = true;
+        [SerializeField]
+        GameObject m_teleporterManagerPrefab;
+        GameObject m_teleporterManager;
+
+        [SerializeField]
+        GameObject m_teleporterPositionsPrefab;
+        public GameObject m_teleporterPositions;
+
+        public GameObject m_teleporterPrefab;
+
+        int previousTwist;
 
         bool m_timerStart;
 
@@ -26,7 +37,6 @@ namespace HF
         // Use this for initialization
         void Start()
         {
-
             if (m_instance)
             {
                 Destroy(this);
@@ -36,40 +46,74 @@ namespace HF
                 m_instance = this;
             }
 
-            m_timerStart = false;
+            m_timerStart = true;
 
             m_currentTwist = Twists.NULL;
+            m_teleporterPositions = Instantiate(m_teleporterPositionsPrefab);
         }
 
         // Update is called once per frame
         void Update()
         {
-            if (m_active)
+            EventManager.m_instance.SubscribeToEvent(Events.Event.DS_CHASE, StartTwists);
+
+            if (m_timerStart == false)
             {
-                if (m_timerStart == false)
-                {
-                    StartCoroutine(CountdownToTwist());
-                }
+                //EventManager.m_instance.SubscribeToEvent(Events.Event.DS_CHASE, SetUpCountdown);
+                SetUpCountdown();
             }
+        }
+
+        void StartTwists()
+        {
+            m_timerStart = false;
         }
 
         void ChooseTwist()
         {
-            int twist = Random.Range(1, 6);
+            int twist = previousTwist;
+
+            while (twist == previousTwist)
+            {
+                twist = Random.Range(1, 6);
+            }
+
+            previousTwist = twist;
 
             BroadcastTwist(twist);
+            m_timerStart = false;
         }
 
         void BroadcastTwist(int twistNumber)
         {
             m_currentTwist = (Twists)twistNumber;
+
+            if(m_currentTwist == Twists.teleporters && m_teleporterManager == null)
+            {
+                m_teleporterManager = Instantiate(m_teleporterManagerPrefab);
+            }
+
+            if(m_currentTwist != Twists.teleporters && m_teleporterManager != null)
+            {
+                Destroy(m_teleporterManager);
+            }
+        }
+
+        void SetUpCountdown()
+        {
+            m_timerStart = true;
+            StartCoroutine(CountdownToTwist());
         }
 
         IEnumerator CountdownToTwist()
         {
-            m_timerStart = true;
-            yield return new WaitForSeconds(20); //time that the thing will start
+            yield return new WaitForSeconds(10); //time that the thing will start
             ChooseTwist();
+        }
+
+        public GameObject GetTeleporterPrefab()
+        {
+            return m_teleporterPrefab;
         }
     }
 }
