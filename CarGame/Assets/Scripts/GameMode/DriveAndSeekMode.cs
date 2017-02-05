@@ -52,9 +52,6 @@ namespace HF
 
         public BufferStruct m_bufferPhase;
         public GameObject m_infoText;
-
-        public GameObject m_twistManagerPrefab;
-        public GameObject m_twistManager;
         
         //public GameObject m_infoBox;
 
@@ -134,7 +131,7 @@ namespace HF
                     {
                         EventManager.m_instance.AddEvent(Events.Event.DS_CHASE);
 
-                        m_twistManager = Instantiate(m_twistManagerPrefab);
+                        //m_twistManager = Instantiate(m_twistManagerPrefab);
                         m_infoText.GetComponent<Text>().text = "Catch the Runner!";
 
                         ChangeAllPlayerMovement(true);
