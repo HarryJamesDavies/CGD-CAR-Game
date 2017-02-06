@@ -14,15 +14,31 @@ public class Boulder : MonoBehaviour
 	public int count = 10000;
 	public GameObject boulder;
 
+	public bool StartEruption = true;
+	public float EruptionTimer = 30.0f;
+
 	public ParticleSystem Eruption;
 
 	public bool doSpawn = true;
 
 	void Start() 
 	{
-		StartCoroutine(Spawner());
+		StartCoroutine (Spawner());
 	}
 
+	void Update()
+	{
+		if (StartEruption == true) 
+		{
+			//StartCoroutine (Spawner());
+			EruptionTimer -= Time.deltaTime;
+		}
+		if (EruptionTimer < 0) 
+		{
+			count = 0;
+		}
+	}
+		
 	IEnumerator Spawner() 
 	{
 		while (doSpawn && count > 0) 

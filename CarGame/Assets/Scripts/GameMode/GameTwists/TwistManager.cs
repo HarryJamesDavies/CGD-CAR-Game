@@ -27,7 +27,8 @@ namespace HF
             dissapear,
             tsunami,
             teleporters,
-            flipControls
+            flipControls,
+			eruption
         }
 
         public Twists m_currentTwist;
@@ -75,7 +76,7 @@ namespace HF
 
             while (twist == previousTwist)
             {
-                twist = Random.Range(1, 6);
+                twist = Random.Range(1, 7);
             }
 
             previousTwist = twist;
