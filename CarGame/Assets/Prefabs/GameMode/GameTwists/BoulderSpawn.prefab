@@ -39,8 +39,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b8156d5c3a22ba4c8ae1d3f90aaf26a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minTime: 0.25
-  maxTime: 0.5
+  minTime: 0.1
+  maxTime: 0.2
   minX: -150
   maxX: 150
   topY: 20
@@ -48,6 +48,8 @@ MonoBehaviour:
   maxZ: 150
   count: 10000
   boulder: {fileID: 145704, guid: ddc5b346924795743ac7b5e9a923821a, type: 2}
+  StartEruption: 1
+  EruptionTimer: 30
   Eruption: {fileID: 0}
   doSpawn: 1
 --- !u!1001 &100100000
