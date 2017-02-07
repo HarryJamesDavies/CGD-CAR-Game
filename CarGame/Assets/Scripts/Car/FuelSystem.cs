@@ -32,6 +32,7 @@ namespace HF
                 }
                 else
                 {
+                    m_fuel = 4000.0f;
                     m_maxFuel = 4000.0f;
                 }
             }
