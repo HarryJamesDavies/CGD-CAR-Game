@@ -262,7 +262,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 491578}
-  - 64: {fileID: 6466374}
+  - 65: {fileID: 6564176}
   - 54: {fileID: 5476534}
   - 114: {fileID: 11413492}
   - 82: {fileID: 8225670}
@@ -562,7 +562,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 146774}
   m_LocalRotation: {x: 0.000001809995, y: -0.0000038146973, z: 6.904644e-12, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.0025, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 404562}
@@ -976,8 +976,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &6466374
-MeshCollider:
+--- !u!65 &6564176
+BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -986,8 +986,8 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 1
-  m_Mesh: {fileID: 4300000, guid: 7b6e46ecbeb5d0d4fbe27aa62e0dba54, type: 3}
+  m_Size: {x: 0.02, y: 0.01, z: 0.04}
+  m_Center: {x: 0, y: 0.01, z: 0}
 --- !u!82 &8225670
 AudioSource:
   m_ObjectHideFlags: 1
