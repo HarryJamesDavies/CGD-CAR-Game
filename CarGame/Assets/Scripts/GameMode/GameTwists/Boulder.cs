@@ -49,27 +49,24 @@ namespace HF
             {
                 StartEruption = false;
             }
-    
-            //if (StartEruption == true)
-            //{
-            //    StartCoroutine(Spawner());
-            //    EruptionTimer -= Time.deltaTime;
-            //}
-            //if (EruptionTimer < 0)
-            //{
-            //    count = 0;
-            //}
         }
 
         IEnumerator Spawner()
         {
             while (doSpawn && count > 0)
             {
-                //Eruption.Play();
-                Vector3 v = new Vector3(Random.Range(minX, maxX), topY, Random.Range(minZ, maxZ));
-                Instantiate(boulder, v, Random.rotation);
-                count--;
-                yield return new WaitForSeconds(Random.Range(minTime, maxTime));
+                if (StartEruption)
+                {
+                    //Eruption.Play();
+                    Vector3 v = new Vector3(Random.Range(minX, maxX), topY, Random.Range(minZ, maxZ));
+                    Instantiate(boulder, v, Random.rotation);
+                    count--;
+                    yield return new WaitForSeconds(Random.Range(minTime, maxTime));
+                }
+                else
+                {
+                    yield return null;
+                }
             }
         }
     }
