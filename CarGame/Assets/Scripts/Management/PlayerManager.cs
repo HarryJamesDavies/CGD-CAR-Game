@@ -6,7 +6,6 @@ namespace HF
 {
     public class PlayerManager : MonoBehaviour
     {
-
         public static PlayerManager m_instance = null;
 
         public List<GameObject> m_playerCars;
