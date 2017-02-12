@@ -31,8 +31,6 @@ namespace HF
         public RawImage m_image;
         public Texture m_chaserTitle;
         public Texture m_runnerTitle;
-        public Texture m_outOfFuel;
-        public Text m_fuel;
 
         //chase breaker images
         public RawImage chasebreaker1;
@@ -71,9 +69,7 @@ namespace HF
                 default:
                     Debug.Log("Error: Player tag doesn't match.");
                     break;
-            }
-
-            m_fuel.enabled = false;
+            }				
 
             //subscribe the text setup to the necessary events
             EventManager.m_instance.SubscribeToEvent(Events.Event.DS_SETUP, SetupText);
@@ -88,26 +84,20 @@ namespace HF
             //updates the fuel text for the runner, and sets others to false
             if (m_runner)
             {
-                m_fuel.enabled = true;
-                m_fuel.text = "Fuel: " + (int)GetComponent<FuelSystem>().m_fuel;
                 chasebreaker1.enabled = true;
                 chasebreaker2.enabled = true;
                 chasebreaker3.enabled = true;
             }
             else
             {
-                m_fuel.enabled = false;
+                //m_fuel.enabled = false;
                 chasebreaker1.enabled = false;
                 chasebreaker2.enabled = false;
                 chasebreaker3.enabled = false;
             }
 
             //checks when the out of fuel image is showing or not
-            if (GetComponent<FuelSystem>().m_fuel == 0.0f)
-            {
-                ShowFuel();
-            }
-            else if (GetComponent<Movement>().m_controls == true)
+            if (GetComponent<Movement>().m_controls == true)
             {
                 m_image.enabled = false;
             }
@@ -262,22 +252,12 @@ namespace HF
             m_image.enabled = false;
         }
 
-        void ShowFuel()
-        {
-            //when fuel is empty display image
-            if (GetComponent<FuelSystem>().m_refuel)
-            {
-                m_image.enabled = true;
-                m_image.texture = m_outOfFuel;
-            }
-        }
-
         void OnDestroy()
         {
             //unsubscribe functions that aren't needed anymore
             EventManager.m_instance.UnsubscribeToEvent(Events.Event.DS_SETUP, SetupText);
             EventManager.m_instance.UnsubscribeToEvent(Events.Event.DS_RUNNING, RunningText);
-            EventManager.m_instance.UnsubscribeToEvent(Events.Event.DS_CHASING, ShowFuel);
+            //EventManager.m_instance.UnsubscribeToEvent(Events.Event.DS_CHASING, ShowFuel);
         }
 
         //update the chasebreaker UI
