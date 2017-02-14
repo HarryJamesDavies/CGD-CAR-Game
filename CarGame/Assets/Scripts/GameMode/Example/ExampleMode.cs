@@ -72,6 +72,8 @@ namespace HF
                         //Informs the game of the change of phase
                         EventManager.m_instance.AddEvent(Events.Event.EX_SETUP);
 
+                        SpawnPlayers();
+
                         //Setup buffer phase
                         m_currentPhase = ExamplePhases.BUFFER;
                         m_bufferPhase.m_lenght = 5.0f;
@@ -222,6 +224,19 @@ namespace HF
                 return true;
             }
             return false;
+        }
+
+        /// <summary>
+        /// Moves Players to spawn position
+        /// </summary>
+        void SpawnPlayers()
+        {
+            for (int iter = 0; iter <= PlayerManager.m_instance.m_numberOfCars - 1; iter++)
+            {
+                Transform spawn = GetSpawn(iter);
+                PlayerManager.m_instance.m_playerCars[iter].transform.position = spawn.position;
+                PlayerManager.m_instance.m_playerCars[iter].transform.rotation = spawn.rotation;
+            }
         }
 
         /// <summary>

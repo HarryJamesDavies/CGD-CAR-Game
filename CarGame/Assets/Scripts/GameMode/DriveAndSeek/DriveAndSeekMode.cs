@@ -39,8 +39,8 @@ namespace HF
 
         private GameObject m_infoText;
 
-        public Transform m_hiderSpawn;
-        public List<Transform> m_seekerSpawns;
+        //public Transform m_hiderSpawn;
+        //public List<Transform> m_seekerSpawns;
 
         new
         void Start()
@@ -266,24 +266,34 @@ namespace HF
                 } while (m_hiderNumber == prevHiderNum);
             }
 
+            SpawnPlayers();
+
+            m_hiderWon = false;
+        }
+
+        void SpawnPlayers()
+        {
             PlayerManager.m_instance.m_playerCars[m_hiderNumber].GetComponent<Car>().SetRunner();
             string HiderTag = PlayerManager.m_instance.m_playerCars[m_hiderNumber].transform.tag;
-            PlayerManager.m_instance.m_playerCars[m_hiderNumber].transform.position = m_hiderSpawn.position;
-            PlayerManager.m_instance.m_playerCars[m_hiderNumber].transform.rotation = m_hiderSpawn.rotation;
 
             int SpawnsUsed = 0;
+            Transform spawn = GetSpawn(SpawnsUsed);
+            SpawnsUsed++;
+
+            PlayerManager.m_instance.m_playerCars[m_hiderNumber].transform.position = spawn.position;
+            PlayerManager.m_instance.m_playerCars[m_hiderNumber].transform.rotation = spawn.rotation;
+
             for (int iter = 0; iter <= PlayerManager.m_instance.m_numberOfCars - 1; iter++)
             {
                 if (iter != m_hiderNumber)
                 {
+                    spawn = GetSpawn(SpawnsUsed);
                     PlayerManager.m_instance.m_playerCars[iter].GetComponent<Car>().SetChaser(HiderTag);
-                    PlayerManager.m_instance.m_playerCars[iter].transform.position = m_seekerSpawns[SpawnsUsed].position;
-                    PlayerManager.m_instance.m_playerCars[iter].transform.rotation = m_seekerSpawns[SpawnsUsed].rotation;
+                    PlayerManager.m_instance.m_playerCars[iter].transform.position = spawn.position;
+                    PlayerManager.m_instance.m_playerCars[iter].transform.rotation = spawn.rotation;
                     SpawnsUsed++;
                 }
             }
-
-            m_hiderWon = false;
         }
 
         bool CheckHidersCaught()

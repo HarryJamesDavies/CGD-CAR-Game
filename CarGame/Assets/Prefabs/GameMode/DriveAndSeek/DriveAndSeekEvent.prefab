@@ -513,14 +513,14 @@ MonoBehaviour:
   - m_name: Buffer
     m_length: 5
   m_mode: 2
-  m_currentPhase: 0
-  m_playerScores: 
-  m_winningScore: 3
-  m_hiderSpawn: {fileID: 461016}
-  m_seekerSpawns:
+  m_spawns:
+  - {fileID: 461016}
   - {fileID: 487984}
   - {fileID: 459978}
   - {fileID: 455206}
+  m_currentPhase: 0
+  m_playerScores: 
+  m_winningScore: 3
 --- !u!114 &11448154
 MonoBehaviour:
   m_ObjectHideFlags: 1

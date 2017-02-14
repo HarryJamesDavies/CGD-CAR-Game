@@ -30,6 +30,8 @@ namespace HF
 
         public GameModeManager.GameModeState m_mode;
 
+        public List<Transform> m_spawns;
+
         protected void Start()
         {
             ResetEvent();
@@ -128,6 +130,11 @@ namespace HF
                 }
             }
             return -1;
+        }
+
+        protected Transform GetSpawn(int _index)
+        {
+            return m_spawns[_index];
         }
     }
 }
