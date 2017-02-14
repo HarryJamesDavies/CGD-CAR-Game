@@ -501,29 +501,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd69bec0d497a314b8deb6e7a7c23cb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_active: 0
-  m_eventLocation: {x: 0, y: 0, z: 0}
-  m_eventWidth: 300
-  m_eventHeight: 300
-  m_eventRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 0
-    height: 0
-  m_mode: 1
-  m_currentPhase: 0
-  m_playerScores: 
-  m_winningScore: 3
-  m_phaseLenghts:
+  m_timers: []
+  m_gameModeTimer: {fileID: 121072, guid: bde9dfd8a8a666d4eac2ef5320c4000a, type: 2}
+  m_modeWidth: 300
+  m_modeHeight: 300
+  m_phases:
   - m_name: Running
     m_length: 15
   - m_name: Chasing
     m_length: 150
   - m_name: Buffer
     m_length: 5
-  m_timers: []
-  m_timerPrefab: {fileID: 194154, guid: 1106d9acb5bdfe44d8d29ffd6f7f0088, type: 2}
+  m_mode: 2
+  m_currentPhase: 0
+  m_playerScores: 
+  m_winningScore: 3
   m_hiderSpawn: {fileID: 461016}
   m_seekerSpawns:
   - {fileID: 487984}

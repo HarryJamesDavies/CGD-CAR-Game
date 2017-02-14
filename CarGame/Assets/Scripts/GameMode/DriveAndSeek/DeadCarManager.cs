@@ -81,7 +81,7 @@ namespace HF
                         int index = 0;
                         foreach (Rect sections in m_sectionBoundaries)
                         {
-                            if (GameModeManager.m_instance.m_currentGameMode.m_eventRect.Overlaps(sections))
+                            if (GameModeManager.m_instance.m_currentGameMode.GetEventRect().Overlaps(sections))
                             {
                                 SpawnCars(index);
                             }
@@ -136,7 +136,6 @@ namespace HF
             for (int iter = 0; iter <= m_sections[_section].transform.childCount - 1; iter++)
             {
                 Transform spawnLocation = m_sections[_section].transform.GetChild(iter).transform;
-                //GameObject tempObject = (GameObject)Instantiate(m_prefabCars[GetRandomCar()], spawnLocation.position, spawnLocation.rotation);
                 int range = Random.Range(1, 11);
                 Quaternion rotation = spawnLocation.localRotation;
                 if (range <= 5)

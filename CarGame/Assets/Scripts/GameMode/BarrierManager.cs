@@ -36,7 +36,7 @@ namespace HF
 
         void CreateBarrier()
         {
-            Rect eventRect = GameModeManager.m_instance.m_currentGameMode.m_eventRect;
+            Rect eventRect = GameModeManager.m_instance.m_currentGameMode.GetEventRect();
             Vector3 min = new Vector3(eventRect.min.x, m_heightOffset, eventRect.min.y);
             Vector3 max = new Vector3(eventRect.max.x, m_heightOffset, eventRect.max.y);
             m_barrier.Add(Instantiate(m_barrierPrefab, min, Quaternion.identity) as GameObject);

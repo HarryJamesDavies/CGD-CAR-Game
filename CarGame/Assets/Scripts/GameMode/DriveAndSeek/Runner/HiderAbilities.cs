@@ -35,7 +35,7 @@ namespace HF
                 StartCoroutine(OilTimer());
             }
 
-            if (GameModeManager.m_instance.m_currentEvent == GameModeManager.GameModeState.FREEROAM) //... check to see if I should be alive
+            if (GameModeManager.m_instance.m_currentMode == GameModeManager.GameModeState.FREEROAM) //... check to see if I should be alive
             {
                 Destroy(m_oilHolder);
                 //Destroy(m_oilReference);

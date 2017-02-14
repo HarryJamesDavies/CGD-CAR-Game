@@ -10,15 +10,15 @@ namespace HF
 
         public enum GameModeState
         {
-            FREEROAM = 0,
-            DRIVEANDSEEK = 1,
-            TEST = 2,
+            FREEROAM,
+            EXAMPLE,
+            DRIVEANDSEEK,
             Count
         };
 
-        public GameModeState m_currentEvent = GameModeState.FREEROAM;
-        public GameModeState m_prevEvent = GameModeState.FREEROAM;
-        public GameModeState m_floatingEvent = GameModeState.FREEROAM;
+        public GameModeState m_currentMode = GameModeState.FREEROAM;
+        public GameModeState m_prevMode = GameModeState.FREEROAM;
+        public GameModeState m_floatingMode = GameModeState.FREEROAM;
 
         public GameMode m_currentGameMode;
         private GameObject m_modeHolder;
@@ -41,20 +41,23 @@ namespace HF
             m_modeHolder.transform.SetParent(transform);
         }
 
-        // Update is called once per frame
         void LateUpdate()
         {
-            if (m_currentEvent != m_floatingEvent)
+            //Checks whether game mode has changed
+            if (m_currentMode != m_floatingMode)
             {
-                m_prevEvent = m_floatingEvent;
-                m_floatingEvent = m_currentEvent;
+                m_prevMode = m_floatingMode;
+                m_floatingMode = m_currentMode;
                 UpdateEvent();
             }
         }
 
+        /// <summary>
+        /// Handles the initialising of the new Game Mode globally
+        /// </summary>
         void UpdateEvent()
         {
-            switch (m_currentEvent)
+            switch (m_currentMode)
             {
                 case GameModeState.FREEROAM:
                     {
@@ -68,7 +71,7 @@ namespace HF
                         EventManager.m_instance.AddEvent(Events.Event.GM_DRIVEANDSEEK);
                         break;
                     }
-                case GameModeState.TEST:
+                case GameModeState.EXAMPLE:
                     {
                         EventManager.m_instance.AddEvent(Events.Event.GM_TEST);
                         break;

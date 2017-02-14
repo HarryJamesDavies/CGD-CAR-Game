@@ -20,14 +20,7 @@ namespace HF
             Count
         }
 
-        [Serializable]
-        public struct PhaseLenght
-        {
-            public string m_name;
-            public float m_length;
-        }
-
-        public struct BufferStruct
+        public struct BufferPhase
         {
             public DriveAndSeekPhases m_nextPhase;
             public float m_lenght;
@@ -35,21 +28,14 @@ namespace HF
         }
 
         public DriveAndSeekPhases m_currentPhase;
+        private BufferPhase m_bufferPhase;
 
         [HideInInspector]
         public List<int> m_playerScores;
         public int m_winningScore = 3;
-        private int m_hiderNumber = 0;
+        private int m_hiderNumber = -1;
         private int m_gameWinner = -1;
         private bool m_hiderWon = false;
-
-        public List<PhaseLenght> m_phaseLenghts;
-        private BufferStruct m_bufferPhase;   
-
-        [HideInInspector]
-        public List<Timer> m_timers;
-        public GameObject m_timerPrefab;
-        private Transform m_timerHolder;
 
         private GameObject m_infoText;
 
@@ -61,17 +47,6 @@ namespace HF
         {
             base.Start();
 
-            m_timerHolder = new GameObject("TimerHolder").transform;
-            m_timerHolder.transform.SetParent(transform);
-
-            for (int iter = 0; iter <= m_phaseLenghts.Count - 1; iter++)
-            {
-                GameObject tempTimer = (GameObject)Instantiate(m_timerPrefab);
-                tempTimer.transform.SetParent(m_timerHolder);
-                tempTimer.GetComponent<Timer>().SetTimer(m_phaseLenghts[iter].m_name, m_phaseLenghts[iter].m_length);
-                m_timers.Add(tempTimer.GetComponent<Timer>());
-            }
-
             for (int iter = 1; iter <= 4; iter++)
             {
                 m_playerScores.Add(0);
@@ -79,8 +54,8 @@ namespace HF
 
             m_infoText = GameObject.FindGameObjectWithTag("DaSText");
 
-            m_currentPhase = DriveAndSeekPhases.INACTIVE;
             m_mode = GameModeManager.GameModeState.DRIVEANDSEEK;
+            m_currentPhase = DriveAndSeekPhases.INACTIVE;
         }
 
         new
@@ -169,15 +144,7 @@ namespace HF
                     {
                         EventManager.m_instance.AddEvent(Events.Event.DS_FINISH);
 
-                        for (int iter = 0; iter <= m_playerScores.Count - 1; iter++)
-                        {
-                            m_playerScores[iter] = 0;
-                        }
-
-                        ResetRound();
-
-                        m_active = false;
-                        GameModeManager.m_instance.m_currentEvent = GameModeManager.GameModeState.FREEROAM;
+                        EndGame();
 
                         //Setup buffer phase
                         m_currentPhase = DriveAndSeekPhases.BUFFER;
@@ -288,18 +255,6 @@ namespace HF
             }
         }
 
-        int GetTimer(string _name)
-        {
-            for (int iter = 0; iter <= m_timers.Count - 1; iter++)
-            {
-                if (m_timers[iter].m_name == _name)
-                {
-                    return iter;
-                }
-            }
-            return -1;
-        }
-
         void SetupHiderAndSeekers()
         {
             if (!m_hiderWon)
@@ -310,8 +265,6 @@ namespace HF
                     m_hiderNumber = UnityEngine.Random.Range(1, PlayerManager.m_instance.m_numberOfCars + 1) - 1;
                 } while (m_hiderNumber == prevHiderNum);
             }
-
-            //DeadCarManager.m_instance.SetHiderNumber(m_hiderNumber);
 
             PlayerManager.m_instance.m_playerCars[m_hiderNumber].GetComponent<Car>().SetRunner();
             string HiderTag = PlayerManager.m_instance.m_playerCars[m_hiderNumber].transform.tag;
@@ -372,10 +325,7 @@ namespace HF
 
         void ResetRound()
         {
-            foreach (Timer timer in m_timers)
-            {
-                timer.ResetTimer();
-            }
+            ResetAllTimers();
 
             for (int iter = 0; iter <= PlayerManager.m_instance.m_numberOfCars - 1; iter++)
             {
@@ -390,7 +340,39 @@ namespace HF
             }
         }
 
-        void ChangePlayerMovement(int _index, bool _state)
+        /// <summary>
+        /// Handles game logic when the game ends
+        /// </summary>
+        void EndGame()
+        {
+            //Reset game to initial state
+            ResetMode();
+
+            //Sets game to inactive
+            m_active = false;
+
+            //Sets the game manager back to freeroam to initalise the game mode's deactivation globaly
+            GameModeManager.m_instance.m_currentMode = GameModeManager.GameModeState.FREEROAM;
+        }
+
+        /// <summary>
+        /// Resets game mode upon completion of the game
+        /// </summary>
+        void ResetMode()
+        {
+            ResetAllTimers();
+
+            for (int iter = 0; iter <= m_playerScores.Count - 1; iter++)
+            {
+                m_playerScores[iter] = 0;
+            }
+
+            m_hiderNumber = -1;
+            m_gameWinner = -1;
+            m_hiderWon = false;
+        }
+
+    void ChangePlayerMovement(int _index, bool _state)
         {
             PlayerManager.m_instance.m_playerCars[_index].GetComponent<Movement>().m_controls = _state;
         }

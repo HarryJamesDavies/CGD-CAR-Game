@@ -7,7 +7,7 @@ namespace HF
     {
         private void OnTriggerStay(Collider other)
         {
-            if (!GetComponent<GameMode>().m_active)
+            if (!GetComponent<GameMode>().IsActive())
             {
                 switch (other.tag)
                 {
@@ -16,14 +16,14 @@ namespace HF
                         {
                             if (Input.GetButtonDown("P1-X(PS4)"))
                             {
-                                SetEvent(other);
+                                SetEvent(other.tag);
                             }
                         }
                         else
                         {
                             if (Input.GetKeyDown(KeyCode.E))
                             {
-                                SetEvent(other);
+                                SetEvent(other.tag);
                             }
                         }
                         break;
@@ -32,14 +32,14 @@ namespace HF
                         {
                             if (Input.GetButtonDown("P2-X(PS4)"))
                             {
-                                SetEvent(other);
+                                SetEvent(other.tag);
                             }
                         }
                         else
                         {
                             if (Input.GetKeyDown("."))
                             {
-                                SetEvent(other);
+                                SetEvent(other.tag);
                             }
                         }
                         break;
@@ -48,14 +48,14 @@ namespace HF
                         {
                             if (Input.GetButtonDown("P3-X(PS4)"))
                             {
-                                SetEvent(other);
+                                SetEvent(other.tag);
                             }
                         }
                         else
                         {
                             if (Input.GetKeyDown(KeyCode.Y))
                             {
-                                SetEvent(other);
+                                SetEvent(other.tag);
                             }
                         }
                         break;
@@ -64,43 +64,33 @@ namespace HF
                         {
                             if (Input.GetButtonDown("P4-X(PS4)"))
                             {
-                                SetEvent(other);
+                                SetEvent(other.tag);
                             }
                         }
                         else
                         {
                             if (Input.GetKeyDown(KeyCode.O))
                             {
-                                SetEvent(other);
+                                SetEvent(other.tag);
                             }
                         }
                         break;
                     default:
-                        //Debug.Log("Default for event trigger");
                         break;
                 }
             }
-
-            if (other.tag == "Player1")
-            {
-
-            }
-
-            //not currently set up for the 2nd player
-            if (other.tag == "Player2")
-            {
-                //Debug.Log("Player2");
-            }
-
         }
 
-        void SetEvent(Collider _other)
+        /// <summary>
+        /// Activates the game mode attached to the same object
+        /// </summary>
+        public void SetEvent(string _triggerTag)
         {
             ShootBeam.sb_instance.DisplayLine();
-            GetComponent<GameMode>().m_active = true;
+            GetComponent<GameMode>().SetActive(true);
             GameModeManager.m_instance.m_currentGameMode = GetComponent<GameMode>();
-            GameModeManager.m_instance.m_currentEvent = GetComponent<GameMode>().m_mode;
-            GameModeManager.m_instance.m_triggerTag = _other.tag;
+            GameModeManager.m_instance.m_currentMode = GetComponent<GameMode>().m_mode;
+            GameModeManager.m_instance.m_triggerTag = _triggerTag;
         }
     }
 }

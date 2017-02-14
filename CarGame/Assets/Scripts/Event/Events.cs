@@ -16,6 +16,7 @@ using System.Collections;
 //                              UI_ = UI Event
 //                              GM_ = Game Mode Events 
 //                              DS_ = Drive and Seek
+//                              EX_ = Example Event
 //
 //
 //===============================================================================//
@@ -38,6 +39,11 @@ namespace HF
             DS_FINISH,
             DS_BUFFER,
             DS_HIDERREADY,
+            EX_SETUP,
+            EX_PLAY,
+            EX_RESET,
+            EX_FINISH,
+            EX_BUFFER,
             Count
         }
     }
