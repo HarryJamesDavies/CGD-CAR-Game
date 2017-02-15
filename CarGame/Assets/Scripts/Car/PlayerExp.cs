@@ -5,14 +5,13 @@ using System.Collections.Generic;
 public class PlayerExp : MonoBehaviour {
 
     public List<float> expMilestones;
-    float currentLevel = 0;
+    public float currentLevel = 0;
 
 	// Use this for initialization
 	void Start ()
     {
         expMilestones = new List<float>();
         addMilestonesToList(500, 1000, 1500);
-        addExptoCurrentLevel(500);
         checkMilestoneAchieved();
 	}
 	

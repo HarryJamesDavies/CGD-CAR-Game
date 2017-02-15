@@ -74,9 +74,16 @@ namespace HF
             //subscribe the text setup to the necessary events
             EventManager.m_instance.SubscribeToEvent(Events.Event.DS_SETUP, SetupText);
             EventManager.m_instance.SubscribeToEvent(Events.Event.DS_RUNNING, RunningText);
-
             //so we can access the cb counter
             chaseBreakerInstance = GetComponent<ChaseBreaker>();
+
+            //add a player exp to the scene
+            gameObject.AddComponent<PlayerExp>();
+
+            if(gameObject.tag == "Player1")
+            {
+                GetComponent<PlayerExp>().addExptoCurrentLevel(500);
+            }
         }
 
         void Update()
