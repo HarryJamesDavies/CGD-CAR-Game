@@ -7,17 +7,15 @@ namespace HF
     {
         public Rigidbody boulder;
         private Rigidbody instantiatedboulder;
-        public float speed = 10;
+        public float speed = 1;
 
         public bool isErupting = true;
+
         public float erupttimer = 10.0f;
 
-        public ParticleSystem Volcano;
+		public float cleanclonetimer = 30.0f;
 
-        void Start()
-        {
-            Volcano.Play();
-        }
+		public Animator boulderDecay;
 
         void Update()
         {
@@ -27,12 +25,25 @@ namespace HF
                 if (isErupting == true)
                 {
                     instantiatedboulder = Instantiate(boulder, transform.position, transform.rotation) as Rigidbody;
-                    instantiatedboulder.velocity = transform.TransformDirection(new Vector3(50, 50, speed));
+                    instantiatedboulder.velocity = transform.TransformDirection(new Vector3(5, 5, speed));
                 }
                 if (erupttimer < 0)
                 {
                     isErupting = false;
+					cleanclonetimer -= Time.deltaTime;
                 }
+				if (cleanclonetimer < 0) 
+				{
+					foreach (GameObject boulderclone in FindObjectsOfType(typeof(GameObject)))
+					{
+						if (boulderclone.name == "Boulder(Clone)")
+						{
+							Destroy(boulderclone);
+							//erupttimer = 5.0f;
+							//isErupting = true;
+						}
+					}
+				}
             }
         }
     }
