@@ -19,13 +19,13 @@ namespace HF
         public int m_playerNumber;
 
         private Camera m_playerCam;
-        public GameObject m_seekerParam;
+        //public GameObject m_seekerParam;
 
         //detection variables
         public bool m_runner;
         public bool m_chaser;
         public bool m_isDead;
-        private GameObject m_seekerCone;
+        //private GameObject m_seekerCone;
 
         //UI image variables
         public RawImage m_image;
@@ -125,12 +125,13 @@ namespace HF
         public void SetChaser(string _runnerTag)
         {
             m_chaser = true;
-            m_seekerCone = Instantiate(m_seekerParam, transform.position, Quaternion.Euler(0.0f, 90.0f, 90.0f)) as GameObject;
-            m_seekerCone.transform.parent = gameObject.transform;
+            gameObject.AddComponent<SeekerScript>();
+            //m_seekerCone = Instantiate(m_seekerParam, transform.position, Quaternion.Euler(0.0f, 90.0f, 90.0f)) as GameObject;
+            //m_seekerCone.transform.parent = gameObject.transform;
 
             //Instantiate(chasebreakerUI, transform.position, transform.rotation);
 
-            m_seekerCone.GetComponent<SeekerScript>().m_hiderTag = _runnerTag;
+            GetComponent<SeekerScript>().m_hiderTag = _runnerTag;
             Destroy(GetComponent<ChaseBreaker>());
         }
 
@@ -147,9 +148,10 @@ namespace HF
         {
             //reset the seekers current variables
             m_chaser = false;
+            Destroy(gameObject.GetComponent<SeekerScript>());
             GetComponent<PlayerHealth>().ResetHealth();
             gameObject.AddComponent<ChaseBreaker>();
-            Destroy(m_seekerCone);
+            //Destroy(m_seekerCone);
         }
 
         public void ResetRunner()
