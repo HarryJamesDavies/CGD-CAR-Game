@@ -80,6 +80,7 @@ GameObject:
   - 4: {fileID: 478082}
   - 65: {fileID: 6522790}
   - 114: {fileID: 11490224}
+  - 114: {fileID: 11423974}
   - 114: {fileID: 11455610}
   m_Layer: 0
   m_Name: ExampleMode
@@ -508,6 +509,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_revealEvent: 02000000
   m_hideEvent: 0300000004000000
+--- !u!114 &11423974
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 130302}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 618e31cb221df374c8f4a9cd1d8636ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_modeWidth: 300
+  m_modeHeight: 300
+  m_mode: 1
+  m_timers: []
+  m_gameModeTimer: {fileID: 0}
+  m_phases: []
+  m_spawns: []
 --- !u!114 &11425628
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -616,16 +635,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b5cf48b0f39e6b4682ae94e22137057, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_timers: []
-  m_gameModeTimer: {fileID: 121072, guid: bde9dfd8a8a666d4eac2ef5320c4000a, type: 2}
   m_modeWidth: 300
   m_modeHeight: 300
+  m_mode: 1
+  m_timers: []
+  m_gameModeTimer: {fileID: 121072, guid: bde9dfd8a8a666d4eac2ef5320c4000a, type: 2}
   m_phases:
   - m_name: Play
     m_length: 10
   - m_name: Buffer
     m_length: 5
-  m_mode: 1
   m_spawns:
   - {fileID: 441706}
   - {fileID: 467166}

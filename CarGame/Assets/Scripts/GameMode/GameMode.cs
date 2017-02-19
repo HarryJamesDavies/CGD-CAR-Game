@@ -16,19 +16,19 @@ namespace HF
 
         protected bool m_active = false;
 
-        [HideInInspector]
-        public List<Timer> m_timers;
-        public GameObject m_gameModeTimer;
-        protected Transform m_timerHolder;
-
         public float m_modeWidth;
         public float m_modeHeight;
         private Vector3 m_modeLocation;
         private Rect m_modeRect;
 
-        public List<PhaseLenght> m_phases;
-
         public GameModeManager.GameModeState m_mode;
+
+        [HideInInspector]
+        public List<Timer> m_timers;
+        public GameObject m_gameModeTimer;
+        protected Transform m_timerHolder;
+
+        public List<PhaseLenght> m_phases;
 
         public List<Transform> m_spawns;
 
