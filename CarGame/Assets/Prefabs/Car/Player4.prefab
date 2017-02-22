@@ -865,6 +865,7 @@ MonoBehaviour:
   m_image: {fileID: 11439818}
   m_chaserTitle: {fileID: 2800000, guid: 4add1dd262d9ff94b96a529bf13bf5b6, type: 3}
   m_runnerTitle: {fileID: 2800000, guid: 1b5fc48eea587ae47bb116cc5fc2daac, type: 3}
+  demoText: {fileID: 0}
   chasebreaker1: {fileID: 11497442}
   chasebreaker2: {fileID: 11403480}
   chasebreaker3: {fileID: 11496126}
@@ -2887,7 +2888,7 @@ Prefab:
   m_IsPrefabParent: 1
 --- !u!65 &2117411734
 BoxCollider:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 105562}

@@ -84,6 +84,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!1 &118550
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 22473282}
+  - 222: {fileID: 22241932}
+  - 114: {fileID: 11440606}
+  m_Layer: 8
+  m_Name: demoExp
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &119202
 GameObject:
   m_ObjectHideFlags: 0
@@ -311,6 +328,7 @@ GameObject:
   - 114: {fileID: 11470584}
   - 114: {fileID: 11486578}
   - 65: {fileID: 259492450}
+  - 114: {fileID: 11430852}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Player1
@@ -1088,6 +1106,7 @@ MonoBehaviour:
   m_image: {fileID: 11486758}
   m_chaserTitle: {fileID: 2800000, guid: 4add1dd262d9ff94b96a529bf13bf5b6, type: 3}
   m_runnerTitle: {fileID: 2800000, guid: 1b5fc48eea587ae47bb116cc5fc2daac, type: 3}
+  demoText: {fileID: 11440606}
   chasebreaker1: {fileID: 11454092}
   chasebreaker2: {fileID: 11496438}
   chasebreaker3: {fileID: 11461152}
@@ -1113,6 +1132,20 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &11430852
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 190764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e2c83077cd9f204dbaba2f55526e626, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  expMilestones: []
+  currentLevel: 0
+  text: {fileID: 11440606}
 --- !u!114 &11436674
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1156,6 +1189,39 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &11440606
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 118550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 9222c888bd5deac438b93ed91ec78993, type: 3}
+    m_FontSize: 25
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 2
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 
 --- !u!114 &11442358
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3061,6 +3127,12 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 197152}
+--- !u!222 &22241932
+CanvasRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 118550}
 --- !u!222 &22242244
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -3161,6 +3233,7 @@ RectTransform:
   - {fileID: 22406502}
   - {fileID: 22468494}
   - {fileID: 22452880}
+  - {fileID: 22473282}
   m_Father: {fileID: 490476}
   m_RootOrder: 6
   m_AnchorMin: {x: 0, y: 0}
@@ -3219,6 +3292,23 @@ RectTransform:
   m_AnchoredPosition: {x: -0.94699407, y: 0}
   m_SizeDelta: {x: 1.9, y: 0.4}
   m_Pivot: {x: 0, y: 0.5}
+--- !u!224 &22473282
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 118550}
+  m_LocalRotation: {x: -1, y: 0.00000016292068, z: -0.00000016292068, w: 2.654315e-14}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_Children: []
+  m_Father: {fileID: 22452474}
+  m_RootOrder: 7
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 5.3, y: -6}
+  m_SizeDelta: {x: 151.1, y: 51.7}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22477036
 RectTransform:
   m_ObjectHideFlags: 1
@@ -3266,7 +3356,7 @@ Prefab:
   m_IsPrefabParent: 1
 --- !u!65 &259492450
 BoxCollider:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 190764}

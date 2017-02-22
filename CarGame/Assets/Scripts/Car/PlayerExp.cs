@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -6,6 +7,10 @@ public class PlayerExp : MonoBehaviour {
 
     public List<float> expMilestones;
     public float currentLevel = 0;
+    public float fade = 1.0f;
+    
+
+    public Text text;
 
 	// Use this for initialization
 	void Start ()
@@ -13,13 +18,15 @@ public class PlayerExp : MonoBehaviour {
         expMilestones = new List<float>();
         addMilestonesToList(500, 1000, 1500);
         checkMilestoneAchieved();
+
+        text = GetComponent<Text>();
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
-	
-	}
+        gameObject.GetComponent<HF.Car>().demoText.color -= new Color(0, 0, 0, fade * Time.deltaTime);
+    }
 
     //add milestones to a milestone list 
     private void addMilestonesToList(params float[] mileStoneList)
@@ -34,6 +41,11 @@ public class PlayerExp : MonoBehaviour {
     public void addExptoCurrentLevel(float expInc)
     {
         currentLevel += expInc;
+        gameObject.GetComponent<HF.Car>().demoText.text = "+ " + expInc;
+        gameObject.GetComponent<HF.Car>().m_demoText = true;
+
+        // text.text = "+ " + expInc;
+
         Debug.Log(currentLevel);
     }
 

@@ -17,6 +17,7 @@ namespace HF
         //key player identifiers
         public string m_tag;
         public int m_playerNumber;
+        public float fade = 1.0f;
 
         private Camera m_playerCam;
         //public GameObject m_seekerParam;
@@ -25,12 +26,14 @@ namespace HF
         public bool m_runner;
         public bool m_chaser;
         public bool m_isDead;
+        public bool m_demoText;
         //private GameObject m_seekerCone;
 
         //UI image variables
         public RawImage m_image;
         public Texture m_chaserTitle;
         public Texture m_runnerTitle;
+        public Text demoText;
 
         //chase breaker images
         public RawImage chasebreaker1;
@@ -78,12 +81,11 @@ namespace HF
             chaseBreakerInstance = GetComponent<ChaseBreaker>();
 
             //add a player exp to the scene
-            gameObject.AddComponent<PlayerExp>();
 
-            if(gameObject.tag == "Player1")
-            {
-                GetComponent<PlayerExp>().addExptoCurrentLevel(500);
-            }
+            //if(gameObject.tag == "Player1")
+            //{
+            //   GetComponent<PlayerExp>().addExptoCurrentLevel(500);
+            //}
         }
 
         void Update()
@@ -101,6 +103,11 @@ namespace HF
                 chasebreaker1.enabled = false;
                 chasebreaker2.enabled = false;
                 chasebreaker3.enabled = false;
+            }
+
+            if(m_demoText == true)
+            {
+                demoText.color -= new Color(0, 0, 0, fade * Time.deltaTime);
             }
 
             //checks when the out of fuel image is showing or not
