@@ -18,6 +18,7 @@ namespace HF
         public string m_tag;
         public int m_playerNumber;
         public float fade = 1.0f;
+        public float speed = 0.1f;
 
         private Camera m_playerCam;
         //public GameObject m_seekerParam;
@@ -34,6 +35,7 @@ namespace HF
         public Texture m_chaserTitle;
         public Texture m_runnerTitle;
         public Text demoText;
+        public RectTransform rect;
 
         //chase breaker images
         public RawImage chasebreaker1;
@@ -108,8 +110,20 @@ namespace HF
             if(m_demoText == true)
             {
                 demoText.color -= new Color(0, 0, 0, fade * Time.deltaTime);
-            }
+                rect.position += Vector3.up * Time.deltaTime * speed;
 
+                Color demoTextColour = demoText.color;
+                Color fadeColour = new Color(0, 0, 0, 0);
+
+                if(demoTextColour.a < fadeColour.a)
+                {
+                    rect.localPosition = new Vector3(8, -6, -3);
+                    demoText.text = "";
+                    demoText.color = new Color(0, 0, 0, 1);
+                    m_demoText = false;
+
+                }
+            }
             //checks when the out of fuel image is showing or not
             if (GetComponent<Movement>().m_controls == true)
             {

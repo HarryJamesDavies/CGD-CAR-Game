@@ -25,7 +25,7 @@ public class PlayerExp : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        gameObject.GetComponent<HF.Car>().demoText.color -= new Color(0, 0, 0, fade * Time.deltaTime);
+        //gameObject.GetComponent<HF.Car>().demoText.color -= new Color(0, 0, 0, fade * Time.deltaTime);
     }
 
     //add milestones to a milestone list 
@@ -41,7 +41,7 @@ public class PlayerExp : MonoBehaviour {
     public void addExptoCurrentLevel(float expInc)
     {
         currentLevel += expInc;
-        gameObject.GetComponent<HF.Car>().demoText.text = "+ " + expInc;
+        gameObject.GetComponent<HF.Car>().demoText.text = "+ " + expInc + "xp";
         gameObject.GetComponent<HF.Car>().m_demoText = true;
 
         // text.text = "+ " + expInc;
