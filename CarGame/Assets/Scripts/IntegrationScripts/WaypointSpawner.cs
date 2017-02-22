@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace HF
 {
-    public class HiderAbilities : MonoBehaviour
+    public class WaypointSpawner : MonoBehaviour
     {
         List<GameObject> m_wayPoints = new List<GameObject>();
 
@@ -28,7 +28,7 @@ namespace HF
             m_timer = true;
         }
 
-        
+
         void Update() //check to see if the event has started, check to see if the car needs to start a timer to drop oil...
         {
             EventManager.m_instance.SubscribeToEvent(Events.Event.DS_RUNNING, StartWayPointSpawns);
@@ -47,7 +47,7 @@ namespace HF
             }
 
         }
-        
+
         void StartWayPointSpawns() //this is the event trigger which flips a bool to allow the car to start leaking oil
         {
             m_timer = false;
@@ -55,17 +55,17 @@ namespace HF
 
         void SpawnWayPointCheck()
         {
-            if(m_wayPoints.Count <= 0)
+            if (m_wayPoints.Count <= 0)
             {
                 SpawnWayPoint();
             }
-            else if(m_wayPoints.Count > 0)
+            else if (m_wayPoints.Count > 0)
             {
                 Vector3 previousPosition = m_wayPoints[m_wayPoints.Count - 1].transform.position;
 
                 float currentDistance = Vector3.Distance(previousPosition, gameObject.transform.position);
-                
-                if(currentDistance >= m_minDistance)
+
+                if (currentDistance >= m_minDistance)
                 {
                     SpawnWayPoint();
                 }
@@ -74,7 +74,7 @@ namespace HF
 
         void SpawnWayPoint() //this spawns the oil by the back spawn
         {
-            
+
             m_WayPoint = Instantiate(m_wayPointReference);
             // m_oil.transform.position = m_spawnPos;
             m_WayPoint.transform.position = gameObject.transform.Find("BackSpawn").transform.position;
