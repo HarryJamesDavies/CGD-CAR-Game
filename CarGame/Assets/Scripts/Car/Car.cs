@@ -107,8 +107,10 @@ namespace HF
                 chasebreaker3.enabled = false;
             }
 
+            //have we entered an xp event
             if(m_demoText == true)
             {
+                //add fancy effects to the text componenet
                 demoText.color -= new Color(0, 0, 0, fade * Time.deltaTime);
                 rect.position += Vector3.up * Time.deltaTime * speed;
 
@@ -117,13 +119,14 @@ namespace HF
 
                 if(demoTextColour.a < fadeColour.a)
                 {
+                    //reset the xp text 
                     rect.localPosition = new Vector3(8, -6, -3);
                     demoText.text = "";
                     demoText.color = new Color(0, 0, 0, 1);
                     m_demoText = false;
-
                 }
             }
+
             //checks when the out of fuel image is showing or not
             if (GetComponent<Movement>().m_controls == true)
             {
