@@ -30,11 +30,15 @@ namespace HF
 
         public List<GameObject> m_lights;
 
+		//public FuelSystem m_fuelSystem;
+
         void Start()
         {
             m_direction = Vector3.forward;
             startingRotation = transform.rotation;
             m_controls = true;
+
+			//m_fuelSystem = gameObject.GetComponent<FuelSystem>();
         }
 
         // Use this for initialization
@@ -43,12 +47,23 @@ namespace HF
             //apply the direction to the car
             if (m_forward)
             {
+				//m_appliedForce += m_power;
+
+				//if (m_fuelSystem.m_reduceFuel)
+			    //{
+	            //	m_fuelSystem.m_fuel -= m_power * 20;
+	            //}
                 m_appliedForce += m_power;				  
             }
 
             if (m_backward)
             {
                 m_appliedForce -= m_power;
+
+				//if (m_fuelSystem.m_reduceFuel)
+				//{
+			    //     m_fuelSystem.m_fuel -= m_power * 20;
+				//}
             }
 
             //rotate the car dependent on direction facing
@@ -168,6 +183,36 @@ namespace HF
                 m_appliedForce = 0;
             }   
             
+			//when no force is being applied refuel, or use button to refuel so long as fuel is less than 50
+			//switch (gameObject.tag)
+			//{
+			//	case "Player1":
+			//		if (Input.GetKeyDown("e"))
+			//			{
+			//				m_fuelSystem.Refuel();
+			//	        }
+			//	    break;
+			//	case "Player2":
+			//		if (Input.GetKeyDown("."))
+			//			{
+			//				m_fuelSystem.Refuel();
+			//			}
+			//		break;
+			//	case "Player3":
+			//		if (Input.GetKeyDown("y"))
+			//			{
+			//				m_fuelSystem.Refuel();
+			//			}
+			//		break;
+			//	case "Player4":
+			//		if (Input.GetKeyDown("o"))
+			//			{
+			//				m_fuelSystem.Refuel();
+			//			}
+			//		break;
+			//	default:
+			//		break;
+			//}
         }
 
         void PlayerMovement(int _controller)
@@ -210,7 +255,12 @@ namespace HF
             {
                 gameObject.transform.position += Vector3.up * 1.5f;
                 gameObject.transform.rotation = startingRotation;
-            }				
+            }
+
+			//if (m_fuelSystem.m_fuel < 0)
+			//{
+		    //	m_appliedForce = 0;
+			//}
 
             m_appliedForce *= m_friction;
             transform.Translate(Vector3.forward * -m_appliedForce);
@@ -260,6 +310,12 @@ namespace HF
                     transform.rotation = startingRotation;
                 }
             }
+
+			//if (m_fuelSystem.m_fuel <= 0.0f)
+		    //{
+		  	// m_appliedForce = 0;
+            //}
+			
             else if (_playerNumber == 2)
             {
                 if (Input.GetKeyDown(KeyCode.UpArrow))
@@ -441,7 +497,12 @@ namespace HF
                 {
                     gameObject.transform.position += Vector3.up * 2.5f;
                     gameObject.transform.rotation = startingRotation;
-                }					           
+                }
+
+				//if (m_fuelSystem.m_fuel < 0)
+				//{
+		        //m_appliedForce = 0;
+		        //}
 
                 m_appliedForce *= m_friction;
                 transform.Translate(Vector3.forward * -m_appliedForce);
@@ -617,6 +678,11 @@ namespace HF
                     default:
                         break;
                 }					
+
+				//if (m_fuelSystem.m_fuel < 0)
+				//{
+			    //m_appliedForce = 0;
+		        //}
 
                 m_appliedForce *= m_friction;
                 transform.Translate(Vector3.forward * -m_appliedForce);

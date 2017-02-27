@@ -17,6 +17,8 @@ namespace HF
 
 		public Animator boulderDecay;
 
+		public ParticleSystem explosion;
+
         void Update()
         {
             if (TwistManager.m_instance.m_currentTwist == TwistManager.Twists.eruption)
@@ -24,9 +26,14 @@ namespace HF
                 erupttimer -= Time.deltaTime;
                 if (isErupting == true)
                 {
+					explosion.Play();
                     instantiatedboulder = Instantiate(boulder, transform.position, transform.rotation) as Rigidbody;
                     instantiatedboulder.velocity = transform.TransformDirection(new Vector3(5, 5, speed));
                 }
+				if (erupttimer < 9) 
+				{
+					explosion.Stop();
+				}
                 if (erupttimer < 0)
                 {
                     isErupting = false;

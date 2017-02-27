@@ -32,6 +32,9 @@ namespace HF
         public Texture m_chaserTitle;
         public Texture m_runnerTitle;
 
+		//public Texture m_outOfFuel;
+	    //public Text m_fuel;
+
         //chase breaker images
         public RawImage chasebreaker1;
         public RawImage chasebreaker2;
@@ -71,6 +74,8 @@ namespace HF
                     break;
             }				
 
+			//m_fuel.enabled = false;
+
             //subscribe the text setup to the necessary events
             EventManager.m_instance.SubscribeToEvent(Events.Event.DS_SETUP, SetupText);
             EventManager.m_instance.SubscribeToEvent(Events.Event.DS_RUNNING, RunningText);
@@ -91,6 +96,9 @@ namespace HF
             //updates the fuel text for the runner, and sets others to false
             if (m_runner)
             {
+				//m_fuel.enabled = true;
+			    //m_fuel.text = "Fuel: " + (int)GetComponent<FuelSystem>().m_fuel;
+
                 chasebreaker1.enabled = true;
                 chasebreaker2.enabled = true;
                 chasebreaker3.enabled = true;
@@ -102,6 +110,11 @@ namespace HF
                 chasebreaker2.enabled = false;
                 chasebreaker3.enabled = false;
             }
+
+			//if (GetComponent<FuelSystem>().m_fuel == 0.0f)
+			//{
+			//	ShowFuel();
+			//}
 
             //checks when the out of fuel image is showing or not
             if (GetComponent<Movement>().m_controls == true)
@@ -260,6 +273,16 @@ namespace HF
         {
             m_image.enabled = false;
         }
+
+		//void ShowFuel()
+	    //{
+		    //when fuel is empty display image
+		//	if (GetComponent<FuelSystem>().m_refuel)
+		//	{
+		//		m_image.enabled = true;
+		//		m_image.texture = m_outOfFuel;
+	  	//	}
+		//}
 
         void OnDestroy()
         {
