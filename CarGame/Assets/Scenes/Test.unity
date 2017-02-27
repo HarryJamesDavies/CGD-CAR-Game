@@ -987,6 +987,11 @@ GameObject:
 Transform:
   m_PrefabParentObject: {fileID: 439406, guid: 1b78ec6b8da64d14ca5b74091f77c09c, type: 2}
   m_PrefabInternal: {fileID: 1740781979}
+--- !u!198 &1509778331 stripped
+ParticleSystem:
+  m_PrefabParentObject: {fileID: 19832484, guid: 7ff54512c4551264ba5355ac225c6bde,
+    type: 2}
+  m_PrefabInternal: {fileID: 2099620902}
 --- !u!1001 &1518103056
 Prefab:
   m_ObjectHideFlags: 0
@@ -1473,8 +1478,54 @@ Prefab:
       propertyPath: m_Name
       value: BoulderEruption
       objectReference: {fileID: 0}
+    - target: {fileID: 11427780, guid: a64ca663f98f6b647953127ba3f51391, type: 2}
+      propertyPath: explosion
+      value: 
+      objectReference: {fileID: 1509778331}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a64ca663f98f6b647953127ba3f51391, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1001 &2099620902
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 422612, guid: 7ff54512c4551264ba5355ac225c6bde, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 422612, guid: 7ff54512c4551264ba5355ac225c6bde, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 422612, guid: 7ff54512c4551264ba5355ac225c6bde, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -37.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 422612, guid: 7ff54512c4551264ba5355ac225c6bde, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 422612, guid: 7ff54512c4551264ba5355ac225c6bde, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 422612, guid: 7ff54512c4551264ba5355ac225c6bde, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 422612, guid: 7ff54512c4551264ba5355ac225c6bde, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 422612, guid: 7ff54512c4551264ba5355ac225c6bde, type: 2}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 7ff54512c4551264ba5355ac225c6bde, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &2113709323 stripped
 Transform:
