@@ -5,25 +5,26 @@ using System.Collections.Generic;
 namespace HF
 {
     /// <summary>
-    /// *Old* Directions of use:
+    /// Directions of use:
     /// 
     /// 1: First, add your new twist to the twist enum, this acts as a store for all
-    /// the twists in Kojima.
-    /// 2: Next, go to the PopulateLists function and add in an else if onto the if statements
+    /// the twists in Kojima. This can be found in the Twists struct, then, add a public bool of your twist 'off'.
+    /// This will control whether or not the player wishes the twist to be active.
+    /// 2: Create a public setter function to set the bool you just created, and set it as false by default at the start
+    /// Then, create a game object variable, and assign the manager of your new twist using the resources.load function
+    /// 3: Next, go to the PopulateLists function and add in an else if onto the if statements
     /// to check what game mode is currently in play. This should use the game mode structure provided
-    /// by the event system that Half Full has created
-    /// 3: Go to the SpawnScripts function, and add an else if on the end of the if statements for your twist
-    /// if the current twist is equal to your twist, then you should add the script components of your twists to the manager
+    /// by the event system that Half Full has created. You will also want an if to check to see if the twist is enabled
+    /// 4: Go to the SpawnScripts function, and add an else if on the end of the if statements for your twist
+    /// if the current twist is equal to your twist, then you should spawn in a manager and add it to the m_twistmanagers list
     /// the scripts should then handle themselves, this function is called when a timer expires
-    /// 4: Go to the RemoveScripts function and add a check in the form of an if statement to check to see
-    /// if your script component is still on the manager. If it is, it needs to be destroyed. This check is done
-    /// each time the timer expires, so only one twist is active at a time.
     /// 5: That's it, the twist has been added. However, you need to call the public function StartTwists to start off
-    /// the process, the manager will then take care of itself.
+    /// the process somewhere in your game mode logic, the manager will then take care of itself.
     /// 6: If you want the twists to start after a certain time. Use the SetTimer function, to set a customised time for the twists
     /// before you call StartTwists (DEFAULT IS SET TO TEN SECONDS)
     /// 7: If you wish to stop the twists at any point in your logic, call StopTwists and the twist manager will return to it's 
     /// otherwise passive state
+    /// 8: If you want more than one twists to spawn, then use the Setnumberoftwistsatonce function
     /// </summary>
    
     public class TwistsManager : MonoBehaviour
@@ -34,7 +35,7 @@ namespace HF
         float m_timer = 10.0f;
         bool m_timerStart;
 
-        GameObject tsunamiPrefab;
+        public GameObject m_tsunamiPrefab;
 
         Twists m_twistContainer = new Twists();
 
@@ -59,10 +60,12 @@ namespace HF
             }
 
             m_timerStart = false;
-
+            
             m_twistContainer.allOff = false;
             m_twistContainer.tsunamiOff = false;
             m_twistContainer.eruptionOff = false;
+
+            m_tsunamiPrefab = (GameObject)Resources.Load("Assets/Resources/TwistPrefabs/TsunamiManager.prefab");
 
         }
 
@@ -99,11 +102,11 @@ namespace HF
             m_eventTwists.Clear();
             if (GameModeManager.m_instance.m_currentMode == GameModeManager.GameModeState.DRIVEANDSEEK)
             {
-                if (m_twistContainer.tsunamiOff == true)
+                if (m_twistContainer.tsunamiOff == false)
                 {
                     m_eventTwists.Add(Twists.Twist.tsunami);
                 }
-                if (m_twistContainer.eruptionOff == true)
+                if (m_twistContainer.eruptionOff == false)
                 {
                     m_eventTwists.Add(Twists.Twist.eruption);
                 }
@@ -156,7 +159,7 @@ namespace HF
             {
                 if (m_currentTwists[iter] == Twists.Twist.tsunami)
                 {
-                    m_TwistManagers.Add(Instantiate(tsunamiPrefab));
+                    m_TwistManagers.Add(Instantiate(m_tsunamiPrefab));
                 }
                 else if (m_currentTwists[iter] == Twists.Twist.NULL)
                 {
