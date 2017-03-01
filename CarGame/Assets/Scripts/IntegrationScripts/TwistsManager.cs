@@ -32,10 +32,12 @@ namespace HF
 
         int m_previousTwist;
         int m_numberOfTwistsAtOnce = 1;
+
         float m_timer = 10.0f;
         bool m_timerStart;
 
         public GameObject m_tsunamiPrefab;
+        public GameObject m_erruptionPrefab;
 
         Twists m_twistContainer = new Twists();
 
@@ -65,7 +67,8 @@ namespace HF
             m_twistContainer.tsunamiOff = false;
             m_twistContainer.eruptionOff = false;
 
-            m_tsunamiPrefab = (GameObject)Resources.Load("Assets/Resources/TwistPrefabs/TsunamiManager.prefab");
+            m_tsunamiPrefab = (GameObject)Resources.Load("TwistPrefabs/TsunamiManager");
+            m_erruptionPrefab = (GameObject)Resources.Load("TwistPrefabs/ErruptionManager");
 
         }
 
@@ -81,8 +84,9 @@ namespace HF
         //trigger to start the twist process
         public void StartTwists()
         {
-            if (m_twistContainer.allOff == true)
+            if (m_twistContainer.allOff == false)
             {
+                Debug.Log("TwistsStarted");
                 m_timerStart = true;
                 PopulateTwistList();
             }
@@ -122,21 +126,26 @@ namespace HF
         //selects a twist from the list
         void ChooseTwist()
         {
-            int twist = m_previousTwist;
+            int twist;
+
+            for(int iter = 0; iter < m_currentTwists.Count; iter++)
+            {
+                m_currentTwists.RemoveAt(iter);
+            }
+
             m_currentTwists.Clear();
             for (int iter = 0; iter < m_numberOfTwistsAtOnce; iter++)
             {
 
-                while (twist == m_previousTwist)
-                {
-                    twist = Random.Range(0, m_eventTwists.Count);
-                }
+                
+                twist = Random.Range(0, m_eventTwists.Count);
+                
 
                 m_currentTwists.Add(m_eventTwists[iter]);
                 m_previousTwist = twist;
             }
-            
 
+            Debug.Log("swap");
             RemoveScripts();
             SpawnTwistScripts();
             m_timerStart = true;
@@ -160,6 +169,10 @@ namespace HF
                 if (m_currentTwists[iter] == Twists.Twist.tsunami)
                 {
                     m_TwistManagers.Add(Instantiate(m_tsunamiPrefab));
+                }
+                else if (m_currentTwists[iter] == Twists.Twist.eruption)
+                {
+                    m_TwistManagers.Add(Instantiate(m_erruptionPrefab));
                 }
                 else if (m_currentTwists[iter] == Twists.Twist.NULL)
                 {

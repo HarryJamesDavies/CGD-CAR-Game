@@ -28,7 +28,7 @@ namespace HF
         }
 
         //Holds a list of tracked events
-        private List<EventList> m_eventList = new List<EventList>();
+        public List<EventList> m_eventList = new List<EventList>();
         //Holds any events pushed to the EventManager this frame
         private List<Events.Event> m_eventBuffer = new List<Events.Event>();
         //Acts as an intermediate when resolving event calls
