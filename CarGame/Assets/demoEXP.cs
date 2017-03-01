@@ -10,6 +10,7 @@ namespace HF
         // Use this for initialization
         void Start()
         {
+
         }
 
         // Update is called once per frame
@@ -23,6 +24,21 @@ namespace HF
             if (other.gameObject.tag == "Player1")
             {
                 other.GetComponent<HF.PlayerExp>().addExptoCurrentLevel(25);
+            }
+
+            if (other.gameObject.tag == "Player2")
+            {
+                other.GetComponent<HF.PlayerExp>().addExptoCurrentLevel(50);
+            }
+
+            if (other.gameObject.tag == "Player3")
+            {
+                other.GetComponent<HF.PlayerExp>().addExptoCurrentLevel(70);
+            }
+
+            if (other.gameObject.tag == "Player4")
+            {
+                other.GetComponent<HF.PlayerExp>().addExptoCurrentLevel(65);
             }
         }
 

@@ -20,7 +20,6 @@ namespace HF
         {
             expMilestones = new List<float>();
             addMilestonesToList(500, 1000, 1500);
-            checkMilestoneAchieved();
 
             text = GetComponent<Text>();
         }
@@ -28,7 +27,7 @@ namespace HF
         // Update is called once per frame
         void Update()
         {
-            
+            checkMilestoneAchieved();
         }
 
         //add milestones to a milestone list 
@@ -60,7 +59,7 @@ namespace HF
             for (int i = 0; i < expMilestones.Count; i++)
             {
                 float mile = expMilestones[i];
-                if (currentLevel == mile)
+                if (currentLevel >= mile)
                 {
                     Debug.Log("CurrentXP = " + mile + " Level Up: " + (i + 1));
                 }
