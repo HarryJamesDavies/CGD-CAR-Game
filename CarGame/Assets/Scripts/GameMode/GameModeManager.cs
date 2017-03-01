@@ -20,6 +20,7 @@ namespace HF
         public GameModeState m_prevMode = GameModeState.FREEROAM;
         public GameModeState m_floatingMode = GameModeState.FREEROAM;
 
+        public GameObject m_twistManager;
         public GameMode m_currentGameMode;
         private GameObject m_modeHolder;
 
@@ -37,6 +38,7 @@ namespace HF
                 m_instance = this;
             }
 
+            m_twistManager = GameObject.Find("TwistManager");
             m_modeHolder = new GameObject("Mode Holder");
             m_modeHolder.transform.SetParent(transform);
         }
@@ -69,6 +71,7 @@ namespace HF
                 case GameModeState.DRIVEANDSEEK:
                     {
                         EventManager.m_instance.AddEvent(Events.Event.GM_DRIVEANDSEEK);
+                        m_twistManager.GetComponent<TwistsManager>().StartTwists();
                         break;
                     }
                 case GameModeState.EXAMPLE:
